@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Spoframe</title>
+    <link rel="stylesheet" href="susp.css">
+    <style>
+        /* Дополнительные стили для каталога */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .btn-view-details {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-view-details:hover {
+            background: var(--primary-hover);
+        }
+
+        .filter-section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            color: var(--text-main);
+        }
+
+        .coming-soon {
+            background: linear-gradient(135deg, rgb(188, 188, 188), rgb(188, 188, 188));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="Landing Page.html">
+                <img src="SF.png" alt="Spoframe" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="Landing Page.html">Главная</a></li>
+                <li><a href="Product Catalog.html" class="active">Каталог</a></li>
+                <li><a href="Product Detail.html">Подробности</a></li>
+                </ul>
+            </div>
+        <div class="nav-right">
+            <button class="btn-signup">Регистрация</button>
+        </div>
+    </nav>
+
+    <!-- Фильтры -->
+    <section class="filter-section">
+        <h2>Фильтры</h2>
+        <div class="filter-options">
+            <div class="filter-group">
+                <h3>Стиль</h3>
+                <label>
+                    <input type="checkbox" checked> Современный
+                </label>
+                <label>
+                    <input type="checkbox"> Традиционный
+                </label>
+            </div>
+            <div class="filter-group">
+                <h3>Функциональность</h3>
+                <label>
+                    <input type="checkbox"> Для коллекций
+                </label>
+                <label>
+                    <input type="checkbox" checked> Для декора
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог -->
+    <main class="catalog-grid">
+        <div class="product-card">
+            <img src="wood-frame.jpg" alt="Деревянная рамка" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Деревянная Рамка</h3>
+                <p class="product-description">Элегантная деревянная рамка, идеальная для гостиной.</p>
+                <p class="product-price">21 990 ₸</p>
+                <a href="#" class="btn-view-details">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="coming-soon">
+                Скоро в продаже
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="black-frame.jpg" alt="Черная металлическая рамка" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Черная Металлическая Рамка</h3>
+                <p class="product-description">Стильная черная рамка для современного интерьера.</p>
+                <p class="product-price">19 990 ₸</p>
+                <a href="#" class="btn-view-details">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="rustic-frame.jpg" alt="Рустикальная рамка" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Рустикальная Рамка</h3>
+                <p class="product-description">Рустикальный шарм, отлично подходит для загородного стиля.</p>
+                <p class="product-price">24 990 ₸</p>
+                <a href="#" class="btn-view-details">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="silver-frame.jpg" alt="Серебряная рамка" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Серебряная Рамка</h3>
+                <p class="product-description">Современная серебряная рамка, добавляет элегантности любому интерьеру.</p>
+                <p class="product-price">26 990 ₸</p>
+                <a href="#" class="btn-view-details">Подробнее</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="coming-soon">
+                Скоро в продаже
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="newsletter">
+            <h3>Подпишитесь на нашу рассылку</h3>
+            <form class="subscribe-form" id="subscribeForm" action="/api/subscription/subscribe" method="POST">
+                <input type="email" name="email" placeholder="Введите ваш email" required>
+                <button type="submit" class="btn-subscribe">Подписаться</button>
+                <div class="form-message" style="display: none;"></div>
+            </form>
+        </div>
+
+        <div class="footer-links">
+            <div class="footer-nav">
+                <a href="pricing.html">Цены</a>
+                <a href="about.html">О нас</a>
+                <a href="features.html">Функции</a>
+                <a href="contact.html">Связаться с нами</a>
+                <a href="details.html#faq">Частые вопросы</a>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="language-selector">
+                    <select>
+                        <option>Русский</option>
+                    </select>
+                </div>
+                <div class="copyright">
+                    © 2025 Spoframe, Inc.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно регистрации/входа -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Форма регистрации -->
+            <div class="form-container signup-form">
+                <div class="signup-header">
+                    <img src="SF.png" alt="Logo" class="modal-logo">
+                    <h2>Зарегистрируйтесь моментально</h2>
+                    <p>и начните наслаждаться музыкой прямо сейчас</p>
+                </div>
+                <form id="signupForm" action="/api/auth/register" method="POST">
+                    <div class="form-group">
+                        <label for="name">Как тебя зовут?</label>
+                        <input type="text" id="name" name="name" placeholder="Введи имя профиля" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Твой email</label>
+                        <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Придумай пароль</label>
+                        <input type="password" id="password" name="password" placeholder="Минимум 8 символов" required>
+                        <div class="password-requirements">Пароль должен содержать минимум 8 символов</div>
+                    </div>
+                    
+                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
+                    <div class="form-message" style="display: none;"></div>
+                    <div class="login-link">
+                        Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Форма входа -->
+            <div class="form-container login-form" style="display: none;">
+                <div class="signup-header">
+                    <img src="SF.png" alt="Logo" class="modal-logo">
+                    <h2>С возвращением!</h2>
+                    <p>войдите в свой аккаунт</p>
+                </div>
+                <form id="loginForm" action="/api/auth/login" method="POST">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="name@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" name="password" placeholder="Введите пароль" required>
+                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="signup-submit">Войти</button>
+                    <div class="form-message" style="display: none;"></div>
+                    <div class="login-link">
+                        Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="public/js/main.js"></script>
+</body>
+</html>
