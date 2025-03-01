@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подробности - Spoframe</title>
+    <link rel="stylesheet" href="susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth-modal.css">
+    <link rel="stylesheet" href="scroll-buttons.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="Landing Page.html">
+                <img src="SF.png" alt="Spoframe" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="Landing Page.html">Главная</a></li>
+                <li><a href="Product Catalog.html">Каталог</a></li>
+                <li><a href="Product Detail.html" class="active">Подробности</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="btn-signup" data-auth="open">Регистрация</button>
+        </div>
+    </nav>
+
+    <!-- Детали продукта -->
+    <div class="product-detail-container">
+        <div class="product-detail-grid">
+            <div class="product-image-section">
+                <img src="modern-frame.jpeg" alt="Стильная Современная Рамка" class="product-detail-image">
+            </div>
+            <div class="product-info-section">
+                <h1>Обзор продукта</h1>
+                <h2 class="product-name">Стильная Современная Рамка</h2>
+                <p class="product-price">14 990 ₸</p>
+                <p class="product-description">Элегантная и современная рамка, идеально подходящая для современных интерьеров, созданная с точностью и изяществом.</p>
+                <button type="button" class="btn-buy-now" onclick="window.location.href='development-page.html'">Купить</button>
+            </div>
+        </div>
+
+        <!-- Отзывы пользователей -->
+        <section class="testimonials-section">
+            <h2>Отзывы наших покупателей</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <img src="User_icon.jpg" alt="Айсулу Нурланова" class="user-avatar">
+                    <div class="testimonial-content">
+                        <h3>User1</h3>
+                        <div class="rating">★★★★★</div>
+                        <p>Потрясающее качество, превзошло мои ожидания.</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <img src="User_icon.jpg" alt="Арман Сатыбалды" class="user-avatar">
+                    <div class="testimonial-content">
+                        <h3>User2</h3>
+                        <div class="rating">★★★★★</div>
+                        <p>Отличная практичность, очень рекомендую.</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <img src="User_icon.jpg" alt="Динара Жумабаева" class="user-avatar">
+                    <div class="testimonial-content">
+                        <h3>User3</h3>
+                        <div class="rating">★★★★★</div>
+                        <p>Хорошее соотношение цены и качества, очень довольна.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ секция -->
+        <section class="faq-section">
+            <h2>Часто задаваемые вопросы</h2>
+            <p class="faq-description">Изучите различные варианты покупки и найдите ответы на распространенные вопросы.</p>
+            
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary>Какие размеры доступны?</summary>
+                    <p>Мы предлагаем размеры от маленького до XXL. Пожалуйста, обратитесь к таблице размеров для конкретных измерений.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Как выбрать цвет?</summary>
+                    <p>Вы можете выбрать из доступных цветовых вариантов в разделе настройки продукта.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Какие варианты доставки?</summary>
+                    <p>Мы предлагаем стандартную и экспресс-доставку в большинство регионов.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Могу ли я вернуть товар?</summary>
+                    <p>Да, мы предлагаем 30-дневную политику возврата для неиспользованных товаров.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Как отследить мой заказ?</summary>
+                    <p>Вы можете отследить свой заказ, используя номер отслеживания, предоставленный в письме с подтверждением.</p>
+                </details>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="Product Catalog.html">Каталог</a>
+                <span>•</span>
+                <a href="Product Detail.html">Подробности</a>
+                <span>•</span>
+                <a href="About Product.html">О продукте</a>
+            </div>
+            <div class="copyright">
+                © 2025 Spoframe
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно регистрации/входа -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal__content">
+            <span class="close">&times;</span>
+            
+            <!-- Форма входа -->
+            <div class="form-container login-form">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="email" placeholder="Введите ваш email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" placeholder="Введите пароль">
+                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="auth-submit">Войти</button>
+
+                    <div class="auth-footer">
+                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="form-container signup-form" style="display: none;">
+                <div class="signup-header">
+                    <img src="SF.png" alt="Logo" class="modal-logo">
+                    <h2>Зарегистрируйтесь моментально</h2>
+                    <p>и начните наслаждаться музыкой прямо сейчас</p>
+                </div>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label>КАК ТЕБЯ ЗОВУТ?</label>
+                        <input type="text" placeholder="Введи имя профиля">
+                    </div>
+                    <div class="form-group">
+                        <label>ТВОЙ EMAIL</label>
+                        <input type="email" placeholder="name@domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label>ПРИДУМАЙ ПАРОЛЬ</label>
+                        <input type="password" placeholder="Минимум 8 символов">
+                        <div class="password-requirements">
+                            Пароль должен содержать минимум 8 символов
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
+                    <div class="auth-footer">
+                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-buttons">
+        <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <script src="auth-modal.js"></script>
+    <script src="public/js/main.js"></script>
+    <script src="scroll-buttons.js"></script>
+    <!-- Добавьте перед закрывающим тегом body -->
+    <div id="developmentPage" class="development-page">
+        <div class="development-content">
+            <img src="construction.gif" alt="В разработке" class="development-image">
+            <h2>Страница в разработке</h2>
+            <p>Мы усердно работаем над созданием удобной системы оплаты и оформления заказов</p>
+            <button class="close-dev-page">Вернуться назад</button>
+        </div>
+    </div>
+</body>
+</html>
