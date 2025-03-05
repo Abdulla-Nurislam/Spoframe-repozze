@@ -163,6 +163,130 @@
             background: var(--primary);
             color: white;
         }
+
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .product-modal__content {
+            position: relative;
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-modal__close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-main);
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .product-modal__close:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .product-modal__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .product-modal__image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-modal__info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .product-modal__title {
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .product-modal__price {
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .product-modal__description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .product-modal__features {
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item i {
+            color: var(--primary);
+        }
+
+        .product-modal__buy {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .product-modal__buy:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .product-modal__grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-modal__image {
+                height: 300px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -218,7 +342,7 @@
 
     <!-- Каталог -->
     <main class="catalog-grid">
-        <div class="product-card" data-style="modern" data-function="decor">
+        <div class="product-card" data-style="modern" data-function="decor" data-modal-target="modal-wood-frame">
             <img src="wood-frame.png" alt="Деревянная рамка" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Деревянная Рамка</h3>
@@ -228,7 +352,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-style="modern" data-function="collection">
+        <div class="product-card" data-style="modern" data-function="collection" data-modal-target="modal-black-frame">
             <img src="black-frame.png" alt="Черная металлическая рамка" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Черная Металлическая Рамка</h3>
@@ -238,7 +362,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-style="rustic" data-function="decor">
+        <div class="product-card" data-style="rustic" data-function="decor" data-modal-target="modal-rustic-frame">
             <img src="frame.jpg" alt="Рустикальная рамка" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Рустикальная Рамка</h3>
@@ -254,7 +378,7 @@
             </div>
         </div>
 
-        <div class="product-card" data-style="traditional" data-function="collection">
+        <div class="product-card" data-style="traditional" data-function="collection" data-modal-target="modal-silver-frame">
             <img src="silver-frame.png" alt="Серебряная рамка" class="product-image">
             <div class="product-info">
                 <h3 class="product-title">Серебряная Рамка</h3>
@@ -362,5 +486,141 @@
     <script src="public/js/main.js"></script>
     <script src="filters.js"></script>
     <script src="scroll-buttons.js"></script>
+    <script src="product-modals.js"></script>
+
+    <!-- Модальные окна для продуктов -->
+    <div class="product-modal" id="modal-wood-frame">
+        <div class="product-modal__content">
+            <button class="product-modal__close">&times;</button>
+            <div class="product-modal__grid">
+                <img src="wood-frame.png" alt="Деревянная рамка" class="product-modal__image">
+                <div class="product-modal__info">
+                    <h2 class="product-modal__title">Деревянная Рамка</h2>
+                    <p class="product-modal__price">21 990 ₸</p>
+                    <p class="product-modal__description">
+                        Элегантная деревянная рамка, созданная из высококачественного массива дерева. 
+                        Идеально подходит для гостиной и создает теплую, уютную атмосферу в любом помещении.
+                    </p>
+                    <div class="product-modal__features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Натуральное дерево высшего качества</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Ручная работа</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Защитное покрытие</span>
+                        </div>
+                    </div>
+                    <button class="product-modal__buy">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для черной металлической рамки -->
+    <div class="product-modal" id="modal-black-frame">
+        <div class="product-modal__content">
+            <button class="product-modal__close">&times;</button>
+            <div class="product-modal__grid">
+                <img src="black-frame.png" alt="Черная металлическая рамка" class="product-modal__image">
+                <div class="product-modal__info">
+                    <h2 class="product-modal__title">Черная Металлическая Рамка</h2>
+                    <p class="product-modal__price">19 990 ₸</p>
+                    <p class="product-modal__description">
+                        Стильная черная металлическая рамка с современным дизайном. 
+                        Идеальное решение для минималистичных интерьеров и офисных пространств.
+                        Матовое покрытие придает изделию элегантный вид.
+                    </p>
+                    <div class="product-modal__features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Прочный металлический корпус</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Матовое покрытие</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Современный дизайн</span>
+                        </div>
+                    </div>
+                    <button class="product-modal__buy">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для рустикальной рамки -->
+    <div class="product-modal" id="modal-rustic-frame">
+        <div class="product-modal__content">
+            <button class="product-modal__close">&times;</button>
+            <div class="product-modal__grid">
+                <img src="frame.jpg" alt="Рустикальная рамка" class="product-modal__image">
+                <div class="product-modal__info">
+                    <h2 class="product-modal__title">Рустикальная Рамка</h2>
+                    <p class="product-modal__price">24 990 ₸</p>
+                    <p class="product-modal__description">
+                        Рустикальная рамка с характерным винтажным шармом. 
+                        Идеально подходит для загородных домов и интерьеров в стиле кантри.
+                        Каждая рамка имеет уникальный рисунок древесины.
+                    </p>
+                    <div class="product-modal__features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Состаренная древесина</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Уникальный дизайн</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Экологичные материалы</span>
+                        </div>
+                    </div>
+                    <button class="product-modal__buy">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для серебряной рамки -->
+    <div class="product-modal" id="modal-silver-frame">
+        <div class="product-modal__content">
+            <button class="product-modal__close">&times;</button>
+            <div class="product-modal__grid">
+                <img src="silver-frame.png" alt="Серебряная рамка" class="product-modal__image">
+                <div class="product-modal__info">
+                    <h2 class="product-modal__title">Серебряная Рамка</h2>
+                    <p class="product-modal__price">26 990 ₸</p>
+                    <p class="product-modal__description">
+                        Элегантная серебряная рамка с роскошным дизайном. 
+                        Идеально подходит для классических интерьеров и торжественных помещений.
+                        Высококачественное серебряное покрытие придает изысканный вид.
+                    </p>
+                    <div class="product-modal__features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Премиальное покрытие</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Классический дизайн</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Долговечное покрытие</span>
+                        </div>
+                    </div>
+                    <button class="product-modal__buy">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

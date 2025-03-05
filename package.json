@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
@@ -9,7 +10,23 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.1",
     "nodemailer": "^6.10.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "gsap": "^3.12.5",
+    "framer-motion": "^11.0.8",
+    "aos": "^2.3.4",
+    "locomotive-scroll": "^4.1.4",
+    "three": "^0.162.0",
+    "swiper": "^11.0.7",
+    "motion": "^10.17.0",
+    "scrollreveal": "^4.0.9",
+    "animejs": "^3.2.2",
+    "lottie-web": "^5.12.2",
+    "particles.js": "^2.0.0",
+    "typed.js": "^2.1.0",
+    "vanilla-tilt": "^1.8.1",
+    "smooth-scrollbar": "^8.8.4",
+    "tailwindcss": "^3.4.1",
+    "sass": "^1.71.1"
   },
   "name": "startup-machines",
   "version": "1.0.0",
@@ -21,5 +38,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdulla-Nurislam/Spoframe-repozze.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Abdulla-Nurislam/Spoframe-repozze/issues"
+  },
+  "homepage": "https://github.com/Abdulla-Nurislam/Spoframe-repozze#readme"
 }
