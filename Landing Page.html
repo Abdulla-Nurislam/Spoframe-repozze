@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spoframe</title>
-    <link rel="stylesheet" href="susp.css">
+    <link rel="stylesheet" href="/css/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="auth-modal.css">
-    <link rel="stylesheet" href="scroll-buttons.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <script src="auth-modal.js" defer></script>
-    <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <link rel="stylesheet" href="/css/auth-modal.css">
+    <link rel="stylesheet" href="/css/scroll-buttons.css">
+    <script src="/js/auth-modal.js" defer></script>
 </head>
-<body data-scroll-container>
+<body>
     <!-- Навигация -->
     <nav class="navbar">
         <div class="nav-left">
             <a href="Landing Page.html">
-                <img src="SF.png" alt="Spoframe" class="logo">
+                <img src="/images/SF.png" alt="Spoframe" class="logo">
             </a>
             <ul class="nav-links">
                 <li><a href="Landing Page.html" class="active">Главная</a></li>
@@ -43,9 +38,9 @@
         <div class="hero-slide slide-4"></div>
 
         <div class="hero-content">
-            <div class="trailer-label" data-aos="fade-up" data-aos-delay="200">Рамки</div>
-            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">Spoframe</h1>
-            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+            <div class="trailer-label">Рамки</div>
+            <h1>Spoframe</h1>
+            <div class="hero-buttons">
                 <a href="Product Detail.html" id="orderNowBtn" class="btn-watch-now">ЗАКАЗАТЬ СЕЙЧАС</a>
                 <div class="trailer-navigation">
                     <span class="dot active" data-slide="1"></span>
@@ -59,10 +54,10 @@
 
     <!-- Секция особенностей -->
     <section class="features">
-        <h2 class="section-title" data-aos="fade-up">Особенности</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Откройте для себя уникальные возможности Spoframe</p>
+        <h2 class="section-title">Особенности</h2>
+        <p class="section-subtitle">Откройте для себя уникальные возможности Spoframe</p>
         <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-card">
                 <div class="icon-box blue">
                     <i class="icon-design"></i>
                 </div>
@@ -71,7 +66,7 @@
                 <p>Элегантные рамки, которые дополняют любой интерьер, добавляя нотку изысканности вашему пространству.</p>
             </div>
             
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="feature-card">
                 <div class="icon-box green">
                     <i class="icon-spotify"></i>
                 </div>
@@ -80,7 +75,7 @@
                 <p>Легко подключайтесь к Spotify для отображения обложек альбомов, плейлистов и многого другого прямо на вашей рамке.</p>
             </div>
             
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="800">
+            <div class="feature-card">
                 <div class="icon-box purple">
                     <i class="icon-customize"></i>
                 </div>
@@ -89,7 +84,7 @@
                 <p>Доступны режимы слайд-шоу и статичного изображения. Настраивайте источники контента, частоту смены кадров и яркость дисплея под свои предпочтения.</p>
             </div>
         </div>
-    <button class="btn-explore-features" data-aos="fade-up" data-aos-delay="1000" onclick="window.location.href='About Product.html'">Подробнее</button> 
+    <button class="btn-explore-features" onclick="window.location.href='About Product.html'">Подробнее</button> 
     </section>
 
     <!-- Футер -->
@@ -137,7 +132,7 @@
             <!-- Форма регистрации -->
             <div class="form-container signup-form" style="display: none;">
                 <div class="signup-header">
-                    <img src="SF.png" alt="Logo" class="modal-logo">
+                    <img src="/images/SF.png" alt="Logo" class="modal-logo">
                     <h2>Зарегистрируйтесь моментально</h2>
                     <p>и начните наслаждаться музыкой прямо сейчас</p>
                 </div>
@@ -177,9 +172,8 @@
 
     </div>
 
-    <script src="auth-modal.js"></script>
-    <script src="public/js/main.js"></script>
-    <script src="scroll-buttons.js"></script>
-    <script src="animations.js"></script>
+    <script src="/js/auth-modal.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scroll-buttons.js"></script>
 </body>
 </html>
