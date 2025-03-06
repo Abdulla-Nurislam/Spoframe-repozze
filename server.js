@@ -17,8 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Настройка статических файлов
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname)));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname)));
+app.use('/js', express.static(path.join(__dirname)));
+app.use('/images', express.static(path.join(__dirname)));
 
 // Создание таблиц при запуске
 db.serialize(() => {
