@@ -7,8 +7,10 @@ require('dotenv').config();
 const path = require('path');
 const app = express();
 
-// Подключение к базе данных
-const db = new sqlite3.Database('users.db');
+// Подключение к базе данных - используем in-memory SQLite для Vercel
+const db = process.env.NODE_ENV === 'production' 
+    ? new sqlite3.Database(':memory:')
+    : new sqlite3.Database('users.db');
 
 // Middleware для обработки JSON и форм
 app.use(bodyParser.json());
@@ -152,10 +154,13 @@ app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });
+
+// Экспортируем app для Vercel
+module.exports = app;
 
 // Обработка ошибок
 app.use((err, req, res, next) => {
