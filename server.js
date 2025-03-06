@@ -15,28 +15,48 @@ const db = process.env.NODE_ENV === 'production'
 // Middleware для обработки JSON и форм
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('.'));
-app.use('/public', express.static('public'));
 
-// Создание таблицы пользователей при запуске
-db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-`);
+// Настройка статических файлов
+app.use(express.static(__dirname));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// Добавьте это к существующим CREATE TABLE запросам
-db.run(`
-    CREATE TABLE IF NOT EXISTS subscribers (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT UNIQUE NOT NULL,
-        subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-`);
+// Создание таблиц при запуске
+db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
+
+    db.run(`
+        CREATE TABLE IF NOT EXISTS subscribers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT UNIQUE NOT NULL,
+            subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    `);
+});
+
+// Основные маршруты
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Landing Page.html'));
+});
+
+app.get('/catalog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Product Catalog.html'));
+});
+
+app.get('/details', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Product Detail.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'About Product.html'));
+});
 
 // Создаем транспорт для отправки почты
 const transporter = nodemailer.createTransport({
@@ -47,12 +67,11 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Маршрут для регистрации
+// API маршруты
 app.post('/api/auth/register', async (req, res) => {
     const { name, email, password } = req.body;
     
     try {
-        // Проверяем, существует ли пользователь
         const checkUserQuery = 'SELECT * FROM users WHERE email = ?';
         db.get(checkUserQuery, [email], async (err, existingUser) => {
             if (err) {
@@ -65,17 +84,13 @@ app.post('/api/auth/register', async (req, res) => {
             }
 
             try {
-                // Хешируем пароль
                 const hashedPassword = await bcrypt.hash(password, 10);
-
-                // Добавляем пользователя
                 const insertUserQuery = 'INSERT INTO users (username, email, password, registration_date) VALUES (?, ?, ?, ?)';
                 db.run(insertUserQuery, [name, email, hashedPassword, new Date().toISOString()], function(err) {
                     if (err) {
                         console.error('Database error:', err);
                         return res.status(500).json({ error: 'Ошибка при создании пользователя' });
                     }
-
                     res.status(201).json({ 
                         message: 'Регистрация успешна',
                         userId: this.lastID 
@@ -92,41 +107,44 @@ app.post('/api/auth/register', async (req, res) => {
     }
 });
 
-// Маршрут для входа (соответствует пути в HTML форме)
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
     
-    db.get('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, user) => {
-        if (err) {
-            return res.status(500).json({ error: 'Ошибка сервера' });
-        }
-        if (!user) {
-            return res.status(401).json({ error: 'Неверный email или пароль' });
-        }
-        res.json({ message: 'Вход выполнен успешно', user: { id: user.id, username: user.username, email: user.email } });
-    });
+    try {
+        db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user) => {
+            if (err) {
+                return res.status(500).json({ error: 'Ошибка сервера' });
+            }
+            if (!user) {
+                return res.status(401).json({ error: 'Неверный email или пароль' });
+            }
+
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (!passwordMatch) {
+                return res.status(401).json({ error: 'Неверный email или пароль' });
+            }
+
+            res.json({ 
+                message: 'Вход выполнен успешно', 
+                user: { 
+                    id: user.id, 
+                    username: user.username, 
+                    email: user.email 
+                } 
+            });
+        });
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Ошибка при входе' });
+    }
 });
 
-// Маршрут для получения списка пользователей
-app.get('/api/users', (req, res) => {
-    db.all('SELECT * FROM users', [], (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-// Маршрут для подписки на рассылку
 app.post('/api/subscription/subscribe', async (req, res) => {
     const { email } = req.body;
 
     try {
-        // Сохраняем email в базу данных
         db.run('INSERT INTO subscribers (email) VALUES (?)', [email]);
 
-        // Отправляем приветственное письмо
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
@@ -149,21 +167,17 @@ app.post('/api/subscription/subscribe', async (req, res) => {
     }
 });
 
-// Маршрут для страницы администратора
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
-});
-
-// Экспортируем app для Vercel
-module.exports = app;
-
 // Обработка ошибок
 app.use((err, req, res, next) => {
     console.error('Ошибка сервера:', err);
     res.status(500).json({ error: 'Внутренняя ошибка сервера' });
 });
+
+// Запуск сервера
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
+});
+
+// Экспорт для Vercel
+module.exports = app;
