@@ -1,0 +1,36 @@
+{
+  "navigation": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "about": "О нас",
+    "toggleMenu": "Переключить меню"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "loginTitle": "Вход в систему",
+    "registerTitle": "Регистрация",
+    "name": "Имя",
+    "email": "Email",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "namePlaceholder": "Введите ваше имя",
+    "emailPlaceholder": "Введите ваш email",
+    "passwordPlaceholder": "Введите пароль",
+    "confirmPasswordPlaceholder": "Подтвердите пароль",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?"
+  },
+  "footer": {
+    "navigation": "Навигация",
+    "contact": "Контакты",
+    "social": "Социальные сети",
+    "rights": "Все права защищены",
+    "privacy": "Политика конфиденциальности",
+    "terms": "Условия использования"
+  },
+  "welcome": "Добро пожаловать в Spoframe",
+  "health": {
+    "ok": "API работает"
+  }
+} 

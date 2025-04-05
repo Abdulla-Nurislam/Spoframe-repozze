@@ -1,0 +1,36 @@
+{
+  "navigation": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "about": "About",
+    "toggleMenu": "Toggle menu"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "loginTitle": "Sign In",
+    "registerTitle": "Sign Up",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "namePlaceholder": "Enter your name",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "social": "Social Media",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "welcome": "Welcome to Spoframe",
+  "health": {
+    "ok": "API is working"
+  }
+} 

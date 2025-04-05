@@ -1,0 +1,54 @@
+/* Импорт оригинальных стилей */
+@import url('../../susp.css');
+
+/* Дополнительные стили для совместимости с React-компонентами, 
+   сохраняя при этом оригинальный дизайн */
+
+/* Стили для React-контейнера */
+#root {
+  display: contents; /* Чтобы React-контейнер не влиял на оригинальную структуру */
+}
+
+/* Обеспечиваем совместимость с React Router */
+.app {
+  display: contents; /* Сохраняем оригинальную структуру */
+}
+
+/* Стили для main-content в React-приложении */
+.main-content {
+  min-height: calc(100vh - 60px - 200px);
+}
+
+/* Сохраняем оригинальные стили для модальных окон */
+.auth-modal {
+  z-index: 1000;
+}
+
+/* Обеспечиваем совместимость с анимациями */
+.hero-slide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slide-1 { 
+  background: linear-gradient(-45deg, 
+      #9333EA, 
+      #4C1D95, 
+      #7C3AED,
+      #4C1D95);
+  background-size: 400% 400%;
+  animation: gradientAnimation 6s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+} 

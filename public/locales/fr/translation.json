@@ -1,0 +1,25 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "about": "À propos",
+    "profile": "Profil"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe"
+  },
+  "products": {
+    "title": "Nos produits",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "price": "Prix",
+    "category": "Catégorie",
+    "addToCart": "Ajouter au panier",
+    "details": "Détails"
+  }
+} 

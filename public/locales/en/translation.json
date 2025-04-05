@@ -1,0 +1,72 @@
+{
+  "navigation": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "about": "About",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "products": {
+    "title": "Our Products",
+    "filter": "Filter",
+    "sort": "Sort",
+    "price": "Price",
+    "category": "Category",
+    "addToCart": "Add to Cart",
+    "details": "Details"
+  },
+  "home": {
+    "frames": "Frames",
+    "orderNow": "ORDER NOW",
+    "features": "Features",
+    "featuresSubtitle": "Discover the unique capabilities of Spoframe",
+    "more": "Learn More",
+    "design": {
+      "title": "Stylish Design",
+      "category": "Design",
+      "description": "Elegant frames that complement any interior, adding a touch of sophistication to your space."
+    },
+    "integration": {
+      "title": "Spotify Integration",
+      "category": "Integration",
+      "description": "Easily connect to Spotify to display album covers, playlists, and more right on your frame."
+    },
+    "display": {
+      "title": "Customizable Display",
+      "category": "Accessibility",
+      "description": "Slideshow and static image modes available. Customize content sources, frame rate, and display brightness to your preferences."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We'd be happy to answer them!",
+    "name": "Your Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "subject": "Subject",
+    "subjectPlaceholder": "Message subject",
+    "message": "Message",
+    "messagePlaceholder": "Enter your message",
+    "send": "Send Message",
+    "thankYou": "Thank you for your message!",
+    "willContactSoon": "We will contact you soon."
+  },
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "details": "Details",
+    "about": "About Product",
+    "register": "Register"
+  },
+  "footer": {
+    "copyright": "© 2025 Spoframe"
+  }
+} 

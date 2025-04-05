@@ -1,0 +1,28 @@
+{
+  "types": "static-deploy/index.d.ts",
+  "name": "spoframe-static",
+  "version": "1.0.0",
+  "description": "A simplified version of the Spoframe project without React",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "spoframe",
+    "web",
+    "static"
+  ],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

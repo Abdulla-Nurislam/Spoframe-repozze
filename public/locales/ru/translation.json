@@ -1,0 +1,106 @@
+{
+  "navigation": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "about": "О нас",
+    "profile": "Профиль"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?"
+  },
+  "products": {
+    "title": "Наши продукты",
+    "filter": "Фильтр",
+    "sort": "Сортировка",
+    "price": "Цена",
+    "category": "Категория",
+    "addToCart": "В корзину",
+    "details": "Подробнее"
+  },
+  "home": {
+    "frames": "Рамки",
+    "orderNow": "ЗАКАЗАТЬ СЕЙЧАС",
+    "features": "Особенности",
+    "featuresSubtitle": "Откройте для себя уникальные возможности Spoframe",
+    "more": "Подробнее",
+    "design": {
+      "title": "Стильный Дизайн",
+      "category": "Дизайн",
+      "description": "Элегантные рамки, которые дополняют любой интерьер, добавляя нотку изысканности вашему пространству."
+    },
+    "integration": {
+      "title": "Интеграция со Spotify",
+      "category": "Интеграция",
+      "description": "Легко подключайтесь к Spotify для отображения обложек альбомов, плейлистов и многого другого прямо на вашей рамке."
+    },
+    "display": {
+      "title": "Настраиваемость Дисплея",
+      "category": "Доступность",
+      "description": "Доступны режимы слайд-шоу и статичного изображения. Настраивайте источники контента, частоту смены кадров и яркость дисплея под свои предпочтения."
+    }
+  },
+  "contact": {
+    "title": "Связаться с нами",
+    "subtitle": "Есть вопросы? Мы с радостью на них ответим!",
+    "name": "Ваше имя",
+    "namePlaceholder": "Введите ваше имя",
+    "email": "Email",
+    "emailPlaceholder": "Введите ваш email",
+    "subject": "Тема",
+    "subjectPlaceholder": "Тема сообщения",
+    "message": "Сообщение",
+    "messagePlaceholder": "Введите ваше сообщение",
+    "send": "Отправить сообщение",
+    "thankYou": "Спасибо за ваше сообщение!",
+    "willContactSoon": "Мы свяжемся с вами в ближайшее время."
+  },
+  "nav": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "details": "Подробности",
+    "about": "О продукте",
+    "register": "Регистрация"
+  },
+  "footer": {
+    "copyright": "© 2025 Spoframe",
+    "catalog": "Каталог",
+    "details": "Подробности",
+    "about": "О продукте",
+    "contact": "Связаться с нами",
+    "login": "Войти"
+  },
+  "landing": {
+    "frames": "Цифровые рамки",
+    "orderNow": "Заказать сейчас",
+    "features": "Особенности",
+    "featuresSubtitle": "Откройте для себя уникальные возможности Spoframe",
+    "stylishDesign": "Стильный дизайн",
+    "design": "Дизайн",
+    "designDescription": "Элегантные рамки, которые украсят любой интерьер",
+    "spotifyIntegration": "Интеграция со Spotify",
+    "integration": "Интеграция",
+    "integrationDescription": "Автоматическое отображение обложек альбомов и плейлистов",
+    "customDisplay": "Настраиваемый дисплей",
+    "accessibility": "Доступность",
+    "accessibilityDescription": "Полный контроль над отображением контента",
+    "learnMore": "Узнать больше",
+    "contactUs": "Свяжитесь с нами",
+    "contactSubtitle": "Есть вопросы? Мы всегда на связи",
+    "yourName": "Ваше имя",
+    "enterName": "Введите ваше имя",
+    "enterEmail": "Введите ваш email",
+    "subject": "Тема",
+    "enterSubject": "Введите тему сообщения",
+    "message": "Сообщение",
+    "enterMessage": "Введите ваше сообщение",
+    "sendMessage": "Отправить сообщение"
+  }
+} 

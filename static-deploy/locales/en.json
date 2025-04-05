@@ -1,0 +1,78 @@
+{
+  "navigation": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "details": "Details",
+    "about": "About",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "name": "What's your name?",
+    "your_email": "Your email",
+    "create_password": "Create a password",
+    "min_chars": "Minimum 8 characters",
+    "register_now": "Register instantly",
+    "start_enjoying": "and start enjoying music right now"
+  },
+  "hero": {
+    "frames": "Frames",
+    "order_now": "ORDER NOW"
+  },
+  "features": {
+    "title": "Features",
+    "subtitle": "Discover the unique capabilities of Spoframe",
+    "more": "Learn more",
+    "design": {
+      "title": "Stylish Design",
+      "category": "Design",
+      "description": "Elegant frames that complement any interior, adding a touch of sophistication to your space."
+    },
+    "spotify": {
+      "title": "Spotify Integration",
+      "category": "Integration",
+      "description": "Easily connect to Spotify to display album covers, playlists, and more right on your frame."
+    },
+    "display": {
+      "title": "Customizable Display",
+      "category": "Accessibility",
+      "description": "Slideshow and static image modes available. Customize content sources, frame rate, and display brightness to your preferences."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We'd be happy to answer them!",
+    "name": "Your name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "success_title": "Thank you for your message!",
+    "success_message": "We will get back to you soon."
+  },
+  "footer": {
+    "catalog": "Catalog",
+    "details": "Details",
+    "about": "About",
+    "copyright": "© 2025 Spoframe"
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "message": "Sorry, but the page you are looking for does not exist or has been moved.",
+      "back": "Back to home"
+    },
+    "500": {
+      "title": "Server error",
+      "message": "Sorry, but there was an error on the server. We are already working on fixing it. Please try again later.",
+      "back": "Back to home"
+    }
+  }
+} 

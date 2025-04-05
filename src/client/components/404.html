@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена | Spoframe</title>
+    <link rel="stylesheet" href="susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: 700;
+            color: #7C3AED;
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 32px;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-home {
+            background: #7C3AED;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .btn-home:hover {
+            background: #6D28D9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="Landing Page.html">
+                <img src="SF.png" alt="Spoframe" class="logo">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Контент ошибки -->
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Страница не найдена</h2>
+        <p class="error-message">Извините, но страница, которую вы ищете, не существует или была перемещена.</p>
+        <a href="Landing Page.html" class="btn-home">Вернуться на главную</a>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="Landing Page.html">Главная</a>
+                <span>•</span>
+                <a href="Product Catalog.html">Каталог</a>
+                <span>•</span>
+                <a href="Product Detail.html">Подробности</a>
+            </div>
+            <div class="copyright">
+                © 2025 Spoframe
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

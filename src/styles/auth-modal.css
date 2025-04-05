@@ -1,0 +1,403 @@
+/* Основные переменные */
+:root {
+    --primary-color: #7C3AED;
+    --primary-hover: #6D28D9;
+    --error-color: #EF4444;
+    --success-color: #10B981;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --border-color: #E5E7EB;
+    --input-bg: #F9FAFB;
+    --modal-bg: #FFFFFF;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --discord-bg: #313338;
+    --discord-input-bg: #1E1F22;
+    --discord-text: #F2F3F5;
+    --discord-label: #B5BAC1;
+    --discord-link: #00A8FC;
+    --discord-button: #5865F2;
+    --discord-button-hover: #4752C4;
+    --discord-error: #FA777C;
+    --discord-modal-bg: #232428;
+}
+
+/* Модальное окно */
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.auth-modal__content {
+    background: #2B2D31;
+    width: 400px;
+    padding: 32px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.modal-logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.signup-header h2 {
+    color: #FFFFFF;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.signup-header p {
+    color: #B5BAC1;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #B5BAC1;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: #1E1F22;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.password-requirements {
+    color: #B5BAC1;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.auth-submit, .signup-submit {
+    width: 100%;
+    padding: 12px;
+    background: #5865F2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.auth-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #B5BAC1;
+}
+
+.switch-to-login, .switch-to-signup {
+    color: #00A8FC;
+    text-decoration: none;
+}
+
+.close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    color: #B5BAC1;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.auth-logo {
+    height: 40px;
+    width: auto;
+}
+
+.auth-social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: #111;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.social-button:hover {
+    background-color: #f9fafb;
+}
+
+.auth-divider {
+    position: relative;
+    text-align: center;
+    margin: 24px 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 20px);
+    height: 1px;
+    background-color: #e5e7eb;
+}
+
+.auth-divider::before {
+    left: 0;
+}
+
+.auth-divider::after {
+    right: 0;
+}
+
+.auth-divider span {
+    background: white;
+    padding: 0 10px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border: 1px solid #5865F2;
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #B5BAC1;
+    cursor: pointer;
+    padding: 0;
+}
+
+.password-toggle:hover {
+    color: #FFFFFF;
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 8px;
+    color: #00A8FC;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    color: #00A8FC;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Переключатель форм */
+.auth-modal__toggle {
+    display: flex;
+    background: var(--input-bg);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 24px;
+}
+
+.auth-modal__toggle-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.auth-modal__toggle-btn.active {
+    background: var(--modal-bg);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Сообщения об ошибках и успехе */
+.auth-modal__message {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+}
+
+.auth-modal__message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+    display: block;
+}
+
+.auth-modal__message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    display: block;
+}
+
+/* Дополнительные ссылки */
+.auth-modal__link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.auth-modal__link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .auth-modal__content {
+        margin: 16px;
+        padding: 24px;
+        width: 90%;
+    }
+
+    .auth-modal__header h2 {
+        font-size: 20px;
+    }
+
+    .auth-modal__header p {
+        font-size: 14px;
+    }
+
+    .auth-modal__form-group input {
+        font-size: 14px;
+    }
+}
+
+/* Добавьте эти стили в auth-modal.css */
+.auth-modal__message {
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 14px;
+    display: none;
+}
+
+.auth-modal__message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+    display: block;
+}
+
+.auth-modal__message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    display: block;
+}
+
+.strength-bar {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+    transition: width 0.3s ease;
+}
+
+.strength-text {
+    font-size: 12px;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --modal-bg: #1F2937;
+        --input-bg: #374151;
+        --text-primary: #F9FAFB;
+        --text-secondary: #9CA3AF;
+        --border-color: #4B5563;
+    }
+
+    .auth-modal__form-group input {
+        color: var(--text-primary);
+    }
+
+    .auth-modal__password-toggle svg {
+        fill: var(--text-secondary);
+    }
+
+    .auth-modal__message.error {
+        background: rgba(239, 68, 68, 0.2);
+    }
+
+    .auth-modal__message.success {
+        background: rgba(16, 185, 129, 0.2);
+    }
+}
+
+.error-message {
+    color: #ff4444;
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 68, 68, 0.1);
+}
+
+.error-message:not(:empty) {
+    display: block;
+}
+
+.close-message {
+    color: #007bff;
+    cursor: pointer;
+    margin-left: 10px;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spoframe - Демонстрация компонентной архитектуры</title>
+  <link rel="stylesheet" href="src/styles/component-architecture.css">
+  <!-- Подключение React -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Загрузка шрифтов -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .page-container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .page-header {
+      margin-bottom: 2rem;
+    }
+    
+    .page-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #1F2937;
+    }
+    
+    .page-description {
+      font-size: 1.125rem;
+      color: #6B7280;
+      max-width: 800px;
+      line-height: 1.5;
+    }
+    
+    .features-list {
+      margin: 2rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .features-list li {
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    
+    .react-container {
+      margin-top: 3rem;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .code-example {
+      background-color: #1F2937;
+      color: #F9FAFB;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 2rem 0;
+    }
+    
+    .code-example code {
+      white-space: pre;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .tech-badge {
+      padding: 0.5rem 1rem;
+      background-color: #F3F4F6;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #4B5563;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      color: #1F2937;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #7C3AED;
+      border-radius: 1.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <header class="page-header">
+      <h1 class="page-title">Демонстрация сложной компонентной архитектуры</h1>
+      <p class="page-description">
+        В этом демо представлена реализация передовых концепций компонентной архитектуры React, включающая управление состоянием, композицию компонентов, ленивую загрузку и оптимизацию производительности.
+      </p>
+      
+      <div class="tech-stack">
+        <div class="tech-badge">React 17+</div>
+        <div class="tech-badge">Hooks API</div>
+        <div class="tech-badge">Context API</div>
+        <div class="tech-badge">CSS Variables</div>
+        <div class="tech-badge">Component Composition</div>
+        <div class="tech-badge">Lazy Loading</div>
+      </div>
+    </header>
+    
+    <section>
+      <h2 class="section-title">Основные особенности</h2>
+      <ul class="features-list">
+        <li><strong>Глобальное управление состоянием</strong> с использованием React Context API и паттерна Reducer</li>
+        <li><strong>Пользовательские хуки</strong> для изоляции бизнес-логики от представления</li>
+        <li><strong>Компонентная композиция</strong> и переиспользование компонентов</li>
+        <li><strong>Higher-Order Components (HOC)</strong> для расширения функциональности базовых компонентов</li>
+        <li><strong>Render Props Pattern</strong> для гибкой передачи данных между компонентами</li>
+        <li><strong>Ленивая загрузка</strong> компонентов с использованием React.lazy и Suspense</li>
+        <li><strong>Оптимизация производительности</strong> с помощью React.memo и хуков useMemo/useCallback</li>
+        <li><strong>Динамическая темизация</strong> приложения с использованием CSS-переменных</li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2 class="section-title">Пример структуры компонента</h2>
+      <div class="code-example">
+        <code>// Пример кастомного хука для управления состоянием
+const useProducts = () => {
+  const { state, dispatch } = useApp();
+  
+  const fetchProducts = useCallback(async () => {
+    dispatch({ type: 'FETCH_PRODUCTS_START' });
+    // Логика загрузки данных
+    dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', payload: data });
+  }, [dispatch]);
+  
+  const filteredProducts = useMemo(() => {
+    // Логика фильтрации продуктов
+    return filteredData;
+  }, [state.products, state.filters]);
+  
+  return {
+    products: state.products,
+    filteredProducts,
+    isLoading: state.isLoading,
+    fetchProducts
+  };
+};</code>
+      </div>
+    </section>
+    
+    <section>
+      <h2 class="section-title">Демонстрация компонента</h2>
+      <p>Ниже представлен интерактивный демо-пример компонентной архитектуры:</p>
+      
+      <!-- React-компонент будет монтироваться в этот контейнер -->
+      <div id="component-architecture-container" class="react-container"></div>
+    </section>
+  </div>
+  
+  <!-- Загрузка нашего React-компонента -->
+  <script src="dist/components/ComponentArchitecture.js"></script>
+  <script>
+    // Код монтирования компонента будет добавлен автоматически при сборке
+    document.addEventListener('DOMContentLoaded', () => {
+      // Проверка поддержки React
+      if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+        console.log('React и ReactDOM загружены');
+      } else {
+        console.error('React или ReactDOM не загружены');
+      }
+      
+      // Проверка наличия контейнера
+      const container = document.getElementById('component-architecture-container');
+      if (container) {
+        console.log('Контейнер для React-компонента найден');
+      } else {
+        console.error('Контейнер для React-компонента не найден');
+      }
+      
+      // В реальном сценарии здесь был бы код монтирования 
+      // ReactDOM.render(<ComponentArchitectureWrapper />, container);
+    });
+  </script>
+</body>
+</html> 
