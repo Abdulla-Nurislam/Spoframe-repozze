@@ -2,78 +2,50 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "public/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.png",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.jpg",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/css/(.*)",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
-      "dest": "/public/css/$1"
+      "src": "/$",
+      "dest": "/public/Landing Page.html"
     },
     {
-      "src": "/js/(.*)",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
-      "dest": "/public/js/$1"
+      "src": "/catalog",
+      "dest": "/public/Product Catalog.html"
     },
     {
-      "src": "/images/(.*)",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
-      "dest": "/public/images/$1"
+      "src": "/product",
+      "dest": "/public/Product Detail.html"
     },
     {
-      "src": "/(.*\\.(css|js|jpg|jpeg|png|gif|ico|svg|webp))",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
-      "dest": "/$1"
+      "src": "/about",
+      "dest": "/public/About Product.html"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "src": "/register",
+      "dest": "/public/register.html"
     },
     {
-      "src": "/catalog/?$",
-      "dest": "server.js"
+      "src": "/admin",
+      "dest": "/public/admin.html"
     },
     {
-      "src": "/product/?$",
-      "dest": "server.js"
+      "src": "/profile",
+      "dest": "/public/profile.html"
     },
     {
-      "src": "/about/?$",
-      "dest": "server.js"
+      "src": "/user-feedback",
+      "dest": "/public/user-feedback.html"
     },
     {
-      "src": "/development-page/?$",
-      "dest": "server.js"
+      "src": "/development-page",
+      "dest": "/public/development-page.html"
     },
     {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/public/$1"
     }
   ],
   "env": {
