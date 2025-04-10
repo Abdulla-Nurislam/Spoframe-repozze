@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата через QR код - Spoframe</title>
+    <link rel="stylesheet" href="/susp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .payment-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-out;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .bank-logo {
+            margin: 10px 0 20px;
+            text-align: center;
+        }
+        
+        .bank-logo img {
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .qr-code-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px auto 20px;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .qr-code-container img {
+            max-width: 220px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .payment-info {
+            text-align: left;
+            margin: 24px 0;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .payment-info p {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-info strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .payment-info span {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .back-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-steps {
+            text-align: left;
+            margin: 24px 0;
+        }
+
+        .payment-steps ol {
+            list-style-position: inside;
+            color: var(--text-secondary);
+            padding-left: 10px;
+        }
+
+        .payment-steps li {
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 576px) {
+            .payment-container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .qr-code-container {
+                padding: 15px;
+            }
+            
+            .qr-code-container img {
+                max-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Оплата через QR код</h1>
+        <p>Отсканируйте QR код с помощью банковского приложения для завершения оплаты заказа.</p>
+        
+        <div class="bank-logo">
+            <img src="/images/images.png" alt="Halyk Bank" width="150" />
+        </div>
+        
+        <div class="qr-code-container">
+            <img src="/images/PHOTO-2025-04-10-16-03-24.jpg" alt="QR код для оплаты Halyk Bank" />
+        </div>
+        
+        <div class="payment-info">
+            <p><strong>Номер заказа:</strong> <span>#374585</span></p>
+            <p><strong>Сумма к оплате:</strong> <span>14 990 ₸</span></p>
+            <p><strong>Статус:</strong> <span>Ожидание оплаты</span></p>
+        </div>
+        
+        <div class="payment-steps">
+            <strong>Инструкция по оплате:</strong>
+            <ol>
+                <li>Откройте приложение Halyk Bank</li>
+                <li>Выберите функцию сканирования QR кода</li>
+                <li>Наведите камеру на QR код</li>
+                <li>Подтвердите сумму и детали платежа</li>
+                <li>Завершите транзакцию в вашем приложении</li>
+            </ol>
+        </div>
+        
+        <button class="back-button" onclick="window.history.back()">Вернуться к покупкам</button>
+    </div>
+</body>
+</html> 
