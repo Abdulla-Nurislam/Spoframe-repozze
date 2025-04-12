@@ -35,6 +35,18 @@
             box-shadow: none !important;
         }
         
+        footer * {
+            background-color: #000000 !important;
+        }
+        
+        footer .footer-content,
+        footer .footer-center,
+        footer .quick-links,
+        footer .language-selector,
+        footer .copyright {
+            background-color: #000000 !important;
+        }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
@@ -423,8 +435,8 @@
     </section>
 
     <!-- Футер -->
-    <footer style="background-color: #000000 !important; padding: 20px 0 !important; margin-top: 30px !important; color: #888888 !important;">
-        <div class="footer-content">
+    <footer style="background-color: #000000 !important; padding: 20px 0 !important; margin-top: 30px !important; color: #888888 !important; width: 100% !important; display: block !important;">
+        <div class="footer-content" style="background-color: #000000 !important;">
             <div class="quick-links">
                 <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
                 <span>•</span>
@@ -433,7 +445,7 @@
                 <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
             </div>
         </div>
-        <div class="footer-center">
+        <div class="footer-center" style="background-color: #000000 !important;">
             <div class="language-selector">
                 <select id="languageSelect" aria-label="Language Selection">
                     <option value="ru">RU</option>
