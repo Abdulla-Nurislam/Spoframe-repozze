@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Подробности - Spoframe</title>
+    <title data-lang-ru="Подробности продукта - Spoframe" data-lang-en="Product Details - Spoframe">Подробности продукта - Spoframe</title>
     <link rel="stylesheet" href="/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/auth-styles.css">
     <link rel="stylesheet" href="/scroll-buttons.css">
     <style>
         /* Стили для секции обратной связи */
@@ -16,14 +17,88 @@
             --input-bg: var(--bg-main);
             --input-text: var(--text-main);
             --label-text: var(--text-main);
+            --contact-text: var(--text-main);
+            --contact-subtitle: var(--text-secondary);
+        }
+        
+        /* Стили для футера */
+        footer {
+            background-color: #000000;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+            text-align: center;
+            color: #888888;
+            font-size: 14px;
+        }
+        
+        .quick-links a {
+            color: #888888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .quick-links a:hover {
+            color: #7C3AED;
+        }
+        
+        .quick-links span {
+            color: #555555;
+        }
+        
+        /* Стили для переключателя языка */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+        }
+        
+        .language-selector select {
+            background-color: transparent;
+            color: #888888;
+            border: 1px solid #555555;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        
+        .language-selector select:hover {
+            border-color: #7C3AED;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --contact-bg: #1f2937;
-                --input-bg: #111827;
-                --input-text: #e5e7eb;
-                --label-text: #e5e7eb;
+                --contact-bg: #121212; /* Гораздо более тёмный фон */
+                --input-bg: #1e1e1e;
+                --input-text: #ffffff; /* Белый текст для полей ввода */
+                --label-text: #ffffff; /* Белый текст для меток */
+                --contact-text: #ffffff; /* Белый текст для заголовков */
+                --contact-subtitle: #e0e0e0; /* Светло-серый текст для подзаголовков */
             }
         }
 
@@ -43,14 +118,14 @@
         .section-title {
             text-align: center;
             font-size: 2rem;
-            color: var(--text-main);
+            color: var(--contact-text);
             margin-bottom: 1rem;
             font-weight: 600;
         }
 
         .section-subtitle {
             text-align: center;
-            color: var(--text-secondary);
+            color: var(--contact-subtitle);
             margin-bottom: 2.5rem;
             max-width: 600px;
             margin-left: auto;
@@ -79,7 +154,7 @@
 
         .form-group label {
             font-weight: 500;
-            color: var(--label-text);
+            color: black;
             font-size: 0.95rem;
         }
 
@@ -103,7 +178,7 @@
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: var(--text-secondary);
+            color: var(--contact-subtitle);
             opacity: 0.7;
         }
 
@@ -129,7 +204,7 @@
         .form-success {
             text-align: center;
             padding: 2.5rem 2rem;
-            background-color: var(--card-bg);
+            background-color: var(--contact-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
@@ -142,12 +217,12 @@
 
         .form-success h3 {
             font-size: 1.7rem;
-            color: var(--text-main);
+            color: var(--contact-text);
             margin-bottom: 0.8rem;
         }
 
         .form-success p {
-            color: var(--text-secondary);
+            color: var(--contact-subtitle);
             font-size: 1.1rem;
         }
 
@@ -167,6 +242,70 @@
                 margin: 2rem 1rem;
             }
         }
+        
+        /* Добавляем стили для приветствия и кнопки выхода */
+        .welcome-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .btn-logout {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Стили для футера */
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            background-color: #f7f7f7;
+            border-top: 1px solid #ddd;
+        }
+        
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .quick-links a:hover {
+            color: #333;
+        }
+        
+        .language-selector {
+            margin-bottom: 1rem;
+        }
+        
+        .language-selector select {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -177,13 +316,17 @@
                 <img src="/SF.png" alt="Spoframe" class="logo">
             </a>
             <ul class="nav-links">
-                <li><a href="/">Главная</a></li>
-                <li><a href="/catalog">Каталог</a></li>
-                <li><a href="/product" class="active">Подробности</a></li>
+                <li><a href="/Landing Page.html" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="/Product Detail.html" class="active" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
             </ul>
         </div>
         <div class="nav-right">
-            <button class="btn-signup" data-auth="open">Регистрация</button>
+            <div class="welcome-message" id="welcomeMessage" style="display: none;">
+                <span data-lang-ru="Приветствую, " data-lang-en="Welcome, ">Приветствую, <span class="username">Пользователь</span>!</span>
+                <button class="btn-logout" onclick="logout()" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</button>
+            </div>
+            <button class="btn-signup" data-auth="open" aria-label="Открыть форму регистрации" id="btnSignup" data-lang-ru="Регистрация" data-lang-en="Sign Up">Регистрация</button>
         </div>
     </nav>
 
@@ -194,43 +337,43 @@
                 <img src="/images/modern-frame.jpeg" alt="Стильная Современная Рамка" class="product-detail-image">
             </div>
             <div class="product-info-section">
-                <h1>Обзор продукта</h1>
-                <h2 class="product-name">Стильная Современная Рамка</h2>
+                <h1 data-lang-ru="Обзор продукта" data-lang-en="Product Overview">Обзор продукта</h1>
+                <h2 class="product-name" data-lang-ru="Стильная Современная Рамка" data-lang-en="Stylish Modern Frame">Стильная Современная Рамка</h2>
                 <p class="product-price">4 990 ₸</p>
-                <p class="product-description">Элегантная и современная рамка, идеально подходящая для современных интерьеров, созданная с точностью и изяществом.</p>
-                <button type="button" class="btn-buy-now" onclick="window.location.href='/development-page'">Купить</button>
+                <p class="product-description" data-lang-ru="Элегантная и современная рамка, идеально подходящая для современных интерьеров, созданная с точностью и изяществом." data-lang-en="Elegant and modern frame, perfect for contemporary interiors, crafted with precision and elegance.">Элегантная и современная рамка, идеально подходящая для современных интерьеров, созданная с точностью и изяществом.</p>
+                <button type="button" class="btn-buy-now" onclick="window.location.href='/development-page'" data-lang-ru="Купить" data-lang-en="Buy Now">Купить</button>
             </div>
         </div>
 
         <!-- FAQ секция -->
         <section class="faq-section">
-            <h2>Часто задаваемые вопросы</h2>
-            <p class="faq-description">Изучите различные варианты покупки и найдите ответы на распространенные вопросы.</p>
+            <h2 data-lang-ru="Часто задаваемые вопросы" data-lang-en="Frequently Asked Questions">Часто задаваемые вопросы</h2>
+            <p class="faq-description" data-lang-ru="Изучите различные варианты покупки и найдите ответы на распространенные вопросы." data-lang-en="Explore different purchasing options and find answers to common questions.">Изучите различные варианты покупки и найдите ответы на распространенные вопросы.</p>
             
             <div class="faq-container">
                 <details class="faq-item">
-                    <summary>Какие размеры доступны?</summary>
-                    <p>Мы предлагаем размеры от маленького до XXL. Пожалуйста, обратитесь к таблице размеров для конкретных измерений.</p>
+                    <summary data-lang-ru="Какие размеры доступны?" data-lang-en="What sizes are available?">Какие размеры доступны?</summary>
+                    <p data-lang-ru="Мы предлагаем размеры от маленького до XXL. Пожалуйста, обратитесь к таблице размеров для конкретных измерений." data-lang-en="We offer sizes from small to XXL. Please refer to the size chart for specific measurements.">Мы предлагаем размеры от маленького до XXL. Пожалуйста, обратитесь к таблице размеров для конкретных измерений.</p>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Как выбрать цвет?</summary>
-                    <p>Вы можете выбрать из доступных цветовых вариантов в разделе настройки продукта.</p>
+                    <summary data-lang-ru="Как выбрать цвет?" data-lang-en="How to choose a color?">Как выбрать цвет?</summary>
+                    <p data-lang-ru="Вы можете выбрать из доступных цветовых вариантов в разделе настройки продукта." data-lang-en="You can choose from available color options in the product configuration section.">Вы можете выбрать из доступных цветовых вариантов в разделе настройки продукта.</p>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Какие варианты доставки?</summary>
-                    <p>Мы предлагаем стандартную и экспресс-доставку в большинство регионов.</p>
+                    <summary data-lang-ru="Какие варианты доставки?" data-lang-en="What shipping options are available?">Какие варианты доставки?</summary>
+                    <p data-lang-ru="Мы предлагаем стандартную и экспресс-доставку в большинство регионов." data-lang-en="We offer standard and express shipping to most regions.">Мы предлагаем стандартную и экспресс-доставку в большинство регионов.</p>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Могу ли я вернуть товар?</summary>
-                    <p>Да, мы предлагаем 30-дневную политику возврата для неиспользованных товаров.</p>
+                    <summary data-lang-ru="Могу ли я вернуть товар?" data-lang-en="Can I return the product?">Могу ли я вернуть товар?</summary>
+                    <p data-lang-ru="Да, мы предлагаем 30-дневную политику возврата для неиспользованных товаров." data-lang-en="Yes, we offer a 30-day return policy for unused items.">Да, мы предлагаем 30-дневную политику возврата для неиспользованных товаров.</p>
                 </details>
 
                 <details class="faq-item">
-                    <summary>Как отследить мой заказ?</summary>
-                    <p>Вы можете отследить свой заказ, используя номер отслеживания, предоставленный в письме с подтверждением.</p>
+                    <summary data-lang-ru="Как отследить мой заказ?" data-lang-en="How can I track my order?">Как отследить мой заказ?</summary>
+                    <p data-lang-ru="Вы можете отследить свой заказ, используя номер отслеживания, предоставленный в письме с подтверждением." data-lang-en="You can track your order using the tracking number provided in your confirmation email.">Вы можете отследить свой заказ, используя номер отслеживания, предоставленный в письме с подтверждением.</p>
                 </details>
             </div>
         </section>
@@ -239,35 +382,35 @@
     <!-- Секция обратной связи -->
     <section class="contact-section">
         <div class="container">
-            <h2 class="section-title">Связаться с нами</h2>
-            <p class="section-subtitle">Есть вопросы? Мы с радостью на них ответим!</p>
+            <h2 class="section-title" data-lang-ru="Связаться с нами" data-lang-en="Contact Us">Связаться с нами</h2>
+            <p class="section-subtitle" data-lang-ru="Есть вопросы? Мы с радостью на них ответим!" data-lang-en="Have questions? We'll be happy to answer them!">Есть вопросы? Мы с радостью на них ответим!</p>
             
             <form id="contactForm" class="contact-form">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="name">Ваше имя</label>
-                        <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+                        <label for="name" data-lang-ru="Ваше имя" data-lang-en="Your Name">Ваше имя</label>
+                        <input type="text" id="name" name="name" placeholder="Введите ваше имя" data-lang-ru-placeholder="Введите ваше имя" data-lang-en-placeholder="Enter your name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+                        <label for="email" data-lang-ru="Email" data-lang-en="Email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Введите ваш email" data-lang-ru-placeholder="Введите ваш email" data-lang-en-placeholder="Enter your email" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="subject">Тема</label>
-                    <input type="text" id="subject" name="subject" placeholder="Тема сообщения" required>
+                    <label for="subject" data-lang-ru="Тема" data-lang-en="Subject">Тема</label>
+                    <input type="text" id="subject" name="subject" placeholder="Тема сообщения" data-lang-ru-placeholder="Тема сообщения" data-lang-en-placeholder="Message subject" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Сообщение</label>
-                    <textarea id="message" name="message" placeholder="Введите ваше сообщение" rows="5" required></textarea>
+                    <label for="message" data-lang-ru="Сообщение" data-lang-en="Message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="Введите ваше сообщение" data-lang-ru-placeholder="Введите ваше сообщение" data-lang-en-placeholder="Enter your message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="btn-submit">Отправить сообщение</button>
+                <button type="submit" class="btn-submit" data-lang-ru="Отправить сообщение" data-lang-en="Send Message">Отправить сообщение</button>
             </form>
             
             <div id="formSuccess" class="form-success" style="display: none;">
                 <i class="fas fa-check-circle"></i>
-                <h3>Спасибо за ваше сообщение!</h3>
-                <p>Мы свяжемся с вами в ближайшее время.</p>
+                <h3 data-lang-ru="Спасибо за ваше сообщение!" data-lang-en="Thank you for your message!">Спасибо за ваше сообщение!</h3>
+                <p data-lang-ru="Мы свяжемся с вами в ближайшее время." data-lang-en="We will contact you shortly.">Мы свяжемся с вами в ближайшее время.</p>
             </div>
         </div>
     </section>
@@ -276,20 +419,22 @@
     <footer>
         <div class="footer-content">
             <div class="quick-links">
-                <a href="/catalog">Каталог</a>
+                <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
                 <span>•</span>
-                <a href="/product">Подробности</a>
+                <a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a>
                 <span>•</span>
-                <a href="/about">О продукте</a>
+                <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
             </div>
+        </div>
+        <div class="footer-center">
             <div class="language-selector">
-                <select id="languageSelect" aria-label="Выбор языка">
+                <select id="languageSelect" aria-label="Language Selection">
                     <option value="ru">RU</option>
                     <option value="en">EN</option>
                 </select>
             </div>
-            <div class="copyright">
-                © 2025 Spoframe
+            <div class="copyright" data-lang-ru="2025 Spoframe" data-lang-en="2025 Spoframe">
+                2025 Spoframe
             </div>
         </div>
     </footer>
@@ -301,22 +446,27 @@
             
             <!-- Форма входа -->
             <div class="form-container login-form">
+                <div class="login-header">
+                    <img src="/SF.png" alt="Logo" class="modal-logo">
+                    <h2 data-lang-ru="Добро пожаловать в Spoframe" data-lang-en="Welcome to Spoframe">Добро пожаловать в Spoframe</h2>
+                    <p data-lang-ru="Войдите, чтобы продолжить" data-lang-en="Sign in to continue">Войдите, чтобы продолжить</p>
+                </div>
                 <form class="auth-form">
                     <div class="form-group">
-                        <label>EMAIL</label>
-                        <input type="email" placeholder="Введите ваш email">
+                        <label style="color: white;" data-lang-ru="EMAIL" data-lang-en="EMAIL">EMAIL</label>
+                        <input type="email" placeholder="Введите ваш email" data-lang-ru-placeholder="Введите ваш email" data-lang-en-placeholder="Enter your email">
                     </div>
 
                     <div class="form-group">
-                        <label>PASSWORD</label>
-                        <input type="password" placeholder="Введите пароль">
-                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                        <label style="color: white;" data-lang-ru="PASSWORD" data-lang-en="PASSWORD">PASSWORD</label>
+                        <input type="password" placeholder="Введите пароль" data-lang-ru-placeholder="Введите пароль" data-lang-en-placeholder="Enter your password">
+                        <a href="/reset-password.html" class="forgot-password" data-lang-ru="Забыли пароль?" data-lang-en="Forgot password?">Забыли пароль?</a>
                     </div>
 
-                    <button type="submit" class="auth-submit">Войти</button>
+                    <button type="submit" class="auth-submit" data-lang-ru="Войти" data-lang-en="Sign In">Войти</button>
 
                     <div class="auth-footer">
-                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
+                        <p data-lang-ru="Нет аккаунта? " data-lang-en="Don't have an account? ">Нет аккаунта? <a href="#" class="switch-to-signup" data-lang-ru="Зарегистрироваться" data-lang-en="Sign Up">Зарегистрироваться</a></p>
                     </div>
                 </form>
             </div>
@@ -325,29 +475,29 @@
             <div class="form-container signup-form" style="display: none;">
                 <div class="signup-header">
                     <img src="/SF.png" alt="Logo" class="modal-logo">
-                    <h2>Зарегистрируйтесь моментально</h2>
-                    <p>и начните наслаждаться музыкой прямо сейчас</p>
+                    <h2 data-lang-ru="Зарегистрируйтесь моментально" data-lang-en="Sign Up Instantly">Зарегистрируйтесь моментально</h2>
+                    <p data-lang-ru="и начните наслаждаться музыкой прямо сейчас" data-lang-en="and start enjoying music right now">и начните наслаждаться музыкой прямо сейчас</p>
                 </div>
                 <form id="signupForm">
                     <div class="form-group">
-                        <label>КАК ТЕБЯ ЗОВУТ?</label>
-                        <input type="text" placeholder="Введи имя профиля">
+                        <label style="color: white;" data-lang-ru="КАК ТЕБЯ ЗОВУТ?" data-lang-en="WHAT'S YOUR NAME?">КАК ТЕБЯ ЗОВУТ?</label>
+                        <input type="text" placeholder="Введи имя профиля" data-lang-ru-placeholder="Введи имя профиля" data-lang-en-placeholder="Enter your profile name">
                     </div>
                     <div class="form-group">
-                        <label>ТВОЙ EMAIL</label>
+                        <label style="color: white;" data-lang-ru="ТВОЙ EMAIL" data-lang-en="YOUR EMAIL">ТВОЙ EMAIL</label>
                         <input type="email" placeholder="name@domain.com">
                     </div>
                     <div class="form-group">
-                        <label>ПРИДУМАЙ ПАРОЛЬ</label>
-                        <input type="password" placeholder="Минимум 8 символов">
-                        <div class="password-requirements">
+                        <label style="color: white;" data-lang-ru="ПРИДУМАЙ ПАРОЛЬ" data-lang-en="CREATE PASSWORD">ПРИДУМАЙ ПАРОЛЬ</label>
+                        <input type="password" placeholder="Минимум 8 символов" data-lang-ru-placeholder="Минимум 8 символов" data-lang-en-placeholder="Minimum 8 characters">
+                        <div class="password-requirements" data-lang-ru="Пароль должен содержать минимум 8 символов" data-lang-en="Password must contain at least 8 characters">
                             Пароль должен содержать минимум 8 символов
                         </div>
                     </div>
                     
-                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
+                    <button type="submit" class="signup-submit" data-lang-ru="Зарегистрироваться" data-lang-en="Sign Up">Зарегистрироваться</button>
                     <div class="auth-footer">
-                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
+                        <p data-lang-ru="Уже есть аккаунт? " data-lang-en="Already have an account? ">Уже есть аккаунт? <a href="#" class="switch-to-login" data-lang-ru="Войти" data-lang-en="Sign In">Войти</a></p>
                     </div>
                 </form>
             </div>
@@ -368,6 +518,7 @@
     <script src="/public/js/main.js"></script>
     <script src="/scroll-buttons.js"></script>
     <script src="/language-switcher.js"></script>
+    <script src="/auth-forms.js"></script>
     <!-- Добавьте перед закрывающим тегом body -->
     <div id="developmentPage" class="development-page">
         <div class="development-content">
@@ -405,6 +556,229 @@
                 });
             }
         });
+    </script>
+
+    <script src="/auth-modal.js"></script>
+    <script src="/authModal.bundle.js"></script>
+    <script src="/product-purchase.js"></script>
+    <script src="/language-switcher.js"></script>
+    <script src="/auth-forms.js"></script>
+    
+    <script>
+        // Дополнительный скрипт для обработки плейсхолдеров при переключении языка
+        document.addEventListener('DOMContentLoaded', function() {
+            // Функция для обновления плейсхолдеров на основе выбранного языка
+            function updatePlaceholders(lang) {
+                const elements = document.querySelectorAll('[data-lang-' + lang + '-placeholder]');
+                elements.forEach(element => {
+                    const translation = element.getAttribute('data-lang-' + lang + '-placeholder');
+                    if (translation) {
+                        element.placeholder = translation;
+                    }
+                });
+            }
+            
+            // Применение плейсхолдеров при загрузке страницы
+            const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
+            updatePlaceholders(savedLang);
+            
+            // Обновление плейсхолдеров при изменении языка
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    updatePlaceholders(this.value);
+                });
+            }
+        });
+    </script>
+    
+    <script>
+    // Упрощенная проверка авторизации при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            // Инициализация модальных окон и обработчиков форм
+            initializeAuthForms();
+            
+            // Проверяем авторизацию
+            checkAuth();
+        }, 100); // Небольшая задержка для стабильности
+    });
+    
+    // Проверка авторизации
+    function checkAuth() {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null;
+            
+            const btnSignup = document.getElementById('btnSignup');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            
+            if (userToken && userData && btnSignup && welcomeMessage) {
+                // Если пользователь авторизован
+                btnSignup.style.display = 'none';
+                welcomeMessage.style.display = 'flex';
+                
+                // Устанавливаем имя пользователя
+                const usernameEl = welcomeMessage.querySelector('.username');
+                if (usernameEl && userData.name) {
+                    usernameEl.textContent = userData.name;
+                }
+            } else if (btnSignup) {
+                // Если пользователь не авторизован, показываем кнопку регистрации
+                btnSignup.style.display = 'block';
+                if (welcomeMessage) welcomeMessage.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Ошибка при проверке авторизации:', error);
+        }
+    }
+    
+    // Выход из профиля
+    function logout() {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userData');
+        
+        const btnSignup = document.getElementById('btnSignup');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        
+        if (btnSignup) btnSignup.style.display = 'block';
+        if (welcomeMessage) welcomeMessage.style.display = 'none';
+    }
+    
+    // Проверка электронной почты
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // Получение списка пользователей из localStorage
+    function getUsersFromStorage() {
+        return JSON.parse(localStorage.getItem('users') || '[]');
+    }
+    
+    // Проверка существования пользователя по email
+    function checkUserExists(email) {
+        const users = getUsersFromStorage();
+        return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+    }
+    
+    // Получение пользователя по email и паролю
+    function getUserByCredentials(email, password) {
+        const users = getUsersFromStorage();
+        return users.find(user => 
+            user.email.toLowerCase() === email.toLowerCase() && 
+            user.password === password
+        );
+    }
+    
+    // Сохранение нового пользователя
+    function saveNewUser(name, email, password) {
+        const users = getUsersFromStorage();
+        const newUser = {
+            id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+            name: name,
+            email: email,
+            password: password,
+            registrationDate: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        return newUser;
+    }
+    
+    // Инициализация форм авторизации
+    function initializeAuthForms() {
+        const loginForm = document.querySelector('#loginForm');
+        const signupForm = document.querySelector('#signupForm');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = loginForm.querySelector('input[type="email"]').value;
+                const password = loginForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    alert('Пожалуйста, введите корректный email адрес');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                const user = getUserByCredentials(email, password);
+                if (!user) {
+                    alert('Неверный email или пароль');
+                    return;
+                }
+                
+                // Успешный вход
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify({
+                    id: user.id,
+                    email: user.email,
+                    name: user.name
+                }));
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                alert('Вход выполнен успешно!');
+            });
+        }
+        
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = signupForm.querySelector('input[name="name"]').value;
+                const email = signupForm.querySelector('input[type="email"]').value;
+                const password = signupForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    alert('Пожалуйста, введите корректный email адрес');
+                    return;
+                }
+                
+                // Проверка пароля
+                if (password.length < 8) {
+                    alert('Пароль должен содержать минимум 8 символов');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                if (checkUserExists(email)) {
+                    alert('Пользователь с таким email уже существует');
+                    return;
+                }
+                
+                // Сохранение нового пользователя
+                const newUser = saveNewUser(name, email, password);
+                
+                // Имитация успешной регистрации
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify({
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name
+                }));
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                alert('Регистрация выполнена успешно!');
+            });
+        }
+    }
     </script>
 </body>
 </html>
