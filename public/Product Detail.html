@@ -22,11 +22,17 @@
         }
         
         /* Стили для футера */
+        body > footer, 
+        html > body > footer, 
+        #root > footer, 
+        .footer, 
         footer {
             background-color: #000000 !important;
-            padding: 20px 0;
-            margin-top: 30px;
-            color: #888888;
+            padding: 20px 0 !important;
+            margin-top: 30px !important;
+            color: #888888 !important;
+            border-top: none !important;
+            box-shadow: none !important;
         }
         
         .footer-content {
@@ -417,7 +423,7 @@
     </section>
 
     <!-- Футер -->
-    <footer>
+    <footer style="background-color: #000000 !important; padding: 20px 0 !important; margin-top: 30px !important; color: #888888 !important;">
         <div class="footer-content">
             <div class="quick-links">
                 <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
