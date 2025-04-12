@@ -3,23 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог - Spoframe</title>
+    <title data-lang-ru="Каталог Spoframe - Стильные рамки для вашего интерьера" data-lang-en="Spoframe Catalog - Stylish frames for your interior">Каталог Spoframe - Стильные рамки для вашего интерьера</title>
     <link rel="stylesheet" href="/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/auth-styles.css">
     <link rel="stylesheet" href="/scroll-buttons.css">
     <style>
+        /* Стили для переключателя языка */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+        }
+        
+        .language-selector select {
+            background-color: transparent;
+            color: #888888;
+            border: 1px solid #555555;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        
+        .language-selector select:hover {
+            border-color: #7C3AED;
+        }
+        
+        /* Стили для центрирования элементов в футере */
+        .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
         /* Дополнительные стили для каталога */
+        .catalog-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .catalog-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .catalog-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+        
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            appearance: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.25rem;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 0.8rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .checkbox-container label {
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+        }
+        
+        /* Секция продуктов */
+        .product-section {
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
         .product-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -27,32 +155,32 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-
+        
         .product-card:hover {
             transform: translateY(-5px);
         }
-
+        
         .product-image {
             width: 100%;
             height: 280px;
             object-fit: cover;
         }
-
+        
         .product-info {
             padding: 1.5rem;
         }
-
+        
         .product-title {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
             color: var(--text-main);
         }
-
+        
         .product-description {
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
-
+        
         .product-price {
             font-weight: bold;
             color: var(--primary);
@@ -75,7 +203,7 @@
         .btn-view-details:hover {
             background: var(--primary-hover);
         }
-
+        
         .filter-section {
             padding: 2rem;
             max-width: 1200px;
@@ -87,7 +215,7 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .filter-section::before {
             content: '';
             position: absolute;
@@ -97,20 +225,20 @@
             height: 4px;
             background: linear-gradient(to right, var(--primary), var(--primary-hover));
         }
-
+        
         .filter-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2.5rem;
             margin-bottom: 1.5rem;
         }
-
+        
         .filter-group {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
-
+        
         .filter-group h3 {
             margin-bottom: 0.75rem;
             color: var(--text-main);
@@ -120,7 +248,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-
+        
         .checkbox-wrapper {
             display: flex;
             align-items: center;
@@ -130,16 +258,16 @@
             transition: all 0.25s ease;
             cursor: pointer;
         }
-
+        
         .checkbox-wrapper:hover {
             background: rgba(124, 58, 237, 0.08);
             transform: translateX(3px);
         }
-
+        
         .checkbox-wrapper.active {
             background: rgba(124, 58, 237, 0.12);
         }
-
+        
         .checkbox-wrapper input[type="checkbox"] {
             appearance: none;
             -webkit-appearance: none;
@@ -152,7 +280,7 @@
             transition: all 0.25s ease;
             flex-shrink: 0;
         }
-
+        
         .checkbox-wrapper input[type="checkbox"]:checked {
             background: var(--primary);
             border-color: var(--primary);
@@ -169,7 +297,7 @@
             border-width: 0 2px 2px 0;
             transform: rotate(45deg);
         }
-
+        
         .checkbox-wrapper label {
             color: var(--text-main);
             cursor: pointer;
@@ -177,47 +305,37 @@
             font-weight: 500;
             user-select: none;
         }
-
-        .filter-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1.2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid var(--border-color);
-        }
-
+        
         .filter-btn {
-            padding: 10px 20px;
-            border: none;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.25s ease;
             font-size: 1rem;
             font-weight: 500;
+            border: none;
         }
 
-        .btn-apply-filter {
+        #applyFilters {
             background: var(--primary);
             color: white;
             box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
         }
-
-        .btn-apply-filter:hover {
+        
+        #applyFilters:hover {
             background: var(--primary-hover);
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(124, 58, 237, 0.4);
         }
 
-        .btn-reset-filter {
+        #resetFilters {
             background: transparent;
             color: var(--text-main);
             border: 1px solid var(--border-color);
         }
 
-        .btn-reset-filter:hover {
+        #resetFilters:hover {
             background: var(--bg-secondary);
-            border-color: var(--text-secondary);
         }
 
         .coming-soon {
@@ -230,19 +348,20 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
-
+        
         .product-modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
             z-index: 1000;
         }
-
+        
         .product-modal__content {
             position: relative;
             background: var(--card-bg);
@@ -253,12 +372,14 @@
             border-radius: 15px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
         }
-
+        
         .product-modal__close {
             position: absolute;
+            right: 20px;
             top: 15px;
             right: 15px;
             font-size: 24px;
+            color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             color: var(--text-main);
             background: none;
@@ -266,29 +387,38 @@
             width: 30px;
             height: 30px;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            transform: translateY(-2px);
+        }
+        
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
             justify-content: center;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
-
+        
         .product-modal__close:hover {
             background: rgba(0, 0, 0, 0.1);
         }
-
+        
         .product-modal__grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
         }
-
+        
         .product-modal__image {
             width: 100%;
             height: 400px;
             object-fit: cover;
             border-radius: 10px;
         }
-
+        
         .product-modal__info {
             display: flex;
             flex-direction: column;
@@ -307,27 +437,27 @@
             font-weight: bold;
             margin: 15px 0;
         }
-
+        
         .product-modal__description {
             color: var(--text-secondary);
             line-height: 1.6;
         }
-
+        
         .product-modal__features {
             margin-top: 20px;
         }
-
+        
         .feature-item {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
         }
-
+        
         .feature-item i {
             color: var(--primary);
         }
-
+        
         .product-modal__buy {
             background: var(--primary);
             color: white;
@@ -338,13 +468,17 @@
             font-size: 16px;
             margin-top: 20px;
             transition: all 0.3s ease;
+            width: 100%;
+            font-weight: bold;
         }
-
+        
         .product-modal__buy:hover {
             background: var(--primary-hover);
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-
+        
+        /* Адаптивность */
         @media (max-width: 768px) {
             .product-modal__grid {
                 grid-template-columns: 1fr;
@@ -366,16 +500,18 @@
                 gap: 1.5rem;
             }
             
-            .filter-actions {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            
             .filter-btn {
                 width: 100%;
             }
+            
+            .nav-links {
+                margin: 1rem 0;
+            }
+            
+            .auth-buttons {
+                margin-top: 1rem;
+            }
         }
-
     </style>
 </head>
 <body>
@@ -386,13 +522,17 @@
                 <img src="/SF.png" alt="Spoframe" class="logo">
             </a>
             <ul class="nav-links">
-                <li><a href="/">Главная</a></li>
-                <li><a href="/catalog" class="active">Каталог</a></li>
-                <li><a href="/product">Подробности</a></li>
-                </ul>
-            </div>
+                <li><a href="/Landing Page.html" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="/Product Catalog.html" class="active" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
+            </ul>
+        </div>
         <div class="nav-right">
-            <button class="btn-signup" data-auth="open">Регистрация</button>
+            <button class="btn-signup" data-auth="open" data-lang-ru="Регистрация" data-lang-en="Sign Up">Регистрация</button>
+            <div class="user-profile" data-auth="profile" style="display: none;">
+                <span class="welcome-message" data-lang-ru="Привет, " data-lang-en="Hello, ">Привет, <span class="username">Пользователь</span>!</span>
+                <button class="btn-logout" onclick="logout()" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</button>
+            </div>
         </div>
     </nav>
 
@@ -400,80 +540,80 @@
     <section class="filter-section">
         <div class="filter-options">
             <div class="filter-group">
-                <h3>Стиль</h3>
+                <h3 class="filter-title" data-lang-ru="Стиль" data-lang-en="Style">Стиль</h3>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="style-modern" value="modern">
-                    <label for="style-modern">Современный</label>
+                    <label for="style-modern" data-lang-ru="Современный" data-lang-en="Modern">Современный</label>
                 </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="style-traditional" value="traditional">
-                    <label for="style-traditional">Традиционный</label>
+                    <label for="style-traditional" data-lang-ru="Традиционный" data-lang-en="Traditional">Традиционный</label>
                 </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="style-rustic" value="rustic">
-                    <label for="style-rustic">Рустикальный</label>
+                    <label for="style-rustic" data-lang-ru="Рустикальный" data-lang-en="Rustic">Рустикальный</label>
                 </div>
             </div>
             
             <div class="filter-group">
-                <h3>Функционал</h3>
+                <h3 class="filter-title" data-lang-ru="Функционал" data-lang-en="Functionality">Функционал</h3>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="function-decor" value="decor">
-                    <label for="function-decor">Декоративный</label>
+                    <label for="function-decor" data-lang-ru="Декоративная" data-lang-en="Decorative">Декоративная</label>
                 </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="function-collection" value="collection">
-                    <label for="function-collection">Коллекционный</label>
+                    <label for="function-collection" data-lang-ru="Коллекционная" data-lang-en="Collection">Коллекционная</label>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Каталог -->
     <main class="catalog-grid">
         <div class="product-card" data-style="modern" data-function="decor" data-modal-target="modal-wood-frame">
             <img src="/wood-frame.png" alt="Деревянная рамка" class="product-image">
             <div class="product-info">
-                <h3 class="product-title">Деревянная Рамка</h3>
-                <p class="product-description">Элегантная деревянная рамка, идеальная для гостиной.</p>
+                <h3 class="product-title" data-lang-ru="Деревянная Рамка" data-lang-en="Wooden Frame">Деревянная Рамка</h3>
+                <p class="product-description" data-lang-ru="Элегантная деревянная рамка, идеальная для гостиной." data-lang-en="Elegant wooden frame, perfect for the living room.">Элегантная деревянная рамка, идеальная для гостиной.</p>
                 <p class="product-price">21 990 ₸</p>
-                <a href="Product Detail.html" class="btn-view-details">Подробнее</a>
+                <a href="Product Detail.html" class="btn-view-details" data-lang-ru="Подробнее" data-lang-en="Details">Подробнее</a>
             </div>
         </div>
 
         <div class="product-card" data-style="modern" data-function="collection" data-modal-target="modal-black-frame">
             <img src="/black-frame.png" alt="Черная металлическая рамка" class="product-image">
             <div class="product-info">
-                <h3 class="product-title">Черная Металлическая Рамка</h3>
-                <p class="product-description">Стильная черная рамка для современного интерьера.</p>
+                <h3 class="product-title" data-lang-ru="Черная Металлическая Рамка" data-lang-en="Black Metal Frame">Черная Металлическая Рамка</h3>
+                <p class="product-description" data-lang-ru="Стильная черная рамка для современного интерьера." data-lang-en="Stylish black frame for modern interior.">Стильная черная рамка для современного интерьера.</p>
                 <p class="product-price">19 990 ₸</p>
-                <a href="Product Detail.html" class="btn-view-details">Подробнее</a>
+                <a href="Product Detail.html" class="btn-view-details" data-lang-ru="Подробнее" data-lang-en="Details">Подробнее</a>
             </div>
         </div>
 
         <div class="product-card" data-style="rustic" data-function="decor" data-modal-target="modal-rustic-frame">
             <img src="/frame.jpg" alt="Рустикальная рамка" class="product-image">
             <div class="product-info">
-                <h3 class="product-title">Рустикальная Рамка</h3>
-                <p class="product-description">Рустикальный шарм, отлично подходит для загородного стиля.</p>
+                <h3 class="product-title" data-lang-ru="Рустикальная Рамка" data-lang-en="Rustic Frame">Рустикальная Рамка</h3>
+                <p class="product-description" data-lang-ru="Рустикальный шарм, отлично подходит для загородного стиля." data-lang-en="Rustic charm, perfect for country style.">Рустикальный шарм, отлично подходит для загородного стиля.</p>
                 <p class="product-price">24 990 ₸</p>
-                <a href="Product Detail.html" class="btn-view-details">Подробнее</a>
+                <a href="Product Detail.html" class="btn-view-details" data-lang-ru="Подробнее" data-lang-en="Details">Подробнее</a>
             </div>
         </div>
         
         <div class="product-card coming-soon-card">
             <div class="coming-soon">
-                Скоро в продаже
+                <span data-lang-ru="Скоро в продаже" data-lang-en="Coming soon">Скоро в продаже</span>
             </div>
         </div>
 
         <div class="product-card" data-style="traditional" data-function="collection" data-modal-target="modal-silver-frame">
             <img src="/silver-frame.png" alt="Серебряная рамка" class="product-image">
             <div class="product-info">
-                <h3 class="product-title">Серебряная Рамка</h3>
-                <p class="product-description">Современная серебряная рамка, добавляет элегантности любому интерьеру.</p>
+                <h3 class="product-title" data-lang-ru="Серебряная Рамка" data-lang-en="Silver Frame">Серебряная Рамка</h3>
+                <p class="product-description" data-lang-ru="Современная серебряная рамка, добавляет элегантности любому интерьеру." data-lang-en="Modern silver frame, adds elegance to any interior.">Современная серебряная рамка, добавляет элегантности любому интерьеру.</p>
                 <p class="product-price">26 990 ₸</p>
-                <a href="Product Detail.html" class="btn-view-details">Подробнее</a>
+                <a href="#" class="btn-view-details" data-lang-ru="Подробнее" data-lang-en="Details">Подробнее</a>
             </div>
         </div>
 
@@ -481,7 +621,7 @@
 
         <div class="product-card coming-soon-card">
             <div class="coming-soon">
-                Скоро в продаже
+                <span data-lang-ru="Скоро в продаже" data-lang-en="Coming soon">Скоро в продаже</span>
             </div>
         </div>
     </main>
@@ -490,23 +630,28 @@
     <footer>
         <div class="footer-content">
             <div class="quick-links">
-                <a href="/catalog">Каталог</a>
+                <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
                 <span>•</span>
-                <a href="/product">Подробности</a>
+                <a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a>
                 <span>•</span>
-                <a href="/about">О продукте</a>
+                <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
             </div>
+        </div>
+        <div class="footer-center">
             <div class="language-selector">
-                <select id="languageSelect" aria-label="Выбор языка">
+                <select id="languageSelect" aria-label="Language Selection">
                     <option value="ru">RU</option>
-                    <option value="en">EN</option>
+                    <option value="en" selected>EN</option>
                 </select>
             </div>
             <div class="copyright">
-                © 2025 Spoframe
+                2025 Spoframe
             </div>
         </div>
     </footer>
+
+    <!-- Уведомление -->
+    <div id="notification" class="simple-notification"></div>
 
     <!-- Модальное окно регистрации/входа -->
     <div class="auth-modal" id="authModal">
@@ -515,22 +660,22 @@
             
             <!-- Форма входа -->
             <div class="form-container login-form">
-                <form class="auth-form">
+                <form class="auth-form" id="loginForm">
                     <div class="form-group">
-                        <label>EMAIL</label>
-                        <input type="email" placeholder="Введите ваш email">
+                        <label style="color: white;">EMAIL</label>
+                        <input type="email" name="email" placeholder="Введите ваш email" data-lang-ru-placeholder="Введите ваш email" data-lang-en-placeholder="Enter your email">
                     </div>
 
                     <div class="form-group">
-                        <label>PASSWORD</label>
-                        <input type="password" placeholder="Введите пароль">
+                        <label style="color: white;">PASSWORD</label>
+                        <input type="password" name="password" placeholder="Введите пароль">
                         <a href="/reset-password.html" class="forgot-password">Забыли пароль?</a>
                     </div>
 
-                    <button type="submit" class="auth-submit">Войти</button>
+                    <button type="submit" class="auth-button" data-lang-ru="Войти" data-lang-en="Login">Войти</button>
 
                     <div class="auth-footer">
-                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
+                        <p class="form-switch"><span data-lang-ru="Нет аккаунта?" data-lang-en="No account?">Нет аккаунта?</span> <a href="#" class="switch-to-signup" data-lang-ru="Зарегистрироваться" data-lang-en="Sign up">Зарегистрироваться</a></p>
                     </div>
                 </form>
             </div>
@@ -540,28 +685,28 @@
                 <div class="signup-header">
                     <img src="/SF.png" alt="Logo" class="modal-logo">
                     <h2>Зарегистрируйтесь моментально</h2>
-                    <p>и начните наслаждаться музыкой прямо сейчас</p>
+                    <p>и начните наслаждаться рамками прямо сейчас</p>
                 </div>
                 <form id="signupForm">
                     <div class="form-group">
-                        <label>КАК ТЕБЯ ЗОВУТ?</label>
-                        <input type="text" placeholder="Введи имя профиля">
+                        <label style="color: white;">КАК ТЕБЯ ЗОВУТ?</label>
+                        <input type="text" name="name" placeholder="Введи имя профиля">
                     </div>
                     <div class="form-group">
-                        <label>ТВОЙ EMAIL</label>
-                        <input type="email" placeholder="name@domain.com">
+                        <label style="color: white;">ТВОЙ EMAIL</label>
+                        <input type="email" name="email" placeholder="name@domain.com">
                     </div>
                     <div class="form-group">
-                        <label>ПРИДУМАЙ ПАРОЛЬ</label>
-                        <input type="password" placeholder="Минимум 8 символов">
+                        <label style="color: white;">ПРИДУМАЙ ПАРОЛЬ</label>
+                        <input type="password" name="password" placeholder="Минимум 8 символов">
                         <div class="password-requirements">
                             Пароль должен содержать минимум 8 символов
                         </div>
                     </div>
                     
-                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
+                    <button type="submit" class="auth-button" data-lang-ru="Зарегистрироваться" data-lang-en="Sign up">Зарегистрироваться</button>
                     <div class="auth-footer">
-                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
+                        <p class="form-switch"><span data-lang-ru="Уже есть аккаунт?" data-lang-en="Already have an account?">Уже есть аккаунт?</span> <a href="#" class="switch-to-login" data-lang-ru="Войти" data-lang-en="Login">Войти</a></p>
                     </div>
                 </form>
             </div>
@@ -577,13 +722,107 @@
             <i class="fas fa-chevron-down"></i>
         </button>
     </div>
-    <script src="/auth-modal.js"></script>
     <script src="/authModal.bundle.js"></script>
     <script src="/scroll-buttons.js"></script>
     <script src="/public/js/main.js"></script>
     <script src="/filters.js"></script>
     <script src="/product-modals.js"></script>
     <script src="/language-switcher.js"></script>
+    <script>
+    // Функция для открытия модального окна
+    function openModal(formType = 'login') {
+        const modal = document.getElementById('authModal');
+        if (!modal) return;
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Показываем нужную форму
+        if (formType === 'login') {
+            showLoginForm();
+        } else if (formType === 'signup') {
+            showSignupForm();
+        }
+    }
+    
+    // Функция для показа формы входа
+    function showLoginForm() {
+        const loginForm = document.querySelector('.login-form');
+        const signupForm = document.querySelector('.signup-form');
+        
+        if (loginForm && signupForm) {
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        }
+    }
+    
+    // Функция для показа формы регистрации
+    function showSignupForm() {
+        const loginForm = document.querySelector('.login-form');
+        const signupForm = document.querySelector('.signup-form');
+        
+        if (loginForm && signupForm) {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        }
+    }
+    
+    // Проверка авторизации при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Вызываем проверку авторизации сразу после загрузки DOM
+        setTimeout(checkAuth, 100); // Небольшая задержка для уверенности
+        
+        // Обработчики переключения форм
+        // Кнопка открытия модального окна
+        const btnSignup = document.querySelector('.btn-signup');
+        if (btnSignup) {
+            btnSignup.addEventListener('click', function() {
+                openModal('signup');
+            });
+        }
+        
+        // Закрытие модального окна
+        const closeBtn = document.querySelector('.auth-modal .close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const modal = document.getElementById('authModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
+        // Закрытие модального окна при клике вне контента
+        const authModal = document.getElementById('authModal');
+        if (authModal) {
+            authModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
+        // Переключение на форму регистрации
+        const switchToSignup = document.querySelector('.switch-to-signup');
+        if (switchToSignup) {
+            switchToSignup.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSignupForm();
+            });
+        }
+        
+        // Переключение на форму входа
+        const switchToLogin = document.querySelector('.switch-to-login');
+        if (switchToLogin) {
+            switchToLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginForm();
+            });
+        }
+    });
+    </script>
 
     <!-- Модальные окна для продуктов -->
     <div class="product-modal" id="modal-wood-frame">
@@ -592,27 +831,24 @@
             <div class="product-modal__grid">
                 <img src="/wood-frame.png" alt="Деревянная рамка" class="product-modal__image">
                 <div class="product-modal__info">
-                    <h2 class="product-modal__title">Деревянная Рамка</h2>
+                    <h2 class="product-modal__title" data-lang-ru="Деревянная Рамка" data-lang-en="Wooden Frame">Деревянная Рамка</h2>
                     <p class="product-modal__price">21 990 ₸</p>
-                    <p class="product-modal__description">
-                        Элегантная деревянная рамка, созданная из высококачественного массива дерева. 
-                        Идеально подходит для гостиной и создает теплую, уютную атмосферу в любом помещении.
-                    </p>
+                    <p class="product-modal__description" data-lang-ru="Элегантная деревянная рамка, созданная из высококачественного массива дерева. Идеально подходит для гостиной и создает теплую, уютную атмосферу в любом помещении." data-lang-en="Elegant wooden frame, created from high-quality wood. Perfect for the living room and creates a warm, cozy atmosphere in any room.">Элегантная деревянная рамка, созданная из высококачественного массива дерева. Идеально подходит для гостиной и создает теплую, уютную атмосферу в любом помещении.</p>
                     <div class="product-modal__features">
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Натуральное дерево высшего качества</span>
+                            <span data-lang-ru="Натуральное дерево высшего качества" data-lang-en="High-quality natural wood">Натуральное дерево высшего качества</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Ручная работа</span>
+                            <span data-lang-ru="Ручная работа" data-lang-en="Handmade">Ручная работа</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Защитное покрытие</span>
+                            <span data-lang-ru="Защитное покрытие" data-lang-en="Protective coating">Защитное покрытие</span>
                         </div>
                     </div>
-                    <button class="product-modal__buy">Купить сейчас</button>
+                    <button class="product-modal__buy" data-lang-ru="Купить сейчас" data-lang-en="Buy now" onclick="handleBuyNow()">Купить сейчас</button>
                 </div>
             </div>
         </div>
@@ -625,28 +861,27 @@
             <div class="product-modal__grid">
                 <img src="/black-frame.png" alt="Черная металлическая рамка" class="product-modal__image">
                 <div class="product-modal__info">
-                    <h2 class="product-modal__title">Черная Металлическая Рамка</h2>
+                    <h2 class="product-modal__title" data-lang-ru="Черная Металлическая Рамка" data-lang-en="Black Metal Frame">Черная Металлическая Рамка</h2>
                     <p class="product-modal__price">19 990 ₸</p>
-                    <p class="product-modal__description">
-                        Стильная черная металлическая рамка с современным дизайном. 
+                    <p class="product-modal__description" data-lang-ru="Стильная черная металлическая рамка с современным дизайном." data-lang-en="Stylish black metal frame with modern design.">Стильная черная металлическая рамка с современным дизайном.
                         Идеальное решение для минималистичных интерьеров и офисных пространств.
                         Матовое покрытие придает изделию элегантный вид.
                     </p>
                     <div class="product-modal__features">
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Прочный металлический корпус</span>
+                            <span data-lang-ru="Прочный металлический корпус" data-lang-en="Durable metal frame">Прочный металлический корпус</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Матовое покрытие</span>
+                            <span data-lang-ru="Матовое покрытие" data-lang-en="Matte coating">Матовое покрытие</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Современный дизайн</span>
+                            <span data-lang-ru="Современный дизайн" data-lang-en="Modern design">Современный дизайн</span>
                         </div>
                     </div>
-                    <button class="product-modal__buy">Купить сейчас</button>
+                    <button class="product-modal__buy" data-lang-ru="Купить сейчас" data-lang-en="Buy now" onclick="handleBuyNow()">Купить сейчас</button>
                 </div>
             </div>
         </div>
@@ -659,28 +894,24 @@
             <div class="product-modal__grid">
                 <img src="/frame.jpg" alt="Рустикальная рамка" class="product-modal__image">
                 <div class="product-modal__info">
-                    <h2 class="product-modal__title">Рустикальная Рамка</h2>
+                    <h2 class="product-modal__title" data-lang-ru="Рустикальная Рамка" data-lang-en="Rustic Frame">Рустикальная Рамка</h2>
                     <p class="product-modal__price">24 990 ₸</p>
-                    <p class="product-modal__description">
-                        Рустикальная рамка с характерным винтажным шармом. 
-                        Идеально подходит для загородных домов и интерьеров в стиле кантри.
-                        Каждая рамка имеет уникальный рисунок древесины.
-                    </p>
+                    <p class="product-modal__description" data-lang-ru="Рустикальная рамка с характерным винтажным шармом. Идеально подходит для загородных домов и интерьеров в стиле кантри. Каждая рамка имеет уникальный рисунок древесины." data-lang-en="Rustic frame with characteristic vintage charm. Perfect for country houses and interiors in country style. Each frame has a unique wood pattern.">Рустикальная рамка с характерным винтажным шармом. Идеально подходит для загородных домов и интерьеров в стиле кантри. Каждая рамка имеет уникальный рисунок древесины.</p>
                     <div class="product-modal__features">
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Состаренная древесина</span>
+                            <span data-lang-ru="Состаренная древесина" data-lang-en="Aged wood">Состаренная древесина</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Уникальный дизайн</span>
+                            <span data-lang-ru="Уникальный дизайн" data-lang-en="Unique design">Уникальный дизайн</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Экологичные материалы</span>
+                            <span data-lang-ru="Экологичные материалы" data-lang-en="Eco-friendly materials">Экологичные материалы</span>
                         </div>
                     </div>
-                    <button class="product-modal__buy">Купить сейчас</button>
+                    <button class="product-modal__buy" data-lang-ru="Купить сейчас" data-lang-en="Buy now" onclick="handleBuyNow()">Купить сейчас</button>
                 </div>
             </div>
         </div>
@@ -693,31 +924,505 @@
             <div class="product-modal__grid">
                 <img src="/silver-frame.png" alt="Серебряная рамка" class="product-modal__image">
                 <div class="product-modal__info">
-                    <h2 class="product-modal__title">Серебряная Рамка</h2>
+                    <h2 class="product-modal__title" data-lang-ru="Серебряная Рамка" data-lang-en="Silver Frame">Серебряная Рамка</h2>
                     <p class="product-modal__price">26 990 ₸</p>
-                    <p class="product-modal__description">
-                        Элегантная серебряная рамка с роскошным дизайном. 
-                        Идеально подходит для классических интерьеров и торжественных помещений.
-                        Высококачественное серебряное покрытие придает изысканный вид.
-                    </p>
+                    <p class="product-modal__description" data-lang-ru="Элегантная серебряная рамка с роскошным дизайном. Идеально подходит для классических интерьеров и торжественных помещений. Высококачественное серебряное покрытие придает изысканный вид." data-lang-en="Elegant silver frame with luxurious design. Perfect for classic interiors and formal spaces. High-quality silver coating gives it a sophisticated look.">Элегантная серебряная рамка с роскошным дизайном. Идеально подходит для классических интерьеров и торжественных помещений. Высококачественное серебряное покрытие придает изысканный вид.</p>
                     <div class="product-modal__features">
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Премиальное покрытие</span>
+                            <span data-lang-ru="Премиальное покрытие" data-lang-en="Premium coating">Премиальное покрытие</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Классический дизайн</span>
+                            <span data-lang-ru="Классический дизайн" data-lang-en="Classic design">Классический дизайн</span>
                         </div>
                         <div class="feature-item">
                             <i class="fas fa-check"></i>
-                            <span>Долговечное покрытие</span>
+                            <span data-lang-ru="Долговечное покрытие" data-lang-en="Durable coating">Долговечное покрытие</span>
                         </div>
                     </div>
-                    <button class="product-modal__buy">Купить сейчас</button>
+                    <button class="product-modal__buy" data-lang-ru="Купить сейчас" data-lang-en="Buy now" onclick="handleBuyNow()">Купить сейчас</button>
                 </div>
             </div>
         </div>
     </div>
+</body>
+    <script src="/filters.js"></script>
+    <script src="/language-switcher.js"></script>
+    <script src="/auth-forms.js"></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация модальных окон и обработчиков форм
+        initializeAuthForms();
+        
+        // Проверяем авторизацию
+        checkAuth();
+    });
+    
+    // Функция проверки авторизации
+    function checkAuth() {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            const userData = JSON.parse(localStorage.getItem('userData') || 'null');
+            
+            console.log('Проверка аутентификации:', userData);
+            
+            const btnSignup = document.querySelector('.btn-signup');
+            const userProfile = document.querySelector('.user-profile');
+            const usernameElement = document.querySelector('.username');
+            
+            if (userToken && userData) {
+                // Если пользователь авторизован, скрываем кнопку регистрации и показываем профиль
+                if (btnSignup) btnSignup.style.display = 'none';
+                if (userProfile) userProfile.style.display = 'flex';
+                
+                // Устанавливаем имя пользователя в шапке сайта
+                if (usernameElement && userData && userData.name) {
+                    usernameElement.textContent = userData.name;
+                    console.log('Установлено имя пользователя:', userData.name);
+                }
+            } else {
+                // Если пользователь не авторизован, показываем кнопку регистрации и скрываем профиль
+                if (btnSignup) btnSignup.style.display = 'inline-block';
+                if (userProfile) userProfile.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Ошибка при проверке авторизации:', error);
+        }
+    }
+    
+    // Выход из профиля
+    function logout() {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userData');
+        
+        // Обновляем UI после выхода
+        checkAuth();
+        
+        // Показываем уведомление
+        showSimpleNotification('Вы успешно вышли из аккаунта', 'success');
+    }
+    
+    // Получение списка пользователей из localStorage
+    function getUsersFromStorage() {
+        return JSON.parse(localStorage.getItem('users') || '[]');
+    }
+    
+    // Проверка существования пользователя по email
+    function checkUserExists(email) {
+        const users = getUsersFromStorage();
+        return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+    }
+    
+    // Получение пользователя по email и паролю
+    function getUserByCredentials(email, password) {
+        const users = getUsersFromStorage();
+        console.log('Поиск пользователя:', email, users);
+        return users.find(user => 
+            user.email.toLowerCase() === email.toLowerCase() && 
+            user.password === password
+        );
+    }
+    
+    // Сохранение нового пользователя
+    function saveNewUser(name, email, password) {
+        const users = getUsersFromStorage();
+        const newUser = {
+            id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+            name: name,
+            email: email,
+            password: password,
+            registrationDate: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        return newUser;
+    }
+    
+    // Проверка электронной почты
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // Функция для показа простых уведомлений
+    function showSimpleNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = 'simple-notification ' + type + ' show';
+        
+        // Автоматически скрываем уведомление через 3 секунды
+        setTimeout(() => {
+            notification.className = 'simple-notification';
+        }, 3000);
+    }
+    
+    // Проверка электронной почты
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // Получение списка пользователей из localStorage
+    function getUsersFromStorage() {
+        return JSON.parse(localStorage.getItem('users') || '[]');
+    }
+    
+    // Проверка существования пользователя по email
+    function checkUserExists(email) {
+        const users = getUsersFromStorage();
+        return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+    }
+    
+    // Получение пользователя по email и паролю
+    function getUserByCredentials(email, password) {
+        const users = getUsersFromStorage();
+        return users.find(user => 
+            user.email.toLowerCase() === email.toLowerCase() && 
+            user.password === password
+        );
+    }
+    
+    // Сохранение нового пользователя
+    function saveNewUser(name, email, password) {
+        const users = getUsersFromStorage();
+        const newUser = {
+            id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+            name: name,
+            email: email,
+            password: password,
+            registrationDate: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        return newUser;
+    }
+    
+    // Инициализация форм авторизации
+    function initializeAuthForms() {
+        const loginForm = document.querySelector('#loginForm');
+        const signupForm = document.querySelector('#signupForm');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = loginForm.querySelector('input[type="email"]').value;
+                const password = loginForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                const user = getUserByCredentials(email, password);
+                if (!user) {
+                    showSimpleNotification('Неверный email или пароль', 'error');
+                    return;
+                }
+                
+                // Успешный вход
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify({
+                    id: user.id,
+                    email: user.email,
+                    name: user.name
+                }));
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                showSimpleNotification('Вход выполнен успешно!', 'success');
+            });
+        }
+        
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = signupForm.querySelector('input[name="name"]').value;
+                const email = signupForm.querySelector('input[type="email"]').value;
+                const password = signupForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
+                    return;
+                }
+                
+                // Проверка пароля
+                if (password.length < 8) {
+                    showSimpleNotification('Пароль должен содержать минимум 8 символов', 'error');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                if (checkUserExists(email)) {
+                    showSimpleNotification('Пользователь с таким email уже существует', 'error');
+                    return;
+                }
+                
+                // Сохранение нового пользователя
+                const newUser = saveNewUser(name, email, password);
+                
+                // Имитация успешной регистрации
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify({
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name
+                }));
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                showSimpleNotification('Регистрация выполнена успешно!', 'success');
+            });
+        }
+    }
+    
+    // Функция для показа простых уведомлений
+    function showSimpleNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = 'simple-notification ' + type + ' show';
+        
+        // Автоматически скрываем уведомление через 3 секунды
+        setTimeout(() => {
+            notification.className = 'simple-notification';
+        }, 3000);
+    }
+    </script>
+    
+    <script>
+    // Обработчики для модальных окон продуктов
+    document.addEventListener('DOMContentLoaded', function() {
+        // Получаем все карточки продуктов и модальные окна
+        const productCards = document.querySelectorAll('.product-card');
+        const productModals = document.querySelectorAll('.product-modal');
+        const closeButtons = document.querySelectorAll('.product-modal__close');
+        const detailButtons = document.querySelectorAll('.btn-view-details');
+        
+        // Добавляем обработчики для кнопок "Подробнее"
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Предотвращаем переход по ссылке
+                
+                // Получаем родительскую карточку
+                const card = this.closest('.product-card');
+                if (card) {
+                    // Получаем ID модального окна из атрибута data-modal-target
+                    const modalId = card.getAttribute('data-modal-target');
+                    if (modalId) {
+                        const modal = document.getElementById(modalId);
+                        if (modal) {
+                            modal.style.display = 'flex';
+                            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Удаляем обработчик клика по карточке
+        productCards.forEach(card => {
+            card.style.cursor = 'default'; // Меняем курсор на обычный
+        });
+        
+        // Добавляем обработчики для закрытия модальных окон
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.product-modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = ''; // Возвращаем прокрутку страницы
+                }
+            });
+        });
+        
+        // Закрытие модального окна при клике вне его содержимого
+        productModals.forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                if (event.target === this) {
+                    this.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    });
+    </script>
+
+<!-- Скрипт для переключения языка -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Страница загружена, инициализируем переключатель языка');
+    
+    // Получаем селектор языка
+    const languageSelect = document.getElementById('languageSelect');
+    if (!languageSelect) {
+        console.error('Не найден элемент с id "languageSelect"');
+        return;
+    }
+    
+    // Устанавливаем язык из localStorage или используем русский по умолчанию
+    const savedLanguage = localStorage.getItem('language') || 'ru';
+    console.log('Сохраненный язык:', savedLanguage);
+    languageSelect.value = savedLanguage;
+    
+    // Применяем сохраненный язык при загрузке страницы
+    applyLanguage(savedLanguage);
+    
+    // Обработчик изменения языка
+    languageSelect.addEventListener('change', function() {
+        const selectedLanguage = this.value;
+        console.log('Выбран язык:', selectedLanguage);
+        localStorage.setItem('language', selectedLanguage);
+        
+        // Применяем выбранный язык
+        applyLanguage(selectedLanguage);
+    });
+    
+    // Функция для применения выбранного языка
+    function applyLanguage(lang) {
+        // Находим все элементы с атрибутами data-lang-ru и data-lang-en
+        const elements = document.querySelectorAll('[data-lang-' + lang + ']');
+        
+        // Применяем соответствующий текст к каждому элементу
+        elements.forEach(element => {
+            const translation = element.getAttribute('data-lang-' + lang);
+            if (translation) {
+                if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
+                    element.placeholder = translation;
+                } else {
+                    element.textContent = translation;
+                }
+            }
+        });
+        
+        // Обработка плейсхолдеров для инпутов
+        const inputElements = document.querySelectorAll('input[data-lang-' + lang + '-placeholder]');
+        inputElements.forEach(input => {
+            const placeholderTranslation = input.getAttribute('data-lang-' + lang + '-placeholder');
+            if (placeholderTranslation) {
+                input.placeholder = placeholderTranslation;
+            }
+        });
+        
+        // Обновляем заголовок страницы
+        const titleElement = document.querySelector('title');
+        if (titleElement && titleElement.getAttribute('data-lang-' + lang)) {
+            titleElement.textContent = titleElement.getAttribute('data-lang-' + lang);
+        }
+        
+        // Обновляем уведомления в зависимости от языка
+        updateNotificationMessages(lang);
+    }
+    
+    // Функция для обновления текстов уведомлений
+    function updateNotificationMessages(lang) {
+        // Словарь с переводами для уведомлений
+        const notifications = {
+            'success': {
+                'ru': {
+                    'registration': 'Регистрация выполнена успешно!',
+                    'login': 'Вход выполнен успешно!',
+                    'logout': 'Вы успешно вышли из аккаунта',
+                    'buy': 'Товар добавлен в корзину!'
+                },
+                'en': {
+                    'registration': 'Registration completed successfully!',
+                    'login': 'Login successful!',
+                    'logout': 'You have successfully logged out',
+                    'buy': 'Product added to cart!'
+                }
+            },
+            'error': {
+                'ru': {
+                    'email': 'Пожалуйста, введите корректный email адрес',
+                    'password': 'Пароль должен содержать минимум 8 символов',
+                    'user_exists': 'Пользователь с таким email уже существует',
+                    'invalid_credentials': 'Неверный email или пароль'
+                },
+                'en': {
+                    'email': 'Please enter a valid email address',
+                    'password': 'Password must be at least 8 characters long',
+                    'user_exists': 'User with this email already exists',
+                    'invalid_credentials': 'Invalid email or password'
+                }
+            }
+        };
+        
+        // Сохраняем словарь в глобальной переменной для доступа из других функций
+        window.notificationMessages = notifications;
+    }
+});
+</script>
+
+<script>
+// Функция обработки кнопки "Купить сейчас"
+function handleBuyNow() {
+    console.log('Кнопка Купить сейчас нажата');
+    
+    try {
+        // Получаем информацию о товаре из модального окна
+        const modal = document.querySelector('.product-modal[style*="display: flex"]');
+        
+        if (!modal) {
+            console.error('Модальное окно не найдено');
+            return;
+        }
+        
+        // Получаем название товара и цену
+        const productTitleElement = modal.querySelector('.product-modal__title');
+        const productPriceElement = modal.querySelector('.product-modal__price');
+        
+        if (!productTitleElement || !productPriceElement) {
+            console.error('Не найдены элементы с информацией о товаре');
+            return;
+        }
+        
+        const productTitle = productTitleElement.textContent;
+        const productPrice = productPriceElement.textContent;
+        const orderNumber = '#' + Math.floor(Math.random() * 900000 + 100000); // Генерируем случайный номер заказа
+        
+        console.log('Товар:', productTitle, 'Цена:', productPrice, 'Номер заказа:', orderNumber);
+        
+        // Закрываем модальное окно
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        
+        // Переходим на страницу оплаты с параметрами
+        const params = new URLSearchParams();
+        params.append('productTitle', productTitle);
+        params.append('productPrice', productPrice);
+        params.append('orderNumber', orderNumber);
+        
+        // Добавляем временную метку, чтобы избежать кэширования
+        params.append('t', Date.now());
+        
+        // Переходим на страницу оплаты
+        window.location.href = '/development-page.html?' + params.toString();
+        
+        // Показываем уведомление об успешном добавлении товара
+        showSimpleNotification('Товар добавлен в корзину. Переход к оплате...', 'success');
+    } catch (error) {
+        console.error('Ошибка при обработке кнопки Купить сейчас:', error);
+        showSimpleNotification('Произошла ошибка. Пожалуйста, попробуйте еще раз.', 'error');
+    }
+}
+</script>
 </body>
 </html>

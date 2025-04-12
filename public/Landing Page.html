@@ -105,17 +105,17 @@
             </a>
 
             <ul class="nav-links">
-                <li><a href="/" class="active">Главная</a></li>
-                <li><a href="/Product Catalog.html">Каталог</a></li>
-                <li><a href="/About Product.html">Подробности</a></li>
+                <li><a href="/" class="active" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
             </ul>
         </div>
         
         <div class="nav-right">
-            <button class="btn-signup" data-auth="open">Регистрация</button>
+            <button class="btn-signup" data-auth="open" data-lang-ru="Регистрация" data-lang-en="Sign Up">Регистрация</button>
             <div class="user-profile" data-auth="profile" style="display: none;">
-                <span class="welcome-message">Привет, <span class="username">Пользователь</span>!</span>
-                <button class="btn-logout" onclick="logout()">Выйти</button>
+                <span class="welcome-message" data-lang-ru="Привет, " data-lang-en="Hello, ">Привет, <span class="username">Пользователь</span>!</span>
+                <button class="btn-logout" onclick="logout()" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</button>
             </div>
         </div>
     </nav>
@@ -132,10 +132,10 @@
         <div class="hero-slide slide-4"></div>
 
         <div class="hero-content">
-            <div class="trailer-label">Frames</div>
+            <div class="trailer-label" data-lang-ru="Рамки" data-lang-en="Frames">Frames</div>
             <h1>Spoframe</h1>
             <div class="hero-buttons">
-                <a href="/Product Detail.html" id="orderNowBtn" class="btn-watch-now">ORDER NOW</a>
+                <a href="/Product Detail.html" id="orderNowBtn" class="btn-watch-now" data-lang-ru="ЗАКАЗАТЬ СЕЙЧАС" data-lang-en="ORDER NOW">ORDER NOW</a>
                 <div class="trailer-navigation">
                     <span class="dot active" data-slide="1"></span>
                     <span class="dot" data-slide="2"></span>
@@ -645,6 +645,58 @@
             "availability": "https://schema.org/InStock"
         }
     }
+    </script>
+    
+    <!-- Скрипт для переключения языка -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Страница загружена, инициализируем переключатель языка');
+        
+        // Получаем селектор языка
+        const languageSelect = document.getElementById('languageSelect');
+        if (!languageSelect) {
+            console.error('Не найден элемент с id "languageSelect"');
+            return;
+        }
+        
+        // Устанавливаем язык из localStorage или используем русский по умолчанию
+        const savedLanguage = localStorage.getItem('language') || 'ru';
+        console.log('Сохраненный язык:', savedLanguage);
+        languageSelect.value = savedLanguage;
+        
+        // Применяем сохраненный язык при загрузке страницы
+        applyLanguage(savedLanguage);
+        
+        // Обработчик изменения языка
+        languageSelect.addEventListener('change', function() {
+            const selectedLanguage = this.value;
+            console.log('Выбран язык:', selectedLanguage);
+            localStorage.setItem('language', selectedLanguage);
+            
+            // Применяем выбранный язык
+            applyLanguage(selectedLanguage);
+        });
+        
+        // Функция для применения выбранного языка
+        function applyLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang-' + lang + ']');
+            elements.forEach(element => {
+                const translation = element.getAttribute('data-lang-' + lang);
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+            
+            // Обрабатываем особые случаи, например, плейсхолдеры в полях ввода
+            const placeholderElements = document.querySelectorAll('[data-lang-' + lang + '-placeholder]');
+            placeholderElements.forEach(element => {
+                const translation = element.getAttribute('data-lang-' + lang + '-placeholder');
+                if (translation) {
+                    element.placeholder = translation;
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>
