@@ -3,9 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React App</title>
+    <title>Spoframe - Стильные рамки для вашего интерьера</title>
+    <meta name="description" content="Spoframe - элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов. Стильный дизайн для любого интерьера.">
+    <meta name="keywords" content="Spoframe, рамки, интерьер, Spotify, дизайн, обложки альбомов">
+    <meta name="author" content="Spoframe">
+    <meta property="og:title" content="Spoframe - Стильные рамки для вашего интерьера">
+    <meta property="og:description" content="Элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов">
+    <meta property="og:image" content="/SF.png">
+    <meta property="og:url" content="http://spoframe.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="http://spoframe.com">
+    <link rel="stylesheet" href="/susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/scroll-buttons.css">
+    
+    <style>
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide-1 { 
+            background: linear-gradient(-45deg, 
+                #9333EA, 
+                #4C1D95, 
+                #7C3AED,
+                #4C1D95);
+            background-size: 400% 400%;
+            animation: gradientAnimation 6s ease infinite;
+        }
+        .slide-2 { background-image: url('/images/slide2.jpg'); }
+        .slide-3 { background-image: url('/images/slide3.jpg'); }
+        .slide-4 { background-image: url('/images/slide4.jpg'); }
+
+        /* Стили для футера */
+        footer {
+            background-color: var(--card-bg);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quick-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .quick-links a:hover {
+            color: var(--primary);
+        }
+
+        .quick-links span {
+            color: var(--text-secondary);
+        }
+
+        .language-selector select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+    <script src="/auth-modal.js" defer></script>
 </head>
 <body>
-    <div id="root"></div>
+    <!-- Навигация -->
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
+        <div class="nav-left">
+            <a href="/" aria-label="Главная страница Spoframe">
+                <img src="/SF.png" alt="Логотип Spoframe" class="logo">
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Открыть меню">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/" class="active" aria-current="page">Главная</a></li>
+                <li><a href="/catalog">Каталог</a></li>
+                <li><a href="/product">Подробности</a></li>
+                <li><a href="/about">О продукте</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="language-selector">
+                <select id="languageSelect" aria-label="Выбор языка">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+            <button class="btn-signup" data-auth="open" aria-label="Открыть форму регистрации">Регистрация</button>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <header class="hero">
+        <!-- Слайды -->
+        <div class="hero-slide slide-1 active"></div>
+        <div class="hero-slide slide-2"></div>
+        <div class="hero-slide slide-3"></div>
+        <div class="hero-slide slide-4"></div>
+
+        <div class="hero-content">
+            <div class="trailer-label">Рамки</div>
+            <h1>Spoframe</h1>
+            <div class="hero-buttons">
+                <a href="/product" id="orderNowBtn" class="btn-watch-now">ЗАКАЗАТЬ СЕЙЧАС</a>
+                <div class="trailer-navigation">
+                    <span class="dot active" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Секция особенностей -->
+    <section class="features">
+        <h2 class="section-title">Особенности</h2>
+        <p class="section-subtitle">Откройте для себя уникальные возможности Spoframe</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-box blue">
+                    <i class="icon-design"></i>
+                </div>
+                <h3>Стильный Дизайн</h3>
+                <p class="category">Дизайн</p>
+                <p>Элегантные рамки, которые дополняют любой интерьер, добавляя нотку изысканности вашему пространству.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box green">
+                    <i class="icon-spotify"></i>
+                </div>
+                <h3>Интеграция со Spotify</h3>
+                <p class="category">Интеграция</p>
+                <p>Легко подключайтесь к Spotify для отображения обложек альбомов, плейлистов и многого другого прямо на вашей рамке.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box purple">
+                    <i class="icon-customize"></i>
+                </div>
+                <h3>Настраиваемость Дисплея</h3>
+                <p class="category">Доступность</p>
+                <p>Доступны режимы слайд-шоу и статичного изображения. Настраивайте источники контента, частоту смены кадров и яркость дисплея под свои предпочтения.</p>
+            </div>
+        </div>
+    <button class="btn-explore-features" onclick="window.location.href='/about'">Подробнее</button> 
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="/catalog">Каталог</a>
+                <span>•</span>
+                <a href="/product">Подробности</a>
+                <span>•</span>
+                <a href="/about">О продукте</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" aria-label="Выбор языка">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+            <div class="copyright">
+                © 2025 Spoframe
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Кнопки прокрутки -->
+    <div class="scroll-buttons">
+    <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+    </div>
+
+    <script src="/auth-modal.js"></script>
+    <script src="/main.js"></script>
+    <script src="/scroll-buttons.js"></script>
+    <script src="/language-switcher.js"></script>
 </body>
 </html>

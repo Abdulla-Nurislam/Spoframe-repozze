@@ -158,7 +158,7 @@
 
     /* Лого в темной теме */
     .logo {
-        color: var(--primary);  /* Используем тот же цвет в темной теме */
+        color: var(--primary); 
     }
 
     /* Секция особенностей в темной теме */
@@ -1203,36 +1203,6 @@ footer {
     font-weight: bold;
     color: var(--primary-color);
 }
-
-/* Отзывы */
-.testimonials {
-    padding: 4rem 2rem;
-    background: var(--section-bg);
-}
-
-.testimonials-slider {
-    display: flex;
-    gap: 2rem;
-    overflow-x: auto;
-    padding: 2rem 0;
-    scroll-snap-type: x mandatory;
-}
-
-.testimonial-card {
-    min-width: 300px;
-    padding: 2rem;
-    background: var(--card-bg);
-    border-radius: 12px;
-    scroll-snap-align: start;
-}
-
-.testimonial-avatar img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-}
-
 /* CTA секция */
 .cta {
     padding: 6rem 2rem;
@@ -1632,7 +1602,7 @@ footer {
 
 .product-intro h1 {
     font-size: 2.5rem;
-    color: #fff;
+    color: var(--modal-primary-hover-light);
     margin-bottom: 16px;
 }
 
@@ -1729,7 +1699,7 @@ footer {
 /* Стили для секции обратной связи */
 .contact-section {
     padding: 80px 20px;
-    background-color: #f9f9f9;
+    background-color: var(--blur-bg);
 }
 
 .contact-section .container {
@@ -1739,7 +1709,7 @@ footer {
 
 .contact-form {
     margin-top: 40px;
-    background: #fff;
+    background: var(--modal-bg-dark);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -1760,7 +1730,7 @@ footer {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #333;
+    color: var(--gray);
 }
 
 .form-group input,

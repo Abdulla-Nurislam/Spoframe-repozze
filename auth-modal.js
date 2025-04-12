@@ -28,6 +28,9 @@ function initHTMLModal() {
     loginForm = modal.querySelector('.login-form');
     signupForm = modal.querySelector('.signup-form');
     
+    // Получаем ссылку "Забыли пароль?"
+    const forgotPasswordLink = modal.querySelector('.forgot-password');
+    
     // Получаем все кнопки, которые открывают модальное окно
     const authButtons = document.querySelectorAll('[data-auth="open"]');
     
@@ -38,6 +41,15 @@ function initHTMLModal() {
     
     // Добавляем обработчик для закрытия модального окна
     closeBtn.addEventListener('click', closeModal);
+    
+    // Обработчик для ссылки "Забыли пароль?"
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/reset-password.html';
+            closeModal();
+        });
+    }
     
     // Закрытие при клике вне модального окна
     window.addEventListener('click', function(event) {

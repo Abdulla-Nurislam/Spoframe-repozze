@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoframe - Стильные рамки для вашего интерьера</title>
+    <meta name="description" content="Spoframe - элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов. Стильный дизайн для любого интерьера.">
+    <meta name="keywords" content="Spoframe, рамки, интерьер, Spotify, дизайн, обложки альбомов">
+    <meta name="author" content="Spoframe">
+    <meta property="og:title" content="Spoframe - Стильные рамки для вашего интерьера">
+    <meta property="og:description" content="Элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов">
+    <meta property="og:image" content="/images/SF.png">
+    <meta property="og:url" content="http://spoframe.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="http://spoframe.com">
+    <link rel="stylesheet" href="/susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/auth-styles.css">
+    <link rel="stylesheet" href="/scroll-buttons.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    
+    <!-- Яндекс.Метрика -->
+    <script>
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(XXXXXXXX, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
+    <style>
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .nav-links li {
+            padding: 0;
+        }
+        
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide-1 { 
+            background: linear-gradient(-45deg, 
+                #9333EA, /* Возвращен фиолетовый цвет */
+                #4C1D95, /* Темно-фиолетовый */
+                #7C3AED, /* Средний фиолетовый */
+                #4C1D95);
+            background-size: 400% 400%;
+            animation: gradientAnimation 6s ease infinite;
+        }
+        .slide-2 { background-image: url('/images/slide2.jpg'); }
+        .slide-3 { background-image: url('/images/slide3.jpg'); }
+        .slide-4 { background-image: url('/images/slide4.jpg'); }
+        
+        .forgot-password {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #00A8FC; /* Цвет как у ссылки регистрации */
+            text-decoration: none;
+            margin-top: 0.3rem;
+            transition: all 0.2s ease;
+        }
+        
+        .icon-box.purple {
+            background-color: #7C3AED; /* Возвращен фиолетовый цвет */
+        }
+    </style>
+    <script src="/auth-modal.js" defer></script>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/SF.png" alt="Spoframe" class="logo">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="/" class="active">Главная</a></li>
+                <li><a href="/Product Catalog.html">Каталог</a></li>
+                <li><a href="/About Product.html">Подробности</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-right">
+            <button class="btn-signup" data-auth="open">Регистрация</button>
+            <div class="user-profile" data-auth="profile" style="display: none;">
+                <span class="welcome-message">Привет, <span class="username">Пользователь</span>!</span>
+                <button class="btn-logout" onclick="logout()">Выйти</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Уведомление -->
+    <div id="notification" class="simple-notification"></div>
+
+    <!-- Главный баннер -->
+    <header class="hero">
+        <!-- Слайды -->
+        <div class="hero-slide slide-1 active"></div>
+        <div class="hero-slide slide-2"></div>
+        <div class="hero-slide slide-3"></div>
+        <div class="hero-slide slide-4"></div>
+
+        <div class="hero-content">
+            <div class="trailer-label">Frames</div>
+            <h1>Spoframe</h1>
+            <div class="hero-buttons">
+                <a href="/Product Detail.html" id="orderNowBtn" class="btn-watch-now">ORDER NOW</a>
+                <div class="trailer-navigation">
+                    <span class="dot active" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                    <span class="dot" data-slide="3"></span>
+                    <span class="dot" data-slide="4"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Features</h2>
+        <p class="section-subtitle">Discover the unique features of Spoframe</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-box blue">
+                    <i class="icon-design"></i>
+                </div>
+                <h3 data-lang="feature-design-title">Stylish Design</h3>
+                <p class="category" data-lang="feature-design-category">Design</p>
+                <p data-lang="feature-design-desc">Elegant frames that complement any interior, adding a touch of sophistication to your space.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box green">
+                    <i class="icon-spotify"></i>
+                </div>
+                <h3 data-lang="feature-spotify-title">Spotify Integration</h3>
+                <p class="category" data-lang="feature-spotify-category">Integration</p>
+                <p data-lang="feature-spotify-desc">Easily connect to Spotify to display album covers, playlists, and much more directly on your frame.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="icon-box purple">
+                    <i class="icon-customize"></i>
+                </div>
+                <h3 data-lang="feature-display-title">Display Customization</h3>
+                <p class="category" data-lang="feature-display-category">Accessibility</p>
+                <p data-lang="feature-display-desc">Available in slideshow and static image modes. Customize content sources, frame rate, and display brightness according to your preferences.</p>
+            </div>
+        </div>
+    <button class="btn-explore-features" onclick="window.location.href='/About Product.html'">Learn More</button> 
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="/Product Catalog.html" data-lang="footer-catalog">Catalog</a>
+                <span>•</span>
+                <a href="/Product Detail.html" data-lang="footer-details">Details</a>
+                <span>•</span>
+                <a href="/About Product.html" data-lang="footer-about">About Product</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" aria-label="Language Selection">
+                    <option value="ru">RU</option>
+                    <option value="en" selected>EN</option>
+                </select>
+            </div>
+            <div class="copyright">
+                2025 Spoframe
+            </div>
+        </div>
+    </footer>
+    <!-- Модальное окно регистрации/входа -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-modal__content">
+            <span class="close">&times;</span>
+            
+            <!-- Форма входа -->
+            <div class="form-container login-form">
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label style="color: white;">EMAIL</label>
+                        <input type="email" name="email" placeholder="Введите ваш email">
+                    </div>
+
+                    <div class="form-group">
+                        <label style="color: white;">PASSWORD</label>
+                        <input type="password" name="password" placeholder="Введите пароль">
+                        <a href="/reset-password.html" class="forgot-password">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="auth-submit">Войти</button>
+
+                    <div class="auth-footer">
+                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="form-container signup-form" style="display: none;">
+                <div class="signup-header">
+                    <img src="/SF.png" alt="Logo" class="modal-logo">
+                    <h2>Зарегистрируйтесь моментально</h2>
+                    <p>и начните наслаждаться рамками прямо сейчас</p>
+                </div>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label style="color: white;">КАК ТЕБЯ ЗОВУТ?</label>
+                        <input type="text" name="name" placeholder="Введи имя профиля">
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white;">ТВОЙ EMAIL</label>
+                        <input type="email" name="email" placeholder="name@domain.com">
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white;">ПРИДУМАЙ ПАРОЛЬ</label>
+                        <input type="password" name="password" placeholder="Минимум 8 символов">
+                        <div class="password-requirements">
+                            Пароль должен содержать минимум 8 символов
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
+                    <div class="auth-footer">
+                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Кнопки прокрутки -->
+    <div class="scroll-buttons">
+    <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+    <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+
+    </div>
+
+    <!-- Подключаем необходимые скрипты -->
+    <script src="/main.js"></script>
+    <script src="/auth-modal.js"></script>
+    <script src="/authModal.bundle.js"></script>
+    <script src="/main.js"></script>
+    <script src="/scroll-buttons.js"></script>
+    <script src="/language-switcher.js"></script>
+    <script src="/auth-forms.js"></script>
+    
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация слайдера
+        initSlider();
+        
+        // Проверка авторизации
+        checkAuth();
+        
+        // Инициализация форм авторизации
+        initializeAuthForms();
+    })
+    
+    // Функция для инициализации слайдера
+    function initSlider() {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        
+        if (slides.length === 0 || dots.length === 0) {
+            console.log('Элементы слайдера не найдены');
+            return;
+        }
+        
+        let currentSlide = 0;
+        let slideInterval;
+        let isTransitioning = false;
+        
+        // Функция для переключения слайдов
+        function switchSlide(slideIndex) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            
+            // Убираем активный класс с текущего слайда и точки
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            
+            // Обновляем индекс текущего слайда
+            currentSlide = slideIndex;
+            
+            // Добавляем активный класс новому слайду и точке
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+            
+            // Сбрасываем флаг через время анимации
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 500);
+        }
+        
+        // Запускаем автоматическое переключение
+        function startSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                switchSlide(nextIndex);
+            }, 5000);
+        }
+        
+        // Обработчики событий для точек навигации
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                switchSlide(index);
+            });
+        });
+        
+        // Запускаем слайдшоу
+        startSlideshow();
+    }
+    
+    // Функция проверки авторизации
+    function checkAuth() {
+        try {
+            const userToken = localStorage.getItem('userToken');
+            const userData = JSON.parse(localStorage.getItem('userData') || 'null');
+            
+            console.log('Проверка аутентификации:', userData);
+            
+            const btnSignup = document.querySelector('.btn-signup');
+            const userProfile = document.querySelector('.user-profile');
+            const welcomeMessage = document.querySelector('.welcome-message');
+            
+            if (userToken && userData) {
+                // Если пользователь авторизован, скрываем кнопку регистрации и показываем профиль
+                if (btnSignup) btnSignup.style.display = 'none';
+                if (userProfile) {
+                    userProfile.style.display = 'flex';
+                    // Устанавливаем имя пользователя в шапке сайта
+                    const usernameEl = userProfile.querySelector('.username');
+                    if (usernameEl && userData.name) {
+                        usernameEl.textContent = userData.name;
+                        console.log('Установлено имя пользователя:', userData.name);
+                    }
+                }
+            } else {
+                // Если пользователь не авторизован, показываем кнопку регистрации и скрываем профиль
+                if (btnSignup) btnSignup.style.display = 'inline-block';
+                if (userProfile) userProfile.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Ошибка при проверке авторизации:', error);
+        }
+    }
+    
+    // Выход из профиля
+    function logout() {
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userData');
+        
+        // Обновляем UI после выхода
+        checkAuth();
+        
+        // Показываем уведомление
+        showSimpleNotification('Вы успешно вышли из аккаунта', 'success');
+    }
+    
+    // Проверка электронной почты
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // Получение списка пользователей из localStorage
+    function getUsersFromStorage() {
+        return JSON.parse(localStorage.getItem('users') || '[]');
+    }
+    
+    // Проверка существования пользователя по email
+    function checkUserExists(email) {
+        const users = getUsersFromStorage();
+        return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+    }
+    
+    // Получение пользователя по email и паролю
+    function getUserByCredentials(email, password) {
+        const users = getUsersFromStorage();
+        console.log('Поиск пользователя:', email, users);
+        return users.find(user => 
+            user.email.toLowerCase() === email.toLowerCase() && 
+            user.password === password
+        );
+    }
+    
+    // Сохранение нового пользователя
+    function saveNewUser(name, email, password) {
+        const users = getUsersFromStorage();
+        const newUser = {
+            id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+            name: name,
+            email: email,
+            password: password,
+            registrationDate: new Date().toISOString()
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        return newUser;
+    }
+    
+    // Функция для открытия модального окна
+    function openModal(formType = 'login') {
+        const modal = document.getElementById('authModal');
+        if (!modal) return;
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Показываем нужную форму
+        if (formType === 'login') {
+            showLoginForm();
+        } else if (formType === 'signup') {
+            showSignupForm();
+        }
+    }
+    
+    // Функция для показа формы входа
+    function showLoginForm() {
+        const loginForm = document.querySelector('.login-form');
+        const signupForm = document.querySelector('.signup-form');
+        
+        if (loginForm && signupForm) {
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        }
+    }
+    
+    // Функция для показа формы регистрации
+    function showSignupForm() {
+        const loginForm = document.querySelector('.login-form');
+        const signupForm = document.querySelector('.signup-form');
+        
+        if (loginForm && signupForm) {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        }
+    }
+    
+    // Инициализация форм авторизации
+    function initializeAuthForms() {
+        const loginForm = document.querySelector('#loginForm');
+        const signupForm = document.querySelector('#signupForm');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = loginForm.querySelector('input[type="email"]').value;
+                const password = loginForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                const user = getUserByCredentials(email, password);
+                if (!user) {
+                    showSimpleNotification('Неверный email или пароль', 'error');
+                    return;
+                }
+                
+                // Успешный вход
+                const userData = {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name
+                };
+                
+                // Сохраняем данные в localStorage
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                // Сохраняем данные для админ-панели
+                const adminUsers = JSON.parse(sessionStorage.getItem('admin_users') || '[]');
+                if (!adminUsers.some(u => u.email === user.email)) {
+                    adminUsers.push(user);
+                    sessionStorage.setItem('admin_users', JSON.stringify(adminUsers));
+                }
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                showSimpleNotification('Вход выполнен успешно!', 'success');
+            });
+        }
+        
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = signupForm.querySelector('input[name="name"]').value;
+                const email = signupForm.querySelector('input[type="email"]').value;
+                const password = signupForm.querySelector('input[type="password"]').value;
+                
+                // Проверка email
+                if (!validateEmail(email)) {
+                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
+                    return;
+                }
+                
+                // Проверка пароля
+                if (password.length < 8) {
+                    showSimpleNotification('Пароль должен содержать минимум 8 символов', 'error');
+                    return;
+                }
+                
+                // Проверка существования пользователя
+                if (checkUserExists(email)) {
+                    showSimpleNotification('Пользователь с таким email уже существует', 'error');
+                    return;
+                }
+                
+                // Сохранение нового пользователя
+                const newUser = saveNewUser(name, email, password);
+                
+                // Сохраняем данные в localStorage
+                const userData = {
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name
+                };
+                
+                localStorage.setItem('userToken', 'auth-token-' + Date.now());
+                localStorage.setItem('userData', JSON.stringify(userData));
+                
+                // Сохраняем данные для админ-панели
+                const adminUsers = JSON.parse(sessionStorage.getItem('admin_users') || '[]');
+                adminUsers.push(newUser);
+                sessionStorage.setItem('admin_users', JSON.stringify(adminUsers));
+                
+                // Закрываем модальное окно
+                const modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'none';
+                
+                // Проверяем авторизацию и обновляем UI
+                checkAuth();
+                
+                // Уведомление пользователя
+                showSimpleNotification('Регистрация выполнена успешно!', 'success');
+            });
+        }
+    }
+    
+    // Функция для показа простых уведомлений
+    function showSimpleNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = 'simple-notification ' + type + ' show';
+        
+        // Автоматически скрываем уведомление через 3 секунды
+        setTimeout(() => {
+            notification.className = 'simple-notification';
+        }, 3000);
+    }
+    </script>
+    
+    <!-- Микроразметка Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Spoframe",
+        "url": "https://spoframe.com",
+        "logo": "https://spoframe.com/SF.png",
+        "description": "Spoframe - элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов. Стильный дизайн для любого интерьера.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Россия"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "info@spoframe.com"
+        },
+        "sameAs": [
+            "https://facebook.com/spoframe",
+            "https://instagram.com/spoframe",
+            "https://twitter.com/spoframe"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Spoframe",
+        "image": "https://spoframe.com/SF.png",
+        "description": "Элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов",
+        "brand": {
+            "@type": "Brand",
+            "name": "Spoframe"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "https://spoframe.com/Product Detail.html",
+            "priceCurrency": "RUB",
+            "price": "3999",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+</body>
+</html>

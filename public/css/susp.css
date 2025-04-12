@@ -37,6 +37,86 @@
     --font-body: 'Inter', sans-serif;
 }
 
+.light-mode {
+    --bg-main: #ffffff;
+    --text-main: #1F2937;
+    --text-secondary: #6B7280;
+    --card-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --nav-bg: #ffffff;
+}
+
+.dark-mode {
+    --bg-main: #121212;
+    --text-main: #FFFFFF;
+    --text-secondary: #A6A6A6;
+    --card-bg: #1E1E1E;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --nav-bg: #1A1A1A;
+}
+
+.dark-mode .navbar {
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dark-mode .logo-img {
+    filter: brightness(0) invert(1);
+}
+
+.dark-mode .nav-links a {
+    color: #FFFFFF;
+}
+
+.dark-mode .btn-signup {
+    background-color: var(--primary);
+}
+
+.dark-mode .hero {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+.dark-mode .hero-title, 
+.dark-mode .hero-subtitle {
+    color: var(--text-main);
+}
+
+.dark-mode .product-card {
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .product-title,
+.dark-mode .product-price {
+    color: var(--text-main);
+}
+
+.dark-mode .product-description {
+    color: var(--text-secondary);
+}
+
+/* Темный режим для футера */
+.dark-mode footer {
+    background-color: #000000;
+    border-top: none;
+    color: #ffffff;
+}
+
+.dark-mode .quick-links a {
+    color: #ffffff;
+}
+
+.dark-mode .language-selector select {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .copyright {
+    color: #888888;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-main: #111827;
@@ -303,6 +383,38 @@ body {
 .btn-help:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    color: var(--text-main, #1F2937);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 15px;
+}
+
+.theme-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .theme-button {
+    color: #ffffff;
+}
+
+.dark-mode .theme-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
 }
 
 /* Hero секция */
@@ -625,11 +737,14 @@ body {
     margin-top: 2rem;
 }
 
-/* Футер */
+/* Футер - стили для темного и светлого режима */
 footer {
-    background-color: #000000;
+    background-color: var(--bg-main, #ffffff);
+    border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
     padding: 30px 0;
     position: relative;
+    color: var(--text-main, #1F2937);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .footer-content {
@@ -643,7 +758,7 @@ footer {
 }
 
 .quick-links a {
-    color: #ffffff;
+    color: var(--text-main, #1F2937);
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
@@ -651,12 +766,37 @@ footer {
 }
 
 .quick-links a:hover {
-    color: var(--primary);
+    color: var(--primary, #7C3AED);
 }
 
 .quick-links span {
-    color: var(--primary);
+    color: var(--primary, #7C3AED);
     margin: 0 5px;
+}
+
+.language-selector {
+    margin: 15px 0;
+}
+
+.language-selector select {
+    background-color: var(--card-bg, #ffffff);
+    color: var(--text-main, #1F2937);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.language-selector select:hover {
+    border-color: var(--primary, #7C3AED);
+}
+
+.copyright {
+    color: var(--text-secondary, #6B7280);
+    font-size: 14px;
+    margin-top: 20px;
 }
 
 /* Стили для кнопок прокрутки */

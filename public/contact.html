@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Связаться с нами - Spoframe</title>
+    <link rel="stylesheet" href="/susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/scroll-buttons.css">
+    <link rel="stylesheet" href="/contact-form.css">
+    <style>
+        /* Стили для футера */
+        footer {
+            background-color: var(--card-bg);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quick-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .quick-links a:hover {
+            color: var(--primary);
+        }
+
+        .quick-links span {
+            color: var(--text-secondary);
+        }
+
+        .language-selector select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        
+        .main-title {
+            font-size: 3rem;
+            color: var(--text-main);
+            text-align: center;
+            margin: 2rem 0;
+            font-weight: 600;
+        }
+        
+        .main-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/">
+                <img src="/SF.png" alt="Spoframe" class="logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/catalog">Каталог</a></li>
+                <li><a href="/product">Подробности</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <button class="btn-signup" data-auth="open">Регистрация</button>
+        </div>
+    </nav>
+
+    <!-- Заголовок страницы -->
+    <div class="page-header">
+        <h1 class="main-title">Связаться с нами</h1>
+        <p class="main-subtitle">Есть вопросы? Мы с радостью на них ответим!</p>
+    </div>
+    
+    <!-- Форма контакта -->
+    <div class="contact-container">
+        <form id="contactForm" class="contact-form">
+            <div class="form-row">
+                <div class="form-field">
+                    <label class="form-field-label">Ваше имя</label>
+                    <input type="text" placeholder="Введите ваше имя" required>
+                </div>
+                
+                <div class="form-field">
+                    <label class="form-field-label">Email</label>
+                    <input type="email" placeholder="Введите ваш email" required>
+                </div>
+            </div>
+            
+            <div class="form-field">
+                <label class="form-field-label">Тема</label>
+                <input type="text" placeholder="Тема сообщения" required>
+            </div>
+            
+            <div class="form-field">
+                <label class="form-field-label">Сообщение</label>
+                <textarea rows="5" placeholder="Введите ваше сообщение" required></textarea>
+            </div>
+            
+            <button type="submit" class="form-button">Отправить сообщение</button>
+        </form>
+        
+        <div id="formSuccess" class="form-success">
+            <i class="fas fa-check-circle"></i>
+            <h3>Спасибо за ваше сообщение!</h3>
+            <p>Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="/catalog">Каталог</a>
+                <span>•</span>
+                <a href="/product">Подробности</a>
+                <span>•</span>
+                <a href="/about">О продукте</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" aria-label="Выбор языка">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+            <div class="copyright">
+                © 2025 Spoframe
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопки прокрутки -->
+    <div class="scroll-buttons">
+        <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
+            <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <script src="/auth-modal.js"></script>
+    <script src="/scroll-buttons.js"></script>
+    <script src="/language-switcher.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Имитация отправки данных на сервер
+                    setTimeout(function() {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                        
+                        // Очистка формы
+                        contactForm.reset();
+                        
+                        // Через 5 секунд можно снова показать форму
+                        setTimeout(function() {
+                            contactForm.style.display = 'flex';
+                            formSuccess.style.display = 'none';
+                        }, 5000);
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
