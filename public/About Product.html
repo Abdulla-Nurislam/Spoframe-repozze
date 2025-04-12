@@ -5,84 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О продукте - Spoframe</title>
     <link rel="stylesheet" href="susp.css">
-    <link rel="stylesheet" href="auth-modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         /* Существующие стили */
         
-        /* Стили для кнопок прокрутки */
-        .scroll-buttons {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 1000;
-        }
-
-        .scroll-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+        /* Удаляем стили для кнопок прокрутки */
+        
+        /* Добавляем современные стили для секций */
+        .section {
+            padding: 80px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .scroll-btn:hover {
-            transform: scale(1.1);
-            background: var(--accent-color);
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #7c3aed, #4c1d95);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .scroll-text {
-            font-size: 14px;
-            font-weight: 600;
+        .section-title::after {
+            content: '';
             position: absolute;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #7c3aed, #4c1d95);
+            border-radius: 2px;
         }
 
-        .scroll-btn:hover .scroll-text {
+        .section-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card {
+            background: var(--bg-main);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .specs-table th, .specs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .specs-table th {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .specs-table td {
+            color: var(--text-secondary);
+        }
+
+        .specs-table tr:last-child td,
+        .specs-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        .specs-table tr:hover td {
+            background-color: rgba(124, 58, 237, 0.05);
+        }
+
+        /* Анимации при прокрутке */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        .scroll-btn:hover i {
-            opacity: 0;
-        }
-
-        .scroll-btn i {
-            font-size: 16px;
-            transition: opacity 0.3s ease;
+        /* Улучшенные стили для навигации */
+        .navbar {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(var(--navbar-bg-rgb), 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
 <body>
-    <!-- Навигация (такая же как на главной) -->
-    <nav class="navbar">
-        <!-- ... существующая навигация ... -->
-    </nav>
 
     <main class="about-product">
         <section class="product-intro">
-            <h1>О Spoframe</h1>
+            <h1 class="section-title">О Spoframe</h1>
             <p class="intro-text">Инновационное решение для отображения ваших любимых музыкальных моментов</p>
         </section>
 
         <section class="documentation">
             <div class="doc-section">
-                <h2>Основные особенности</h2>
+                <h2 class="section-title">Основные особенности</h2>
                 <div class="feature-grid">
-                    <div class="feature">
-                        <i class="fas fa-paint-brush"></i>
+                    <div class="feature-card">
+                        <i class="fas fa-paint-brush feature-icon"></i>
                         <h3>Дизайн</h3>
                         <ul>
                             <li>Минималистичный стиль</li>
@@ -90,8 +169,8 @@
                             <li>Различные цветовые решения</li>
                         </ul>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-ruler-combined"></i>
+                    <div class="feature-card">
+                        <i class="fas fa-ruler-combined feature-icon"></i>
                         <h3>Размеры и форматы</h3>
                         <ul>
                             <li>Стандартный формат (20x30)</li>
@@ -99,8 +178,8 @@
                             <li>Панорамный формат (20x40)</li>
                         </ul>
                     </div>
-                    <div class="feature">
-                        <i class="fas fa-box"></i>
+                    <div class="feature-card">
+                        <i class="fas fa-box feature-icon"></i>
                         <h3>Комплектация</h3>
                         <ul>
                             <li>Рамка</li>
@@ -112,28 +191,28 @@
             </div>
 
             <div class="doc-section specs">
-                <h2>Характеристики</h2>
-                <div class="specs-grid">
-                    <div class="spec-item">
-                        <h4>Материалы рамок</h4>
-                        <p>Алюминий / Дерево / ...</p>
-                    </div>
-                    <div class="spec-item">
-                        <h4>Стекло</h4>
-                        <p>Матовое / Глянцевое</p>
-                    </div>
-                    <div class="spec-item">
-                        <h4>Крепление</h4>
-                        <p>Настенное / Настольное</p>
-                    </div>
-                    <div class="spec-item">
-                        <h4>Толщина</h4>
-                        <p>2 см</p>
-                    </div>
+                <h2 class="section-title">Характеристики</h2>
+                <div class="specs-table">
+                    <table>
+                        <tr>
+                            <th>Материалы рамок</th>
+                            <td>Алюминий / Дерево / ...</td>
+                        </tr>
+                        <tr>
+                            <th>Стекло</th>
+                            <td>Матовое / Глянцевое</td>
+                        </tr>
+                        <tr>
+                            <th>Крепление</th>
+                            <td>Настенное / Настольное</td>
+                        </tr>
+                        <tr>
+                            <th>Толщина</th>
+                            <td>2 см</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-
-
         </section>
     </main>
 
@@ -141,121 +220,25 @@
     <footer>
         <div class="footer-content">
             <div class="quick-links">
-                <a href="Product Catalog.html">Каталог</a>
+                <a href="/Landing Page.html">Главная</a>
                 <span>•</span>
-                <a href="Product Detail.html">Подробности</a>
+                <a href="/Product Catalog.html">Каталог</a>
                 <span>•</span>
-                <a href="About Product.html">О продукте</a>
+                <a href="/Product Detail.html">Подробности</a>
+            </div>
+            <div class="language-selector">
+                <select id="languageSelect" aria-label="Выбор языка">
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
             </div>
             <div class="copyright">
-                © 2025 Spoframe
+                &copy; 2025 Spoframe
             </div>
         </div>
     </footer>
-
-    <!-- Модальное окно регистрации/входа -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-modal__content">
-            <span class="close">&times;</span>
-            
-            <!-- Форма входа -->
-            <div class="form-container login-form">
-                <form class="auth-form">
-                    <div class="form-group">
-                        <label>EMAIL</label>
-                        <input type="email" placeholder="Введите ваш email">
-                    </div>
-
-                    <div class="form-group">
-                        <label>PASSWORD</label>
-                        <input type="password" placeholder="Введите пароль">
-                        <a href="#" class="forgot-password">Забыли пароль?</a>
-                    </div>
-
-                    <button type="submit" class="auth-submit">Войти</button>
-
-                    <div class="auth-footer">
-                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Форма регистрации -->
-            <div class="form-container signup-form" style="display: none;">
-                <div class="signup-header">
-                    <img src="SF.png" alt="Logo" class="modal-logo">
-                    <h2>Зарегистрируйтесь моментально</h2>
-                    <p>и начните наслаждаться музыкой прямо сейчас</p>
-                </div>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label>КАК ТЕБЯ ЗОВУТ?</label>
-                        <input type="text" placeholder="Введи имя профиля">
-                    </div>
-                    <div class="form-group">
-                        <label>ТВОЙ EMAIL</label>
-                        <input type="email" placeholder="name@domain.com">
-                    </div>
-                    <div class="form-group">
-                        <label>ПРИДУМАЙ ПАРОЛЬ</label>
-                        <input type="password" placeholder="Минимум 8 символов">
-                        <div class="password-requirements">
-                            Пароль должен содержать минимум 8 символов
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
-                    <div class="auth-footer">
-                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Кнопки прокрутки -->
-    <div class="scroll-buttons">
-        <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-        <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
-            <i class="fas fa-chevron-down"></i>
-        </button>
-    </div>
-
-    <script src="auth-modal.js"></script>
-    <script src="authModal.bundle.js"></script>
-    <script src="scroll-buttons.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        const scrollToBottomBtn = document.getElementById('scrollToBottom');
-
-        // Прокрутка вверх
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Прокрутка вниз
-        scrollToBottomBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
-        });
-
-        // Показать/скрыть кнопку прокрутки вверх при скролле
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                scrollToTopBtn.style.opacity = '1';
-            } else {
-                scrollToTopBtn.style.opacity = '0';
-            }
-        });
-    });
-    </script>
+    
+    <!-- Подключаем скрипт для переключения языка -->
+    <script src="/language-switcher.js"></script>
 </body>
-</html> 
+</html>

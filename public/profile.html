@@ -1,57 +1,699 @@
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding-bottom: 24px;
-    margin-bottom: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя | Spoframe</title>
+    <meta name="description" content="Страница профиля пользователя Spoframe. Управляйте своими данными и предпочтениями.">
+    <link rel="stylesheet" href="/susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/auth-modal.css">
+    <link rel="stylesheet" href="/auth-styles.css">
+    
+    <style>
+        :root {
+            --primary-color: #7C3AED;
+            --secondary-color: #4C1D95;
+            --accent-color: #6D28D9;
+            --text-main: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --bg-main: #0F172A;
+            --bg-secondary: #1E293B;
+            --card-bg: #1E293B;
+            --border-color: #334155;
+            --error-color: #EF4444;
+            --success-color: #10B981;
+        }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .profile-page {
+            flex: 1;
+            padding: 80px 0;
+        }
+        
+        .profile-container {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .profile-icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .profile-info {
+            flex: 1;
+            min-width: 0;
+            padding-right: 40px;
+        }
+        
+        .profile-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 8px;
+            color: var(--text-main);
+        }
+        
+        .profile-email {
+            font-size: 1rem;
+            margin: 0;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+        
+        .profile-section {
+            margin-bottom: 32px;
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin: 0 0 16px;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(124, 58, 237, 0.1);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #EF4444, #991B1B);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .orders-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .order-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .order-item:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .order-id {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .order-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        
+        .order-products {
+            color: var(--text-secondary);
+        }
+        
+        .order-total {
+            font-weight: 500;
+        }
+        
+        .order-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .status-completed {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+        
+        .status-processing {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+        
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .empty-state p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .navbar {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px;
+            background: var(--success-color);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification.error {
+            background: var(--error-color);
+        }
+        
+        /* Анимации */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center;
+            }
+            
+            .profile-icon {
+                margin: 0 auto 16px;
+            }
+            
+            .profile-info {
+                padding-right: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
+        <div class="container">
+            <div class="nav-left">
+                <a href="/" aria-label="Главная страница Spoframe">
+                    <img src="/SF.png" alt="Spoframe Logo" class="logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/Landing Page.html">Главная</a></li>
+                    <li><a href="/Product Catalog.html">Каталог</a></li>
+                    <li><a href="/Product Detail.html">Подробности</a></li>
+                    <li><a href="/About Product.html">О продукте</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="language-selector">
+                    <select id="languageSelect" aria-label="Выбор языка">
+                        <option value="ru">RU</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                <div class="user-profile" style="display: flex;">
+                    <div class="user-info">
+                        <span class="username" id="profileUsername">Пользователь</span>
+                        <button class="btn-logout" onclick="logout()">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-.profile-icon {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #fff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
+    <!-- Основное содержимое страницы -->
+    <main class="profile-page">
+        <div class="container">
+            <div class="profile-container fade-in">
+                <div class="profile-header">
+                    <div class="profile-icon" id="profileInitials"></div>
+                    <div class="profile-info">
+                        <h1 class="profile-name" id="profileName">Загрузка...</h1>
+                        <p class="profile-email" id="profileEmail">Загрузка...</p>
+                    </div>
+                </div>
+                
+                <div class="profile-section fade-in delay-1">
+                    <h2 class="section-title">Личная информация</h2>
+                    <form id="profileInfoForm">
+                        <div class="form-group">
+                            <label for="displayName">Имя профиля</label>
+                            <input type="text" id="displayName" name="displayName" placeholder="Введите ваше имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Введите ваш email" disabled>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Сохранить изменения</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="profile-section fade-in delay-2">
+                    <h2 class="section-title">Изменить пароль</h2>
+                    <form id="changePasswordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Текущий пароль</label>
+                            <input type="password" id="currentPassword" name="currentPassword" placeholder="Введите текущий пароль">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Новый пароль</label>
+                            <input type="password" id="newPassword" name="newPassword" placeholder="Введите новый пароль">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Подтвердите новый пароль</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Подтвердите новый пароль">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Обновить пароль</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="profile-section fade-in delay-3">
+                    <h2 class="section-title">История заказов</h2>
+                    <div id="ordersContainer">
+                        <!-- Заказы будут добавлены через JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-.profile-icon::before {
-    content: '';
-    position: absolute;
-    top: 15%;
-    left: 15%;
-    width: 70%;
-    height: 70%;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.3);
-}
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="quick-links">
+                    <a href="/Landing Page.html">Главная</a>
+                    <span>•</span>
+                    <a href="/Product Catalog.html">Каталог</a>
+                    <span>•</span>
+                    <a href="/Product Detail.html">Подробности</a>
+                    <span>•</span>
+                    <a href="/About Product.html">О продукте</a>
+                </div>
+                <div class="copyright">
+                    2025 Spoframe
+                </div>
+            </div>
+        </div>
+    </footer>
 
-.profile-icon::after {
-    content: '';
-    position: absolute;
-    top: 25%;
-    left: 60%;
-    width: 20%;
-    height: 20%;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.profile-info {
-    flex: 1;
-    min-width: 0;
-    padding-right: 40px;
-}
-
-<div class="profile-header">
-    <div class="profile-icon"></div>
-    <div class="profile-info">
-        <h1 class="profile-name">...</h1>
-        <p class="profile-email">...</p>
+    <!-- Уведомление -->
+    <div class="notification" id="notification">
+        Изменения успешно сохранены
     </div>
-</div> 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверка авторизации
+            if (!isLoggedIn()) {
+                window.location.href = '/Landing Page.html';
+                return;
+            }
+            
+            // Загрузка данных пользователя
+            loadUserProfile();
+            
+            // Загрузка истории заказов
+            loadOrderHistory();
+            
+            // Обработчики форм
+            document.getElementById('profileInfoForm').addEventListener('submit', updateProfile);
+            document.getElementById('changePasswordForm').addEventListener('submit', changePassword);
+        });
+        
+        // Проверка авторизации пользователя
+        function isLoggedIn() {
+            return localStorage.getItem('userToken') !== null;
+        }
+        
+        // Загрузка профиля пользователя
+        function loadUserProfile() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            
+            if (userData) {
+                // Заполнение данных профиля
+                document.getElementById('profileName').textContent = userData.name || 'Пользователь';
+                document.getElementById('profileEmail').textContent = userData.email || '';
+                document.getElementById('profileUsername').textContent = userData.name || 'Пользователь';
+                
+                // Заполнение полей формы
+                document.getElementById('displayName').value = userData.name || '';
+                document.getElementById('email').value = userData.email || '';
+                
+                // Установка инициалов
+                const initials = getInitials(userData.name || 'Пользователь');
+                document.getElementById('profileInitials').textContent = initials;
+            }
+        }
+        
+        // Получение инициалов из имени
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+        
+        // Обновление профиля
+        function updateProfile(e) {
+            e.preventDefault();
+            
+            const newName = document.getElementById('displayName').value.trim();
+            
+            if (!newName) {
+                showNotification('Пожалуйста, введите имя профиля', true);
+                return;
+            }
+            
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            userData.name = newName;
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+            
+            // Обновление отображаемой информации
+            document.getElementById('profileName').textContent = newName;
+            document.getElementById('profileUsername').textContent = newName;
+            document.getElementById('profileInitials').textContent = getInitials(newName);
+            
+            showNotification('Профиль успешно обновлен');
+        }
+        
+        // Изменение пароля
+        function changePassword(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Проверка заполнения полей
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Пожалуйста, заполните все поля', true);
+                return;
+            }
+            
+            // Проверка совпадения паролей
+            if (newPassword !== confirmPassword) {
+                showNotification('Новые пароли не совпадают', true);
+                return;
+            }
+            
+            // Проверка минимальной длины
+            if (newPassword.length < 8) {
+                showNotification('Пароль должен содержать минимум 8 символов', true);
+                return;
+            }
+            
+            // В реальном проекте здесь была бы отправка на сервер
+            // Для демонстрации просто показываем успешное уведомление
+            showNotification('Пароль успешно изменен');
+            
+            // Очистка формы
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+        
+        // Загрузка истории заказов
+        function loadOrderHistory() {
+            const ordersContainer = document.getElementById('ordersContainer');
+            
+            // Демонстрационные данные заказов
+            const orders = [
+                {
+                    id: 'SP-1234',
+                    date: '15 марта 2025',
+                    products: 'Spoframe Classic (черный)',
+                    total: '3999 ₽',
+                    status: 'completed'
+                },
+                {
+                    id: 'SP-1235',
+                    date: '2 апреля 2025',
+                    products: 'Spoframe Pro (белый)',
+                    total: '5999 ₽',
+                    status: 'processing'
+                }
+            ];
+            
+            // Отображение заказов или сообщения об их отсутствии
+            if (orders.length > 0) {
+                const ordersList = document.createElement('ul');
+                ordersList.className = 'orders-list';
+                
+                orders.forEach(order => {
+                    const orderItem = document.createElement('li');
+                    orderItem.className = 'order-item';
+                    
+                    let statusText, statusClass;
+                    
+                    switch(order.status) {
+                        case 'completed':
+                            statusText = 'Выполнен';
+                            statusClass = 'status-completed';
+                            break;
+                        case 'processing':
+                            statusText = 'В обработке';
+                            statusClass = 'status-processing';
+                            break;
+                        case 'cancelled':
+                            statusText = 'Отменен';
+                            statusClass = 'status-cancelled';
+                            break;
+                        default:
+                            statusText = 'В обработке';
+                            statusClass = 'status-processing';
+                    }
+                    
+                    orderItem.innerHTML = `
+                        <div class="order-header">
+                            <span class="order-id">Заказ ${order.id}</span>
+                            <span class="order-date">${order.date}</span>
+                        </div>
+                        <div class="order-details">
+                            <span class="order-products">${order.products}</span>
+                            <span class="order-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="order-details">
+                            <span></span>
+                            <span class="order-total">${order.total}</span>
+                        </div>
+                    `;
+                    
+                    ordersList.appendChild(orderItem);
+                });
+                
+                ordersContainer.appendChild(ordersList);
+            } else {
+                ordersContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>У вас пока нет заказов</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Показать уведомление
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            
+            if (isError) {
+                notification.classList.add('error');
+            } else {
+                notification.classList.remove('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Выход из профиля
+        function logout() {
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userData');
+            window.location.href = '/Landing Page.html';
+        }
+    </script>
+
+    <script src="/language-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата - Spoframe</title>
+    <link rel="stylesheet" href="/susp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .payment-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-out;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--text-main);
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Стили для переключения методов оплаты */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--bg-main);
+            min-width: 150px;
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(var(--primary-rgb), 0.05);
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Стили для QR-кода */
+        .bank-logo {
+            margin: 10px 0 20px;
+            text-align: center;
+        }
+        
+        .bank-logo img {
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .qr-code-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px auto 20px;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .qr-code-container img {
+            max-width: 220px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .qr-payment-section {
+            display: none;
+        }
+        
+        .qr-payment-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Стили для карт */
+        .card-type-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card-type-button {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-type-button img {
+            max-width: 100%;
+            max-height: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-type-button:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-type-button:hover img {
+            transform: scale(1.1);
+        }
+        
+        .card-type-button.active {
+            border-color: var(--primary);
+            background: rgba(var(--primary-rgb), 0.05);
+            box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.15);
+        }
+        
+        #selected-card-info {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        
+        /* Стили для формы оплаты карты */
+        .card-payment-form {
+            display: none;
+            text-align: left;
+        }
+        
+        .card-payment-form.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .card-payment-form .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .card-payment-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        
+        .card-payment-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.2s;
+        }
+        
+        .card-payment-form input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-payment {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        .submit-payment:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-info {
+            text-align: left;
+            margin: 24px 0;
+            padding: 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .payment-info p {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-info strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .payment-info span {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .back-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .payment-steps {
+            text-align: left;
+            margin: 24px 0;
+            display: none;
+        }
+        
+        .payment-steps.active {
+            display: block;
+        }
+
+        .payment-steps ol {
+            list-style-position: inside;
+            color: var(--text-secondary);
+            padding-left: 10px;
+        }
+
+        .payment-steps li {
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 576px) {
+            .payment-container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .qr-code-container {
+                padding: 15px;
+            }
+            
+            .qr-code-container img {
+                max-width: 180px;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Оплата заказа</h1>
+        <p>Выберите удобный для вас способ оплаты заказа.</p>
+        
+        <!-- Переключатель методов оплаты -->
+        <div class="payment-methods">
+            <div class="payment-method" id="qr-method" onclick="switchPaymentMethod('qr')">
+                QR-код
+            </div>
+            <div class="payment-method" id="card-method" onclick="switchPaymentMethod('card')">
+                Банковская карта
+            </div>
+        </div>
+        
+        <!-- QR-код оплата -->
+        <div id="qr-payment" class="qr-payment-section">
+            <div class="bank-logo">
+                <img src="/images/images.png" alt="Halyk Bank" width="150" />
+            </div>
+            
+            <div class="qr-code-container">
+                <img src="/images/PHOTO-2025-04-10-16-03-24.jpg" alt="QR код для оплаты Halyk Bank" />
+            </div>
+        </div>
+        
+        <!-- Форма оплаты картой -->
+        <div id="card-payment" class="card-payment-form">
+            <div class="card-type-selection">
+                <button class="card-type-button" id="visa-button" onclick="selectCardType('visa')">
+                    <img src="/images/png-transparent-logo-visa-credit-card-business-visa-text-trademark-payment.png" alt="Visa" />
+                </button>
+                <button class="card-type-button" id="mastercard-button" onclick="selectCardType('mastercard')">
+                    <img src="/images/png-transparent-logo-mastercard-product-font-mastercard-text-orange-logo.png" alt="MasterCard" />
+                </button>
+            </div>
+            
+            <div id="selected-card-info">
+                <p>Выбранная карта: <span id="selected-card-type">Выберите карту</span></p>
+            </div>
+            
+            <form id="credit-card-form">
+                <div class="form-group">
+                    <label for="card-number">Номер карты</label>
+                    <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" autocomplete="cc-number" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-holder">Имя держателя карты</label>
+                    <input type="text" id="card-holder" placeholder="ИМЯ ФАМИЛИЯ" autocomplete="cc-name" required />
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry-date">Срок действия</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvv">CVV/CVC</label>
+                        <input type="password" id="cvv" placeholder="XXX" maxlength="3" autocomplete="cc-csc" required />
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-payment">Оплатить <span id="cardOrderPrice">14 990 ₸</span></button>
+            </form>
+        </div>
+        
+        <div class="payment-info">
+            <p><strong>Номер заказа:</strong> <span id="orderNumber">#374585</span></p>
+            <p><strong>Сумма к оплате:</strong> <span id="orderPrice">14 990 ₸</span></p>
+            <p><strong>Статус:</strong> <span id="orderStatus">Ожидание оплаты</span></p>
+        </div>
+        
+        <!-- QR-код инструкции -->
+        <div class="payment-steps" id="qr-instructions">
+            <strong>Инструкция по оплате через QR-код:</strong>
+            <ol>
+                <li>Откройте приложение Halyk Bank</li>
+                <li>Выберите функцию сканирования QR кода</li>
+                <li>Наведите камеру на QR код</li>
+                <li>Подтвердите сумму и детали платежа</li>
+                <li>Завершите транзакцию в вашем приложении</li>
+            </ol>
+        </div>
+        
+        <!-- Карта инструкции -->
+        <div class="payment-steps" id="card-instructions">
+            <strong>Инструкция по оплате картой:</strong>
+            <ol>
+                <li>Введите номер вашей карты (Visa или MasterCard)</li>
+                <li>Укажите имя держателя карты как указано на карте</li>
+                <li>Введите срок действия карты и CVV/CVC код</li>
+                <li>Нажмите кнопку "Оплатить"</li>
+                <li>Подтвердите платеж в системе безопасных платежей 3D Secure, если потребуется</li>
+            </ol>
+        </div>
+        
+        <button class="back-button" onclick="window.history.back()">Вернуться к покупкам</button>
+    </div>
+
+    <script>
+        // Загружаем данные о заказе из параметров URL
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Страница оплаты загружена");
+            
+            // Функция для получения параметров из URL
+            function getUrlParams() {
+                const params = {};
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                
+                for (const [key, value] of urlParams.entries()) {
+                    params[key] = decodeURIComponent(value);
+                }
+                return params;
+            }
+            
+            // Получаем параметры из URL
+            const orderData = getUrlParams();
+            console.log("Данные заказа:", orderData);
+            
+            // Если есть данные о заказе, обновляем информацию на странице
+            if (orderData.order) {
+                document.getElementById('orderNumber').textContent = orderData.order;
+                document.getElementById('orderPrice').textContent = orderData.price;
+                document.getElementById('cardOrderPrice').textContent = orderData.price;
+                document.getElementById('orderStatus').textContent = orderData.status || 'Ожидание оплаты';
+                
+                // Обновляем заголовок страницы с названием товара
+                if (orderData.title) {
+                    document.title = `Оплата: ${orderData.title}`;
+                }
+            }
+            
+            // Форматирование номера карты при вводе
+            document.getElementById('card-number').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                
+                e.target.value = formattedValue;
+            });
+            
+            // Форматирование срока действия при вводе
+            document.getElementById('expiry-date').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Обработка отправки формы оплаты картой
+            document.getElementById('credit-card-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Платеж успешно отправлен на обработку!');
+                document.getElementById('orderStatus').textContent = 'Обработка платежа';
+            });
+            
+            // По умолчанию активируем метод оплаты QR-кодом
+            switchPaymentMethod('qr');
+        });
+        
+        // Переключение между методами оплаты
+        function switchPaymentMethod(method) {
+            // Сбрасываем активные классы
+            document.getElementById('qr-method').classList.remove('active');
+            document.getElementById('card-method').classList.remove('active');
+            document.getElementById('qr-payment').classList.remove('active');
+            document.getElementById('card-payment').classList.remove('active');
+            document.getElementById('qr-instructions').classList.remove('active');
+            document.getElementById('card-instructions').classList.remove('active');
+            
+            // Активируем выбранный метод
+            if (method === 'qr') {
+                document.getElementById('qr-method').classList.add('active');
+                document.getElementById('qr-payment').classList.add('active');
+                document.getElementById('qr-instructions').classList.add('active');
+            } else if (method === 'card') {
+                document.getElementById('card-method').classList.add('active');
+                document.getElementById('card-payment').classList.add('active');
+                document.getElementById('card-instructions').classList.add('active');
+            }
+        }
+        
+        // Функция для выбора типа карты
+        function selectCardType(type) {
+            // Сбрасываем активные кнопки
+            document.getElementById('visa-button').classList.remove('active');
+            document.getElementById('mastercard-button').classList.remove('active');
+            
+            // Активируем выбранную карту
+            if (type === 'visa') {
+                document.getElementById('visa-button').classList.add('active');
+                document.getElementById('selected-card-type').textContent = 'Visa';
+            } else if (type === 'mastercard') {
+                document.getElementById('mastercard-button').classList.add('active');
+                document.getElementById('selected-card-type').textContent = 'MasterCard';
+            }
+        }
+    </script>
+</body>
+</html>

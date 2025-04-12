@@ -1,0 +1,217 @@
+/* Улучшенные стили для элементов авторизации */
+
+/* Профиль пользователя */
+.user-profile {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--card-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.user-info:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.username {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.btn-logout {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: rgba(124, 58, 237, 0.1);
+    text-decoration: underline;
+}
+
+/* Улучшения для форм авторизации */
+.form-error {
+    color: var(--error, #ff3b30);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    background-color: rgba(255, 59, 48, 0.1);
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* Улучшения для кнопок */
+.auth-submit, .signup-submit, .reset-submit {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.auth-submit:hover, .signup-submit:hover, .reset-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.auth-submit:active, .signup-submit:active, .reset-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Эффект пульсации для полей с ошибками */
+input.error {
+    border-color: var(--error, #ff3b30) !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.4); }
+    70% { box-shadow: 0 0 0 5px rgba(255, 59, 48, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+}
+
+/* Улучшения для ссылки "Забыли пароль?" */
+.forgot-password {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: 0.3rem;
+    transition: all 0.2s ease;
+}
+
+.forgot-password:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.forgot-password:active {
+    transform: translateY(1px);
+}
+
+/* Индикатор силы пароля */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #ddd;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.password-strength-meter {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.password-strength-meter.weak {
+    width: 33%;
+    background-color: #ff3b30;
+}
+
+.password-strength-meter.medium {
+    width: 66%;
+    background-color: #ffcc00;
+}
+
+.password-strength-meter.strong {
+    width: 100%;
+    background-color: #28a745;
+}
+
+/* Улучшения для модального окна */
+.auth-modal {
+    transition: opacity 0.3s ease;
+}
+
+.auth-modal__content {
+    animation: modalFadeIn 0.4s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Улучшения для страницы сброса пароля */
+.reset-container {
+    animation: containerFadeIn 0.5s ease;
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-message {
+    display: none;
+    text-align: center;
+    color: var(--success, #28a745);
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(40, 167, 69, 0.1);
+    margin-bottom: 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-message i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Улучшения для адаптивности */
+@media (max-width: 600px) {
+    .auth-modal__content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+    
+    .user-info {
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .username {
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
