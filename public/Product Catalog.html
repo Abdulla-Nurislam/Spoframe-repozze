@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/auth-modal.css">
-    <link rel="stylesheet" href="/auth-styles.css">
+    <link rel="stylesheet" href="/css/auth.css">
     <link rel="stylesheet" href="/scroll-buttons.css">
     <style>
         /* Стили для переключателя языка */
@@ -512,7 +511,42 @@
                 margin-top: 1rem;
             }
         }
-    </style>
+            /* Стили для мобильной версии аутентификации */
+        @media (max-width: 768px) {
+            .welcome-message {
+                font-size: 0.9rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .btn-logout {
+                margin-left: 0;
+                margin-top: 0.25rem;
+                padding: 0.2rem 0.5rem;
+            }
+            
+            .auth-modal__content {
+                width: 90%;
+                margin: 0 5%;
+            }
+            
+            .form-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .auth-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .auth-header p {
+                font-size: 0.8rem;
+            }
+        }</style>
+    
+    <!-- Новые скрипты аутентификации -->
+    <script src="/src/auth/auth-service.js" defer></script>
+    <!-- Скрипт auth-ui.js удален, так как он пытается инициализировать модальное окно аутентификации -->
+    <!-- Скрипт component-loader.js удален, так как он автоматически загружает модальное окно аутентификации -->
 </head>
 <body>
     <!-- Навигация -->
@@ -528,10 +562,11 @@
             </ul>
         </div>
         <div class="nav-right">
-            <button class="btn-signup" data-auth="open" data-lang-ru="Регистрация" data-lang-en="Sign Up">Регистрация</button>
-            <div class="user-profile" data-auth="profile" style="display: none;">
-                <span class="welcome-message" data-lang-ru="Привет, " data-lang-en="Hello, ">Привет, <span class="username">Пользователь</span>!</span>
-                <button class="btn-logout" onclick="logout()" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</button>
+            <div class="auth-buttons">
+                <a href="/login.html?mode=register" class="register-btn" data-lang-ru="Зарегистрироваться" data-lang-en="Register">Зарегистрироваться</a>
+                <a href="/login.html?mode=login" class="login-btn" data-lang-ru="Войти" data-lang-en="Login">Войти</a>
+                <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</a>
+                <a href="/profile.html" id="profileBtn" class="profile-btn" style="display:none;" data-lang-ru="Профиль" data-lang-en="Profile">Профиль</a>
             </div>
         </div>
     </nav>
@@ -653,65 +688,12 @@
     <!-- Уведомление -->
     <div id="notification" class="simple-notification"></div>
 
-    <!-- Модальное окно регистрации/входа -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-modal__content">
-            <span class="close">&times;</span>
-            
-            <!-- Форма входа -->
-            <div class="form-container login-form">
-                <form class="auth-form" id="loginForm">
-                    <div class="form-group">
-                        <label style="color: white;">EMAIL</label>
-                        <input type="email" name="email" placeholder="Введите ваш email" data-lang-ru-placeholder="Введите ваш email" data-lang-en-placeholder="Enter your email">
-                    </div>
-
-                    <div class="form-group">
-                        <label style="color: white;">PASSWORD</label>
-                        <input type="password" name="password" placeholder="Введите пароль">
-                        <a href="/reset-password.html" class="forgot-password">Забыли пароль?</a>
-                    </div>
-
-                    <button type="submit" class="auth-button" data-lang-ru="Войти" data-lang-en="Login">Войти</button>
-
-                    <div class="auth-footer">
-                        <p class="form-switch"><span data-lang-ru="Нет аккаунта?" data-lang-en="No account?">Нет аккаунта?</span> <a href="#" class="switch-to-signup" data-lang-ru="Зарегистрироваться" data-lang-en="Sign up">Зарегистрироваться</a></p>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Форма регистрации -->
-            <div class="form-container signup-form" style="display: none;">
-                <div class="signup-header">
-                    <img src="/SF.png" alt="Logo" class="modal-logo">
-                    <h2>Зарегистрируйтесь моментально</h2>
-                    <p>и начните наслаждаться рамками прямо сейчас</p>
-                </div>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label style="color: white;">КАК ТЕБЯ ЗОВУТ?</label>
-                        <input type="text" name="name" placeholder="Введи имя профиля">
-                    </div>
-                    <div class="form-group">
-                        <label style="color: white;">ТВОЙ EMAIL</label>
-                        <input type="email" name="email" placeholder="name@domain.com">
-                    </div>
-                    <div class="form-group">
-                        <label style="color: white;">ПРИДУМАЙ ПАРОЛЬ</label>
-                        <input type="password" name="password" placeholder="Минимум 8 символов">
-                        <div class="password-requirements">
-                            Пароль должен содержать минимум 8 символов
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="auth-button" data-lang-ru="Зарегистрироваться" data-lang-en="Sign up">Зарегистрироваться</button>
-                    <div class="auth-footer">
-                        <p class="form-switch"><span data-lang-ru="Уже есть аккаунт?" data-lang-en="Already have an account?">Уже есть аккаунт?</span> <a href="#" class="switch-to-login" data-lang-ru="Войти" data-lang-en="Login">Войти</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <!-- Модальное окно регистрации/входа (загружается динамически) -->
+    <div id="authModalContainer">
+        <!-- Модальное окно загружается динамически -->
     </div>
+    
+    <!-- Модальное окно аутентификации удалено -->
 
     <!-- Кнопки прокрутки -->
     <div class="scroll-buttons">
@@ -722,7 +704,7 @@
             <i class="fas fa-chevron-down"></i>
         </button>
     </div>
-    <script src="/authModal.bundle.js"></script>
+    <!-- Скрипт authModal.bundle.js удален, так как он инициализирует модальное окно аутентификации -->
     <script src="/scroll-buttons.js"></script>
     <script src="/public/js/main.js"></script>
     <script src="/filters.js"></script>
@@ -793,34 +775,7 @@
             });
         }
         
-        // Закрытие модального окна при клике вне контента
-        const authModal = document.getElementById('authModal');
-        if (authModal) {
-            authModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-        
-        // Переключение на форму регистрации
-        const switchToSignup = document.querySelector('.switch-to-signup');
-        if (switchToSignup) {
-            switchToSignup.addEventListener('click', function(e) {
-                e.preventDefault();
-                showSignupForm();
-            });
-        }
-        
-        // Переключение на форму входа
-        const switchToLogin = document.querySelector('.switch-to-login');
-        if (switchToLogin) {
-            switchToLogin.addEventListener('click', function(e) {
-                e.preventDefault();
-                showLoginForm();
-            });
-        }
+        // Код для работы с модальным окном аутентификации удален
     });
     </script>
 
@@ -949,7 +904,7 @@
 </body>
     <script src="/filters.js"></script>
     <script src="/language-switcher.js"></script>
-    <script src="/auth-forms.js"></script>
+    <script src="/js/auth.js"></script>
     
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -992,17 +947,7 @@
         }
     }
     
-    // Выход из профиля
-    function logout() {
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('userData');
-        
-        // Обновляем UI после выхода
-        checkAuth();
-        
-        // Показываем уведомление
-        showSimpleNotification('Вы успешно вышли из аккаунта', 'success');
-    }
+    // Функция выхода из профиля удалена
     
     // Получение списка пользователей из localStorage
     function getUsersFromStorage() {
@@ -1377,6 +1322,20 @@ function handleBuyNow() {
     console.log('Кнопка Купить сейчас нажата');
     
     try {
+        // Проверяем, авторизован ли пользователь
+        const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
+        
+        if (!currentUser || !currentUser.isAuthenticated) {
+            // Показываем уведомление, что нужно войти в систему
+            showSimpleNotification('Для покупки необходимо войти в свой аккаунт', 'error');
+            
+            // Перенаправляем на страницу входа через 2 секунды
+            setTimeout(function() {
+                window.location.href = '/login.html?mode=login';
+            }, 2000);
+            return;
+        }
+        
         // Получаем информацию о товаре из модального окна
         const modal = document.querySelector('.product-modal[style*="display: flex"]');
         

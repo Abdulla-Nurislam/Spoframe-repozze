@@ -17,34 +17,7 @@
     <link rel="stylesheet" href="/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/auth-modal.css">
-    <link rel="stylesheet" href="/auth-styles.css">
-    <link rel="stylesheet" href="/scroll-buttons.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
-    
-    <!-- Яндекс.Метрика -->
-    <script>
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        ym(XXXXXXXX, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <link rel="stylesheet" href="/css/auth.css">
     
     <style>
         @keyframes gradientAnimation {
@@ -93,29 +66,184 @@
         .icon-box.purple {
             background-color: #7C3AED; /* Возвращен фиолетовый цвет */
         }
+        
+        /* Стили для выпадающего меню пользователя */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+        }
+        
+        .user-dropdown-btn {
+            background-color: transparent;
+            border: none;
+            color: #F8FAFC;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+        
+        .user-dropdown-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Add styles for the username text */
+        #headerUserName {
+            font-weight: 500;
+            font-size: 15px;
+            margin-right: 6px;
+        }
+        
+        /* Add styles for the dropdown arrow */
+        .user-dropdown-btn .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .user-dropdown-btn:hover .fa-chevron-down {
+            transform: rotate(180deg);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C3AED, #4C1D95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1E293B;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            margin-top: 8px;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-dropdown-content a {
+            color: #F8FAFC;
+            padding: 14px 18px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .user-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown-content a:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+            color: #7C3AED;
+        }
+        
+        .dropdown-show {
+            display: block;
+        }
+        
+        /* Улучшение стилей кнопок навигации */
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .login-btn, .register-btn, .profile-btn, .logout-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .login-btn:hover, .register-btn:hover, .profile-btn:hover, .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Стили для уведомлений */
+        .simple-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1E293B;
+            color: #F8FAFC;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: top 0.3s ease;
+            z-index: 1000;
+            border-left: 4px solid #10B981;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .simple-notification.error {
+            border-left-color: #EF4444;
+        }
+        
+        .simple-notification.show {
+            top: 20px;
+        }
     </style>
-    <script src="/auth-modal.js" defer></script>
+    <!-- Новые скрипты аутентификации -->
+    <script src="/js/auth.js" defer></script>
+    <!-- Скрипт component-loader.js удален, так как он автоматически загружает модальное окно аутентификации -->
+    <script src="/js/auth-service.js" defer></script>
+    <!-- Скрипт auth-ui.js удален, так как он пытается инициализировать модальное окно аутентификации -->
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar" role="navigation" aria-label="Основная навигация">
-        <div class="nav-left">
-            <a href="/">
-                <img src="/SF.png" alt="Spoframe" class="logo">
+    <nav class="navbar" role="navigation" aria-label="Основная навигация" style="max-width: 100%; overflow-x: hidden; box-sizing: border-box;">
+        <div class="nav-left" style="display: flex; align-items: center;">
+            <a href="/" style="display: flex; align-items: center;">
+                <img src="/SF.png" alt="Spoframe" class="logo" style="max-height: 40px;">
             </a>
 
-            <ul class="nav-links">
-                <li><a href="/" class="active" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
-                <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
-                <li><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
+            <ul class="nav-links" style="display: flex; margin: 0 0 0 20px; padding: 0; list-style: none;">
+                <li style="margin: 0 15px 0 0;"><a href="/" class="active" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li style="margin: 0 15px 0 0;"><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li style="margin: 0 15px 0 0;"><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
             </ul>
         </div>
-        
+            
         <div class="nav-right">
-            <button class="btn-signup" data-auth="open" data-lang-ru="Регистрация" data-lang-en="Sign Up">Регистрация</button>
-            <div class="user-profile" data-auth="profile" style="display: none;">
-                <span class="welcome-message" data-lang-ru="Привет, " data-lang-en="Hello, ">Привет, <span class="username">Пользователь</span>!</span>
-                <button class="btn-logout" onclick="logout()" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</button>
+            <div class="auth-buttons">
+                <a href="/login.html?mode=register" class="register-btn" data-lang-ru="Зарегистрироваться" data-lang-en="Register">Зарегистрироваться</a>
+                <a href="/login.html?mode=login" class="login-btn" data-lang-ru="Войти" data-lang-en="Login">Войти</a>
+                <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</a>
+                <a href="/profile.html" id="profileBtn" class="profile-btn" style="display:none;" data-lang-ru="Профиль" data-lang-en="Profile">Профиль</a>
             </div>
         </div>
     </nav>
@@ -202,87 +330,10 @@
             </div>
         </div>
     </footer>
-    <!-- Модальное окно регистрации/входа -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-modal__content">
-            <span class="close">&times;</span>
-            
-            <!-- Форма входа -->
-            <div class="form-container login-form">
-                <form class="auth-form" id="loginForm">
-                    <div class="form-group">
-                        <label style="color: white;">EMAIL</label>
-                        <input type="email" name="email" placeholder="Введите ваш email">
-                    </div>
-
-                    <div class="form-group">
-                        <label style="color: white;">PASSWORD</label>
-                        <input type="password" name="password" placeholder="Введите пароль">
-                        <a href="/reset-password.html" class="forgot-password">Забыли пароль?</a>
-                    </div>
-
-                    <button type="submit" class="auth-submit">Войти</button>
-
-                    <div class="auth-footer">
-                        <p>Нет аккаунта? <a href="#" class="switch-to-signup">Зарегистрироваться</a></p>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Форма регистрации -->
-            <div class="form-container signup-form" style="display: none;">
-                <div class="signup-header">
-                    <img src="/SF.png" alt="Logo" class="modal-logo">
-                    <h2>Зарегистрируйтесь моментально</h2>
-                    <p>и начните наслаждаться рамками прямо сейчас</p>
-                </div>
-                <form id="signupForm">
-                    <div class="form-group">
-                        <label style="color: white;">КАК ТЕБЯ ЗОВУТ?</label>
-                        <input type="text" name="name" placeholder="Введи имя профиля">
-                    </div>
-                    <div class="form-group">
-                        <label style="color: white;">ТВОЙ EMAIL</label>
-                        <input type="email" name="email" placeholder="name@domain.com">
-                    </div>
-                    <div class="form-group">
-                        <label style="color: white;">ПРИДУМАЙ ПАРОЛЬ</label>
-                        <input type="password" name="password" placeholder="Минимум 8 символов">
-                        <div class="password-requirements">
-                            Пароль должен содержать минимум 8 символов
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="signup-submit">Зарегистрироваться</button>
-                    <div class="auth-footer">
-                        <p>Уже есть аккаунт? <a href="#" class="switch-to-login">Войти</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Кнопки прокрутки -->
-    <div class="scroll-buttons">
-    <button id="scrollToTop" class="scroll-btn" aria-label="Наверх">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-    <button id="scrollToBottom" class="scroll-btn" aria-label="Вниз">
-        <i class="fas fa-chevron-down"></i>
-    </button>
-
-    </div>
-
-    <!-- Подключаем необходимые скрипты -->
-    <script src="/main.js"></script>
-    <script src="/auth-modal.js"></script>
-    <script src="/authModal.bundle.js"></script>
-    <script src="/main.js"></script>
-    <script src="/scroll-buttons.js"></script>
-    <script src="/language-switcher.js"></script>
-    <script src="/auth-forms.js"></script>
+    
+    <!-- Удалено модальное окно аутентификации -->
     
     <script>
-
     document.addEventListener('DOMContentLoaded', function() {
         // Инициализация слайдера
         initSlider();
@@ -290,9 +341,13 @@
         // Проверка авторизации
         checkAuth();
         
-        // Инициализация форм авторизации
-        initializeAuthForms();
-    })
+        // Инициализация кнопок авторизации
+        initializeAuthButtons();
+
+        // Кнопки входа и регистрации теперь обрабатываются в функции initializeAuthButtons()
+        
+        // Все обработчики событий, связанные с модальным окном аутентификации, удалены
+    });
     
     // Функция для инициализации слайдера
     function initSlider() {
@@ -353,47 +408,98 @@
     // Функция проверки авторизации
     function checkAuth() {
         try {
-            const userToken = localStorage.getItem('userToken');
-            const userData = JSON.parse(localStorage.getItem('userData') || 'null');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
             
-            console.log('Проверка аутентификации:', userData);
-            
-            const btnSignup = document.querySelector('.btn-signup');
-            const userProfile = document.querySelector('.user-profile');
-            const welcomeMessage = document.querySelector('.welcome-message');
-            
-            if (userToken && userData) {
-                // Если пользователь авторизован, скрываем кнопку регистрации и показываем профиль
-                if (btnSignup) btnSignup.style.display = 'none';
-                if (userProfile) {
-                    userProfile.style.display = 'flex';
-                    // Устанавливаем имя пользователя в шапке сайта
-                    const usernameEl = userProfile.querySelector('.username');
-                    if (usernameEl && userData.name) {
-                        usernameEl.textContent = userData.name;
-                        console.log('Установлено имя пользователя:', userData.name);
-                    }
-                }
+            if (currentUser && currentUser.isAuthenticated) {
+                // Пользователь авторизован
+                document.getElementById('guestButtons').style.display = 'none';
+                document.getElementById('userDropdown').style.display = 'block';
+                
+                // Заполняем данные пользователя
+                const displayName = currentUser.username || currentUser.email.split('@')[0];
+                document.getElementById('headerUserName').textContent = displayName;
+                document.getElementById('headerUserInitials').textContent = getInitials(displayName);
+                
+                // Инициализация выпадающего меню
+                initUserDropdown();
+                
+                // Устанавливаем обработчик на кнопку выхода
+                document.getElementById('logoutBtn').removeEventListener('click', handleLogout);
+                document.getElementById('logoutBtn').addEventListener('click', handleLogout);
             } else {
-                // Если пользователь не авторизован, показываем кнопку регистрации и скрываем профиль
-                if (btnSignup) btnSignup.style.display = 'inline-block';
-                if (userProfile) userProfile.style.display = 'none';
+                // Пользователь не авторизован
+                document.getElementById('guestButtons').style.display = 'flex';
+                document.getElementById('userDropdown').style.display = 'none';
+                
+                // Добавляем обработчики событий для кнопок входа и регистрации
+                const loginBtn = document.querySelector('.login-btn');
+                const registerBtn = document.querySelector('.register-btn');
+                
+                if (loginBtn) {
+                    loginBtn.removeEventListener('click', redirectToLogin);
+                    loginBtn.addEventListener('click', redirectToLogin);
+                }
+                
+                if (registerBtn) {
+                    registerBtn.removeEventListener('click', redirectToRegister);
+                    registerBtn.addEventListener('click', redirectToRegister);
+                }
             }
         } catch (error) {
             console.error('Ошибка при проверке авторизации:', error);
         }
     }
     
-    // Выход из профиля
-    function logout() {
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('userData');
+    // Обработчик выхода из системы
+    function handleLogout(e) {
+        e.preventDefault();
         
-        // Обновляем UI после выхода
-        checkAuth();
+        // Удаление данных пользователя
+        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
         
         // Показываем уведомление
-        showSimpleNotification('Вы успешно вышли из аккаунта', 'success');
+        showSimpleNotification('Вы успешно вышли из системы');
+        
+        // Перезагрузка страницы через 1 секунду
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+    }
+    
+    // Функция для получения инициалов из имени
+    function getInitials(name) {
+        return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    }
+    
+    // Инициализация выпадающего меню пользователя
+    function initUserDropdown() {
+        const dropdownBtn = document.getElementById('userDropdownBtn');
+        const dropdownContent = document.getElementById('userDropdownContent');
+        
+        if (!dropdownBtn || !dropdownContent) return;
+        
+        // Удаляем существующие обработчики, чтобы избежать дублирования
+        dropdownBtn.removeEventListener('click', toggleDropdown);
+        document.removeEventListener('click', closeDropdownOnClickOutside);
+        
+        // Добавляем обработчик на кнопку
+        dropdownBtn.addEventListener('click', toggleDropdown);
+        
+        // Закрыть выпадающее меню при клике вне его
+        document.addEventListener('click', closeDropdownOnClickOutside);
+        
+        function toggleDropdown(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdownContent.classList.toggle('dropdown-show');
+        }
+        
+        function closeDropdownOnClickOutside(e) {
+            if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.classList.remove('dropdown-show');
+            }
+        }
     }
     
     // Проверка электронной почты
@@ -416,7 +522,6 @@
     // Получение пользователя по email и паролю
     function getUserByCredentials(email, password) {
         const users = getUsersFromStorage();
-        console.log('Поиск пользователя:', email, users);
         return users.find(user => 
             user.email.toLowerCase() === email.toLowerCase() && 
             user.password === password
@@ -439,264 +544,42 @@
         return newUser;
     }
     
-    // Функция для открытия модального окна
-    function openModal(formType = 'login') {
-        const modal = document.getElementById('authModal');
-        if (!modal) return;
-        
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        // Показываем нужную форму
-        if (formType === 'login') {
-            showLoginForm();
-        } else if (formType === 'signup') {
-            showSignupForm();
-        }
-    }
+// Функция для перенаправления на страницу авторизации
+function redirectToAuth(formType = 'login') {
+    window.location.href = '/login.html?mode=' + formType;
+}
+
+// Функция для перенаправления на страницу входа
+function redirectToLogin() {
+    window.location.href = '/login.html?mode=login';
+}
+
+// Функция для перенаправления на страницу регистрации
+function redirectToRegister() {
+    window.location.href = '/login.html?mode=register';
+}
+
+// Инициализация кнопок авторизации
+function initializeAuthButtons() {
+    // Находим кнопки входа и регистрации
+    const loginLinks = document.querySelectorAll('.login-btn');
+    const registerLinks = document.querySelectorAll('.register-btn');
     
-    // Функция для показа формы входа
-    function showLoginForm() {
-        const loginForm = document.querySelector('.login-form');
-        const signupForm = document.querySelector('.signup-form');
-        
-        if (loginForm && signupForm) {
-            signupForm.style.display = 'none';
-            loginForm.style.display = 'block';
-        }
-    }
-    
-    // Функция для показа формы регистрации
-    function showSignupForm() {
-        const loginForm = document.querySelector('.login-form');
-        const signupForm = document.querySelector('.signup-form');
-        
-        if (loginForm && signupForm) {
-            loginForm.style.display = 'none';
-            signupForm.style.display = 'block';
-        }
-    }
-    
-    // Инициализация форм авторизации
-    function initializeAuthForms() {
-        const loginForm = document.querySelector('#loginForm');
-        const signupForm = document.querySelector('#signupForm');
-        
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = loginForm.querySelector('input[type="email"]').value;
-                const password = loginForm.querySelector('input[type="password"]').value;
-                
-                // Проверка email
-                if (!validateEmail(email)) {
-                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
-                    return;
-                }
-                
-                // Проверка существования пользователя
-                const user = getUserByCredentials(email, password);
-                if (!user) {
-                    showSimpleNotification('Неверный email или пароль', 'error');
-                    return;
-                }
-                
-                // Успешный вход
-                const userData = {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name
-                };
-                
-                // Сохраняем данные в localStorage
-                localStorage.setItem('userToken', 'auth-token-' + Date.now());
-                localStorage.setItem('userData', JSON.stringify(userData));
-                
-                // Сохраняем данные для админ-панели
-                const adminUsers = JSON.parse(sessionStorage.getItem('admin_users') || '[]');
-                if (!adminUsers.some(u => u.email === user.email)) {
-                    adminUsers.push(user);
-                    sessionStorage.setItem('admin_users', JSON.stringify(adminUsers));
-                }
-                
-                // Закрываем модальное окно
-                const modal = document.getElementById('authModal');
-                if (modal) modal.style.display = 'none';
-                
-                // Проверяем авторизацию и обновляем UI
-                checkAuth();
-                
-                // Уведомление пользователя
-                showSimpleNotification('Вход выполнен успешно!', 'success');
-            });
-        }
-        
-        if (signupForm) {
-            signupForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = signupForm.querySelector('input[name="name"]').value;
-                const email = signupForm.querySelector('input[type="email"]').value;
-                const password = signupForm.querySelector('input[type="password"]').value;
-                
-                // Проверка email
-                if (!validateEmail(email)) {
-                    showSimpleNotification('Пожалуйста, введите корректный email адрес', 'error');
-                    return;
-                }
-                
-                // Проверка пароля
-                if (password.length < 8) {
-                    showSimpleNotification('Пароль должен содержать минимум 8 символов', 'error');
-                    return;
-                }
-                
-                // Проверка существования пользователя
-                if (checkUserExists(email)) {
-                    showSimpleNotification('Пользователь с таким email уже существует', 'error');
-                    return;
-                }
-                
-                // Сохранение нового пользователя
-                const newUser = saveNewUser(name, email, password);
-                
-                // Сохраняем данные в localStorage
-                const userData = {
-                    id: newUser.id,
-                    email: newUser.email,
-                    name: newUser.name
-                };
-                
-                localStorage.setItem('userToken', 'auth-token-' + Date.now());
-                localStorage.setItem('userData', JSON.stringify(userData));
-                
-                // Сохраняем данные для админ-панели
-                const adminUsers = JSON.parse(sessionStorage.getItem('admin_users') || '[]');
-                adminUsers.push(newUser);
-                sessionStorage.setItem('admin_users', JSON.stringify(adminUsers));
-                
-                // Закрываем модальное окно
-                const modal = document.getElementById('authModal');
-                if (modal) modal.style.display = 'none';
-                
-                // Проверяем авторизацию и обновляем UI
-                checkAuth();
-                
-                // Уведомление пользователя
-                showSimpleNotification('Регистрация выполнена успешно!', 'success');
-            });
-        }
-    }
-    
-    // Функция для показа простых уведомлений
-    function showSimpleNotification(message, type = 'success') {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.className = 'simple-notification ' + type + ' show';
-        
-        // Автоматически скрываем уведомление через 3 секунды
-        setTimeout(() => {
-            notification.className = 'simple-notification';
-        }, 3000);
-    }
-    </script>
-    
-    <!-- Микроразметка Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Spoframe",
-        "url": "https://spoframe.com",
-        "logo": "https://spoframe.com/SF.png",
-        "description": "Spoframe - элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов. Стильный дизайн для любого интерьера.",
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "Россия"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer service",
-            "email": "info@spoframe.com"
-        },
-        "sameAs": [
-            "https://facebook.com/spoframe",
-            "https://instagram.com/spoframe",
-            "https://twitter.com/spoframe"
-        ]
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "Spoframe",
-        "image": "https://spoframe.com/SF.png",
-        "description": "Элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов",
-        "brand": {
-            "@type": "Brand",
-            "name": "Spoframe"
-        },
-        "offers": {
-            "@type": "Offer",
-            "url": "https://spoframe.com/Product Detail.html",
-            "priceCurrency": "RUB",
-            "price": "3999",
-            "availability": "https://schema.org/InStock"
-        }
-    }
-    </script>
-    
-    <!-- Скрипт для переключения языка -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Страница загружена, инициализируем переключатель языка');
-        
-        // Получаем селектор языка
-        const languageSelect = document.getElementById('languageSelect');
-        if (!languageSelect) {
-            console.error('Не найден элемент с id "languageSelect"');
-            return;
-        }
-        
-        // Устанавливаем язык из localStorage или используем русский по умолчанию
-        const savedLanguage = localStorage.getItem('language') || 'ru';
-        console.log('Сохраненный язык:', savedLanguage);
-        languageSelect.value = savedLanguage;
-        
-        // Применяем сохраненный язык при загрузке страницы
-        applyLanguage(savedLanguage);
-        
-        // Обработчик изменения языка
-        languageSelect.addEventListener('change', function() {
-            const selectedLanguage = this.value;
-            console.log('Выбран язык:', selectedLanguage);
-            localStorage.setItem('language', selectedLanguage);
-            
-            // Применяем выбранный язык
-            applyLanguage(selectedLanguage);
+    // Добавляем обработчики событий для кнопок входа
+    loginLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/login.html?mode=login';
         });
-        
-        // Функция для применения выбранного языка
-        function applyLanguage(lang) {
-            const elements = document.querySelectorAll('[data-lang-' + lang + ']');
-            elements.forEach(element => {
-                const translation = element.getAttribute('data-lang-' + lang);
-                if (translation) {
-                    element.textContent = translation;
-                }
-            });
-            
-            // Обрабатываем особые случаи, например, плейсхолдеры в полях ввода
-            const placeholderElements = document.querySelectorAll('[data-lang-' + lang + '-placeholder]');
-            placeholderElements.forEach(element => {
-                const translation = element.getAttribute('data-lang-' + lang + '-placeholder');
-                if (translation) {
-                    element.placeholder = translation;
-                }
-            });
-        }
     });
-    </script>
-</body>
-</html>
+    
+    // Добавляем обработчики событий для кнопок регистрации
+    registerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/login.html?mode=register';
+        });
+    });
+}
+
+// Дополнительные функции для работы с авторизацией могут быть добавлены здесь
