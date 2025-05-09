@@ -1,0 +1,307 @@
+/* Основные переменные */
+:root {
+    --primary-color: #7C3AED;
+    --primary-hover: #6D28D9;
+    --error-color: #EF4444;
+    --success-color: #10B981;
+    --text-primary: #F2F3F5;
+    --text-secondary: #B5BAC1;
+    --border-color: #424549;
+    --input-bg: #1E1F22;
+    --modal-bg: #2B2D31;
+    --card-bg: #313338;
+    --discord-button: #5865F2;
+    --discord-button-hover: #4752C4;
+    --discord-error: #FA777C;
+}
+
+/* Стили для кнопок авторизации в навигации */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.register-btn,
+.login-btn,
+.logout-btn,
+.profile-btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.register-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.register-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.login-btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.login-btn:hover {
+    background-color: rgba(124, 58, 237, 0.1);
+}
+
+.logout-btn {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: #D32F2F;
+}
+
+.profile-btn {
+    background-color: var(--discord-button);
+    color: white;
+}
+
+.profile-btn:hover {
+    background-color: var(--discord-button-hover);
+}
+
+/* Стили для форм аутентификации */
+.auth-container {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: var(--modal-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+    color: var(--text-primary);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--discord-button);
+}
+
+.auth-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+.forgot-password {
+    color: #00A8FC;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: var(--discord-button);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background: var(--discord-button-hover);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: #00A8FC;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-switch {
+    display: none;
+}
+
+.error-message {
+    color: var(--discord-error);
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.success-message {
+    color: var(--success-color);
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+/* Стили для профиля пользователя */
+.user-profile-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: var(--modal-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1.5rem;
+}
+
+.profile-info h1 {
+    color: var(--text-primary);
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.profile-info p {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.profile-section {
+    margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+    color: var(--text-primary);
+    font-size: 20px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.profile-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-edit-profile {
+    padding: 10px 20px;
+    background: var(--discord-button);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-edit-profile:hover {
+    background: var(--discord-button-hover);
+}
+
+.btn-logout {
+    padding: 10px 20px;
+    background: #424549;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-logout:hover {
+    background: #36393f;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .auth-container,
+    .user-profile-container {
+        max-width: 100%;
+        margin: 20px;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .profile-actions {
+        flex-direction: column;
+    }
+}

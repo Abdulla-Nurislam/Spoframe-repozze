@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему - Spoframe</title>
+    <meta name="description" content="Spoframe - элегантные рамки с интеграцией Spotify для отображения обложек альбомов и плейлистов. Вход в систему.">
+    <link rel="stylesheet" href="/susp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/scroll-buttons.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <style>
+        .auth-container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: #2B2D31;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-header h1 {
+            color: #FFFFFF;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .auth-header p {
+            color: #B5BAC1;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #B5BAC1;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: #1E1F22;
+            border: none;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            outline: 1px solid #5865F2;
+        }
+        
+        .auth-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: #B5BAC1;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: #00A8FC;
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #5865F2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background: #4752C4;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #B5BAC1;
+        }
+        
+        .auth-footer a {
+            color: #00A8FC;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-switch {
+            display: none;
+        }
+        
+        .error-message {
+            color: #FA777C;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #3BA55C;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Улучшенная адаптивность для планшетов */
+        @media (max-width: 768px) {
+            .auth-container {
+                max-width: 90%;
+                margin: 30px auto;
+                padding: 1.5rem;
+            }
+            
+            .auth-header h1 {
+                font-size: 24px;
+            }
+            
+            .auth-header p {
+                font-size: 14px;
+            }
+            
+            .form-group input {
+                padding: 10px;
+                font-size: 15px;
+            }
+            
+            .btn-submit {
+                padding: 10px;
+                font-size: 15px;
+            }
+            
+            .auth-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .forgot-password {
+                margin-top: 5px;
+            }
+        }
+        
+        /* Улучшенная адаптивность для мобильных устройств */
+        @media (max-width: 480px) {
+            .auth-container {
+                max-width: 95%;
+                margin: 20px auto;
+                padding: 1.2rem;
+            }
+            
+            .auth-header {
+                margin-bottom: 1.5rem;
+            }
+            
+            .auth-header h1 {
+                font-size: 22px;
+            }
+            
+            .form-group {
+                margin-bottom: 1.2rem;
+            }
+            
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+            
+            .form-group input {
+                padding: 8px;
+                font-size: 14px;
+            }
+            
+            .btn-submit {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .auth-footer {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
+        <div class="nav-left">
+            <a href="/" aria-label="Главная страница Spoframe">
+                <img src="/SF.png" alt="Spoframe" class="logo">
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-right">
+            <div class="auth-buttons">
+                <a href="/login.html?mode=register" class="register-btn" data-lang-ru="Зарегистрироваться" data-lang-en="Register">Зарегистрироваться</a>
+                <a href="/login.html?mode=login" class="login-btn" data-lang-ru="Войти" data-lang-en="Login">Войти</a>
+                <a href="#" id="logoutBtn" class="logout-btn" style="display:none;" data-lang-ru="Выйти" data-lang-en="Logout">Выйти</a>
+                <a href="/profile.html" id="profileBtn" class="profile-btn" style="display:none;" data-lang-ru="Профиль" data-lang-en="Profile">Профиль</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Контейнер авторизации -->
+    <div class="auth-container">
+        <!-- Форма входа -->
+        <div id="login-form" class="auth-form">
+            <div class="auth-header">
+                <h1>Вход в аккаунт</h1>
+                <p>Войдите в свой аккаунт Spoframe</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required>
+                    <div class="error-message" id="login-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" name="password" required>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+                
+                <div class="auth-actions">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember">
+                        <label for="remember-me">Запомнить меня</label>
+                    </div>
+                    <a href="/reset-password.html" class="forgot-password">Забыли пароль?</a>
+                </div>
+                
+                <div class="error-message" id="login-general-error"></div>
+                <div class="success-message" id="login-success-message"></div>
+                
+                <button type="submit" class="btn-submit">Войти</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Нет аккаунта? <a href="#" id="switch-to-register">Зарегистрироваться</a></p>
+            </div>
+        </div>
+        
+        <!-- Форма регистрации -->
+        <div id="register-form" class="form-switch">
+            <div class="auth-header">
+                <h1>Регистрация</h1>
+                <p>Создайте аккаунт Spoframe</p>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="register-username">Имя пользователя</label>
+                    <input type="text" id="register-username" name="username" required>
+                    <div class="error-message" id="register-username-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" required>
+                    <div class="error-message" id="register-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" name="password" required>
+                    <div class="error-message" id="register-password-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm-password">Подтвердите пароль</label>
+                    <input type="password" id="register-confirm-password" name="confirm-password" required>
+                    <div class="error-message" id="register-confirm-password-error"></div>
+                </div>
+                
+                <div class="error-message" id="register-general-error"></div>
+                <div class="success-message" id="register-success-message"></div>
+                
+                <button type="submit" class="btn-submit">Зарегистрироваться</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Уже есть аккаунт? <a href="#" id="switch-to-login">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем скрипты -->
+    <script src="/js/auth.js"></script>
+</body>
+</html>

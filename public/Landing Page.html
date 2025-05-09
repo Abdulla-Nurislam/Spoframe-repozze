@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/auth.css">
     
     <style>
+        /* Базовые стили для всех устройств */
         @keyframes gradientAnimation {
             0% {
                 background-position: 0% 50%;
@@ -169,7 +170,60 @@
             display: block;
         }
         
-        /* Улучшение стилей кнопок навигации */
+        /* Стили навигационной панели */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #0F172A;
+            color: #F8FAFC;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-right: 15px;
+        }
+        
+        .nav-links a {
+            color: #CBD5E1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #7C3AED;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #7C3AED;
+            border-radius: 2px;
+        }
+        
         .nav-right {
             display: flex;
             align-items: center;
@@ -216,28 +270,153 @@
         .simple-notification.show {
             top: 20px;
         }
+        /* Кнопка-гамбургер для мобильного меню */
+
+        
+        /* Медиа-запросы для адаптивности */
+        @media (max-width: 768px) {
+
+            
+            .navbar {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .nav-left {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .nav-links {
+                margin: 1rem 0;
+            }
+            
+            .auth-buttons {
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .hero-content {
+                padding: 40px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 20px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 20px;
+            }
+            
+            .cta-content {
+                padding: 40px 20px;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+            }
+            
+            .user-dropdown-content {
+                right: 0;
+                left: auto;
+            }
+            
+            .auth-buttons {
+                margin-left: auto;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .user-dropdown-btn {
+                padding: 6px 10px;
+            }
+            
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            
+            #headerUserName {
+                display: none;
+            }
+        }
     </style>
     <!-- Новые скрипты аутентификации -->
     <script src="/js/auth.js" defer></script>
     <!-- Скрипт component-loader.js удален, так как он автоматически загружает модальное окно аутентификации -->
     <script src="/js/auth-service.js" defer></script>
     <!-- Скрипт auth-ui.js удален, так как он пытается инициализировать модальное окно аутентификации -->
+    <script src="/js/language-switcher.js" defer></script>
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar" role="navigation" aria-label="Основная навигация" style="max-width: 100%; overflow-x: hidden; box-sizing: border-box;">
-        <div class="nav-left" style="display: flex; align-items: center;">
-            <a href="/" style="display: flex; align-items: center;">
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="/">
                 <img src="/SF.png" alt="Spoframe" class="logo" style="max-height: 40px;">
             </a>
 
-            <ul class="nav-links" style="display: flex; margin: 0 0 0 20px; padding: 0; list-style: none;">
-                <li style="margin: 0 15px 0 0;"><a href="/" class="active" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
-                <li style="margin: 0 15px 0 0;"><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
-                <li style="margin: 0 15px 0 0;"><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
+            <ul class="nav-links">
+                <li><a href="/" class="active" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a></li>
             </ul>
         </div>
-            
         <div class="nav-right">
             <div class="auth-buttons">
                 <a href="/login.html?mode=register" class="register-btn" data-lang-ru="Зарегистрироваться" data-lang-en="Register">Зарегистрироваться</a>
@@ -260,10 +439,10 @@
         <div class="hero-slide slide-4"></div>
 
         <div class="hero-content">
-            <div class="trailer-label" data-lang-ru="Рамки" data-lang-en="Frames">Frames</div>
+            <div class="trailer-label" data-lang-ru="Рамки" data-lang-en="Frames">Рамки</div>
             <h1>Spoframe</h1>
             <div class="hero-buttons">
-                <a href="/Product Detail.html" id="orderNowBtn" class="btn-watch-now" data-lang-ru="ЗАКАЗАТЬ СЕЙЧАС" data-lang-en="ORDER NOW">ORDER NOW</a>
+                <a href="/Product Detail.html" id="orderNowBtn" class="btn-watch-now" data-lang-ru="ЗАКАЗАТЬ СЕЙЧАС" data-lang-en="ORDER NOW">ЗАКАЗАТЬ СЕЙЧАС</a>
                 <div class="trailer-navigation">
                     <span class="dot active" data-slide="1"></span>
                     <span class="dot" data-slide="2"></span>
@@ -276,48 +455,48 @@
 
     <!-- Features Section -->
     <section class="features">
-        <h2 class="section-title">Features</h2>
-        <p class="section-subtitle">Discover the unique features of Spoframe</p>
+        <h2 class="section-title" data-lang-ru="Особенности" data-lang-en="Features">Особенности</h2>
+        <p class="section-subtitle" data-lang-ru="Откройте для себя уникальные особенности Spoframe" data-lang-en="Discover the unique features of Spoframe">Откройте для себя уникальные особенности Spoframe</p>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="icon-box blue">
                     <i class="icon-design"></i>
                 </div>
-                <h3 data-lang="feature-design-title">Stylish Design</h3>
-                <p class="category" data-lang="feature-design-category">Design</p>
-                <p data-lang="feature-design-desc">Elegant frames that complement any interior, adding a touch of sophistication to your space.</p>
+                <h3 data-lang-ru="Стильный дизайн" data-lang-en="Stylish Design">Стильный дизайн</h3>
+                <p class="category" data-lang-ru="Дизайн" data-lang-en="Design">Дизайн</p>
+                <p data-lang-ru="Элегантные рамки, которые дополняют любой интерьер, добавляя нотку изысканности вашему пространству." data-lang-en="Elegant frames that complement any interior, adding a touch of sophistication to your space.">Элегантные рамки, которые дополняют любой интерьер, добавляя нотку изысканности вашему пространству.</p>
             </div>
             
             <div class="feature-card">
                 <div class="icon-box green">
                     <i class="icon-spotify"></i>
                 </div>
-                <h3 data-lang="feature-spotify-title">Spotify Integration</h3>
-                <p class="category" data-lang="feature-spotify-category">Integration</p>
-                <p data-lang="feature-spotify-desc">Easily connect to Spotify to display album covers, playlists, and much more directly on your frame.</p>
+                <h3 data-lang-ru="Интеграция со Spotify" data-lang-en="Spotify Integration">Интеграция со Spotify</h3>
+                <p class="category" data-lang-ru="Интеграция" data-lang-en="Integration">Интеграция</p>
+                <p data-lang-ru="Легко подключайтесь к Spotify для отображения обложек альбомов, плейлистов и многого другого прямо на вашей рамке." data-lang-en="Easily connect to Spotify to display album covers, playlists, and much more directly on your frame.">Легко подключайтесь к Spotify для отображения обложек альбомов, плейлистов и многого другого прямо на вашей рамке.</p>
             </div>
             
             <div class="feature-card">
                 <div class="icon-box purple">
                     <i class="icon-customize"></i>
                 </div>
-                <h3 data-lang="feature-display-title">Display Customization</h3>
-                <p class="category" data-lang="feature-display-category">Accessibility</p>
-                <p data-lang="feature-display-desc">Available in slideshow and static image modes. Customize content sources, frame rate, and display brightness according to your preferences.</p>
+                <h3 data-lang-ru="Настройка дисплея" data-lang-en="Display Customization">Настройка дисплея</h3>
+                <p class="category" data-lang-ru="Доступность" data-lang-en="Accessibility">Доступность</p>
+                <p data-lang-ru="Доступно в режимах слайд-шоу и статичного изображения. Настраивайте источники контента, частоту кадров и яркость дисплея в соответствии с вашими предпочтениями." data-lang-en="Available in slideshow and static image modes. Customize content sources, frame rate, and display brightness according to your preferences.">Доступно в режимах слайд-шоу и статичного изображения. Настраивайте источники контента, частоту кадров и яркость дисплея в соответствии с вашими предпочтениями.</p>
             </div>
         </div>
-    <button class="btn-explore-features" onclick="window.location.href='/About Product.html'">Learn More</button> 
+    <button class="btn-explore-features" onclick="window.location.href='/About Product.html'" data-lang-ru="Узнать больше" data-lang-en="Learn More">Узнать больше</button> 
     </section>
 
     <!-- Футер -->
     <footer>
         <div class="footer-content">
             <div class="quick-links">
-                <a href="/Product Catalog.html" data-lang="footer-catalog">Catalog</a>
+                <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
                 <span>•</span>
-                <a href="/Product Detail.html" data-lang="footer-details">Details</a>
+                <a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a>
                 <span>•</span>
-                <a href="/About Product.html" data-lang="footer-about">About Product</a>
+                <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
             </div>
             <div class="language-selector">
                 <select id="languageSelect" aria-label="Language Selection">
@@ -343,11 +522,20 @@
         
         // Инициализация кнопок авторизации
         initializeAuthButtons();
+        
+        // Инициализация переключения языка
+        initLanguageSelector();
+        
+
 
         // Кнопки входа и регистрации теперь обрабатываются в функции initializeAuthButtons()
         
         // Все обработчики событий, связанные с модальным окном аутентификации, удалены
     });
+    
+
+    
+    // Функции переключения языка перенесены в отдельный файл /js/language-switcher.js
     
     // Функция для инициализации слайдера
     function initSlider() {
@@ -416,8 +604,11 @@
                 document.getElementById('userDropdown').style.display = 'block';
                 
                 // Заполняем данные пользователя
+                // Получаем имя пользователя без добавления текста (username)
                 const displayName = currentUser.username || currentUser.email.split('@')[0];
-                document.getElementById('headerUserName').textContent = displayName;
+                if (document.getElementById('headerUserName')) {
+                    document.getElementById('headerUserName').textContent = displayName;
+                }
                 document.getElementById('headerUserInitials').textContent = getInitials(displayName);
                 
                 // Инициализация выпадающего меню

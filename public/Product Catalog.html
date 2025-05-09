@@ -486,9 +486,37 @@
             .product-modal__image {
                 height: 300px;
             }
+            
+            .product-modal__content {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            .product-modal__title {
+                font-size: 1.5rem;
+            }
+            
+            .product-modal__description {
+                font-size: 0.9rem;
+            }
+            
+            .product-modal__price {
+                font-size: 1.2rem;
+            }
+            
+            .product-modal__actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .product-modal__actions .btn {
+                width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
+
+            
             .filter-section {
                 padding: 1.5rem;
                 margin-bottom: 2rem;
@@ -510,6 +538,54 @@
             .auth-buttons {
                 margin-top: 1rem;
             }
+            
+            .navbar {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .nav-left {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .auth-buttons {
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .catalog-header {
+                padding: 0 15px;
+            }
+            
+            .catalog-title {
+                font-size: 2rem;
+            }
+            
+            .catalog-subtitle {
+                font-size: 1rem;
+            }
+            
+            .catalog-grid {
+                padding: 0 15px;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .product-section {
+                padding: 1.5rem;
+                flex-direction: column;
+                align-items: center;
+            }
         }
             /* Стили для мобильной версии аутентификации */
         @media (max-width: 768px) {
@@ -528,6 +604,25 @@
             .auth-modal__content {
                 width: 90%;
                 margin: 0 5%;
+                padding: 20px 15px;
+            }
+            
+            .form-group label {
+                font-size: 14px;
+            }
+            
+            .form-group input {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .form-actions .btn {
+                width: 100%;
             }
             
             .form-container {
@@ -541,20 +636,77 @@
             .auth-header p {
                 font-size: 0.8rem;
             }
-        }</style>
+        }
+        
+        /* Стили для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .catalog-title {
+                font-size: 1.5rem;
+            }
+            
+            .catalog-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-card {
+                max-width: 100%;
+            }
+            
+            .product-title {
+                font-size: 1.1rem;
+            }
+            
+            .product-description {
+                font-size: 0.9rem;
+            }
+            
+            .product-price {
+                font-size: 1rem;
+            }
+            
+            .btn-view-details {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .user-dropdown-btn {
+                padding: 6px 10px;
+            }
+            
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            
+            #headerUserName {
+                display: none;
+            }
+        }
+        
+
+    </style>
     
     <!-- Новые скрипты аутентификации -->
     <script src="/src/auth/auth-service.js" defer></script>
     <!-- Скрипт auth-ui.js удален, так как он пытается инициализировать модальное окно аутентификации -->
     <!-- Скрипт component-loader.js удален, так как он автоматически загружает модальное окно аутентификации -->
+    <script src="/js/language-switcher.js" defer></script>
 </head>
 <body>
     <!-- Навигация -->
     <nav class="navbar">
         <div class="nav-left">
             <a href="/">
-                <img src="/SF.png" alt="Spoframe" class="logo">
+                <img src="/SF.png" alt="Spoframe" class="logo" style="max-height: 40px;">
             </a>
+            
+
+
             <ul class="nav-links">
                 <li><a href="/Landing Page.html" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
                 <li><a href="/Product Catalog.html" class="active" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
@@ -753,6 +905,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Вызываем проверку авторизации сразу после загрузки DOM
         setTimeout(checkAuth, 100); // Небольшая задержка для уверенности
+        
+
         
         // Обработчики переключения форм
         // Кнопка открытия модального окна
@@ -1213,67 +1367,11 @@
 <!-- Скрипт для переключения языка -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Страница загружена, инициализируем переключатель языка');
+    // Инициализация переключателя языка происходит в общем файле language-switcher.js
     
-    // Получаем селектор языка
-    const languageSelect = document.getElementById('languageSelect');
-    if (!languageSelect) {
-        console.error('Не найден элемент с id "languageSelect"');
-        return;
-    }
-    
-    // Устанавливаем язык из localStorage или используем русский по умолчанию
-    const savedLanguage = localStorage.getItem('language') || 'ru';
-    console.log('Сохраненный язык:', savedLanguage);
-    languageSelect.value = savedLanguage;
-    
-    // Применяем сохраненный язык при загрузке страницы
-    applyLanguage(savedLanguage);
-    
-    // Обработчик изменения языка
-    languageSelect.addEventListener('change', function() {
-        const selectedLanguage = this.value;
-        console.log('Выбран язык:', selectedLanguage);
-        localStorage.setItem('language', selectedLanguage);
-        
-        // Применяем выбранный язык
-        applyLanguage(selectedLanguage);
-    });
-    
-    // Функция для применения выбранного языка
-    function applyLanguage(lang) {
-        // Находим все элементы с атрибутами data-lang-ru и data-lang-en
-        const elements = document.querySelectorAll('[data-lang-' + lang + ']');
-        
-        // Применяем соответствующий текст к каждому элементу
-        elements.forEach(element => {
-            const translation = element.getAttribute('data-lang-' + lang);
-            if (translation) {
-                if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
-                    element.placeholder = translation;
-                } else {
-                    element.textContent = translation;
-                }
-            }
-        });
-        
-        // Обработка плейсхолдеров для инпутов
-        const inputElements = document.querySelectorAll('input[data-lang-' + lang + '-placeholder]');
-        inputElements.forEach(input => {
-            const placeholderTranslation = input.getAttribute('data-lang-' + lang + '-placeholder');
-            if (placeholderTranslation) {
-                input.placeholder = placeholderTranslation;
-            }
-        });
-        
-        // Обновляем заголовок страницы
-        const titleElement = document.querySelector('title');
-        if (titleElement && titleElement.getAttribute('data-lang-' + lang)) {
-            titleElement.textContent = titleElement.getAttribute('data-lang-' + lang);
-        }
-        
-        // Обновляем уведомления в зависимости от языка
-        updateNotificationMessages(lang);
+    // Функция для обновления уведомлений в зависимости от языка
+    function updateNotificationMessages(lang) {
+        // Эта функция будет вызываться из общего файла language-switcher.js
     }
     
     // Функция для обновления текстов уведомлений
@@ -1318,6 +1416,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 // Функция обработки кнопки "Купить сейчас"
+
+
 function handleBuyNow() {
     console.log('Кнопка Купить сейчас нажата');
     

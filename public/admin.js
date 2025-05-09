@@ -108,7 +108,7 @@ function displayUsers() {
     if (users.length === 0) {
         usersList.innerHTML = `
             <tr>
-                <td colspan="4" class="no-users">Нет зарегистрированных пользователей</td>
+                <td colspan="5" class="no-users">Нет зарегистрированных пользователей</td>
             </tr>
         `;
         return;
@@ -130,9 +130,22 @@ function displayUsers() {
             <td>${user.name || 'Не указано'}</td>
             <td>${user.email}</td>
             <td>${formattedDate}</td>
+            <td>
+                <button class="delete-btn" data-id="${user.id}" title="Удалить пользователя">
+                    <i class="fas fa-trash"></i> Удалить
+                </button>
+            </td>
         `;
         
         usersList.appendChild(row);
+    });
+    
+    // Добавляем обработчики событий для кнопок удаления
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const userId = parseInt(this.getAttribute('data-id'));
+            deleteUser(userId);
+        });
     });
 }
 
@@ -140,6 +153,43 @@ function displayUsers() {
 function refreshData() {
     displayStats();
     displayUsers();
+}
+
+// Функция для удаления пользователя
+function deleteUser(userId) {
+    if (!confirm('Вы действительно хотите удалить этого пользователя?')) {
+        return;
+    }
+    
+    // Получаем текущих пользователей
+    let adminUsers = getUsers();
+    
+    // Находим пользователя
+    const userToDelete = adminUsers.find(user => user.id === userId);
+    
+    if (!userToDelete) {
+        alert('Пользователь не найден');
+        return;
+    }
+    
+    // Удаляем пользователя из админки
+    adminUsers = adminUsers.filter(user => user.id !== userId);
+    saveUsers(adminUsers);
+    
+    // Удаляем пользователя также из основного хранилища
+    let appUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    appUsers = appUsers.filter(user => user.email !== userToDelete.email);
+    localStorage.setItem('users', JSON.stringify(appUsers));
+    
+    // Также удаляем из новой системы аутентификации
+    const currentUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const updatedUsers = currentUsers.filter(user => user.email !== userToDelete.email);
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+    
+    alert(`Пользователь ${userToDelete.email} успешно удален`);
+    
+    // Обновляем интерфейс
+    refreshData();
 }
 
 // Функция для проверки новых пользователей из localStorage

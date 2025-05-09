@@ -8,10 +8,22 @@
     <link rel="stylesheet" href="/susp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/auth-modal.css">
-    <link rel="stylesheet" href="/auth-styles.css">
+    <link rel="stylesheet" href="/css/auth.css">
     
     <style>
+        /* Стили для гарантии работы кнопок */
+        button, a.btn, .btn {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            touch-action: manipulation !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+        
         :root {
             --primary-color: #7C3AED;
             --secondary-color: #4C1D95;
@@ -37,6 +49,135 @@
             flex-direction: column;
         }
         
+        /* Header styles */
+        .header {
+            background-color: var(--bg-secondary);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Кнопка Назад */
+        .back-button {
+            display: flex;
+            align-items: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        
+        .back-button:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+        }
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-dropdown-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        .user-dropdown-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--bg-secondary);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-top: 5px;
+        }
+        
+        .user-dropdown-content a {
+            color: var(--text-main);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .user-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .dropdown-show {
+            display: block;
+        }
+        
+        /* Main container styles */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -45,105 +186,86 @@
             box-sizing: border-box;
         }
         
-        .profile-page {
-            flex: 1;
-            padding: 80px 0;
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 0;
         }
         
+        /* Profile page styles */
         .profile-container {
             background: var(--bg-secondary);
             border-radius: 16px;
-            padding: 32px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             margin-bottom: 40px;
-        }
-        
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding-bottom: 24px;
-            margin-bottom: 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .profile-icon {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            position: relative;
             overflow: hidden;
-            border: 2px solid #fff;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .row {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: white;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
         }
         
-        .profile-info {
-            flex: 1;
-            min-width: 0;
-            padding-right: 40px;
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 15px;
+            padding-left: 15px;
+            box-sizing: border-box;
         }
         
-        .profile-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            margin: 0 0 8px;
-            color: var(--text-main);
-        }
-        
-        .profile-email {
-            font-size: 1rem;
-            margin: 0;
-            color: var(--text-secondary);
-            opacity: 0.8;
-        }
-        
-        .profile-section {
-            margin-bottom: 32px;
-        }
-        
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            margin: 0 0 16px;
-            color: var(--text-main);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 8px;
-        }
-        
-        .form-group {
-            margin-bottom: 24px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .card {
+            background-color: var(--bg-secondary);
             border-radius: 8px;
-            color: var(--text-main);
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
         }
         
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+        .card-header {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-footer {
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .text-end {
+            text-align: right;
+        }
+        
+        .mb-0 {
+            margin-bottom: 0;
+        }
+        
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+        
+        .mb-4 {
+            margin-bottom: 20px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .rounded-circle {
+            border-radius: 50%;
+        }
+        
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
         }
         
         .btn {
@@ -156,6 +278,8 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
         
         .btn:hover {
@@ -163,31 +287,16 @@
             box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
         }
         
-        .btn-outline {
+        .btn-outline-primary {
             background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
         }
         
-        .btn-outline:hover {
+        .btn-outline-primary:hover {
             background: rgba(124, 58, 237, 0.1);
         }
         
-        .btn-danger {
-            background: linear-gradient(135deg, #EF4444, #991B1B);
-        }
-        
-        .btn-danger:hover {
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
-        }
-        
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
-            margin-top: 24px;
-        }
-        
+        /* Стили для истории заказов */
         .orders-list {
             list-style: none;
             padding: 0;
@@ -195,17 +304,132 @@
         }
         
         .order-item {
-            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border-left: 3px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: var(--bg-secondary);
             transition: all 0.3s ease;
+        }
+        
+        .order-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .order-id {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .order-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        
+        .order-status {
+            font-size: 0.85rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        
+        .status-completed {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+        
+        .status-processing {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+        
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+        
+        .order-total {
+            font-weight: 500;
+        }
+        
+        .order-empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            opacity: 0.4;
+            margin-bottom: 15px;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            color: var(--text-main);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: bottom 0.3s ease;
+            z-index: 1000;
+            border-left: 4px solid var(--success-color);
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .notification.error {
+            border-left-color: var(--error-color);
+        }
+        
+        .notification.show {
+            bottom: 20px;
+        }
+        
+        .back-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn-back {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            color: var(--text-main);
+        }
+        
+        .btn-back i {
+            margin-right: 5px;
         }
         
         .order-item:hover {
             transform: translateX(5px);
             background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
         
         .order-header {
@@ -334,16 +558,84 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         
+        /* Стили для кнопки назад */
+        .back-button-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-back:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
+            .header-container {
+                padding: 10px;
+            }
+            
+            .header-title {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-top: 70px; /* Уменьшаем верхний отступ */
+                padding: 15px 0;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .profile-container {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            
+            .user-dropdown-btn {
+                padding: 6px 10px;
+            }
+            
+            .card {
+                margin-bottom: 20px;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .profile-icon {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
             .profile-header {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
                 text-align: center;
+                margin-bottom: 20px;
             }
             
             .profile-icon {
                 margin: 0 auto 16px;
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
             }
             
             .profile-info {
@@ -352,127 +644,184 @@
                 text-align: center;
             }
             
+            .profile-name {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+            
+            .profile-email {
+                font-size: 14px;
+            }
+            
+            .profile-section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-group label {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+            
             .form-actions {
                 flex-direction: column;
+                gap: 10px;
             }
             
             .btn {
                 width: 100%;
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .btn-back {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Дополнительные стили для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .profile-container {
+                padding: 15px;
+                margin: 5px;
+            }
+            
+            .profile-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .profile-name {
+                font-size: 20px;
+            }
+            
+            .profile-section {
+                padding: 12px;
+            }
+            
+            .form-group input {
+                padding: 8px 12px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Навигация -->
-    <nav class="navbar" role="navigation" aria-label="Основная навигация">
-        <div class="container">
-            <div class="nav-left">
-                <a href="/" aria-label="Главная страница Spoframe">
-                    <img src="/SF.png" alt="Spoframe Logo" class="logo">
-                </a>
-                <ul class="nav-links">
-                    <li><a href="/Landing Page.html">Главная</a></li>
-                    <li><a href="/Product Catalog.html">Каталог</a></li>
-                    <li><a href="/Product Detail.html">Подробности</a></li>
-                    <li><a href="/About Product.html">О продукте</a></li>
-                </ul>
-            </div>
-            <div class="nav-right">
-                <div class="language-selector">
-                    <select id="languageSelect" aria-label="Выбор языка">
-                        <option value="ru">RU</option>
-                        <option value="en">EN</option>
-                    </select>
-                </div>
-                <div class="user-profile" style="display: flex;">
-                    <div class="user-info">
-                        <span class="username" id="profileUsername">Пользователь</span>
-                        <button class="btn-logout" onclick="logout()">Выйти</button>
-                    </div>
-                </div>
-            </div>
+
+    <!-- Простой хедер с кнопкой Назад -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Назад</a>
         </div>
-    </nav>
+    </header>
 
     <!-- Основное содержимое страницы -->
-    <main class="profile-page">
+    <main class="main-content">
         <div class="container">
-            <div class="profile-container fade-in">
-                <div class="profile-header">
-                    <div class="profile-icon" id="profileInitials"></div>
-                    <div class="profile-info">
-                        <h1 class="profile-name" id="profileName">Загрузка...</h1>
-                        <p class="profile-email" id="profileEmail">Загрузка...</p>
+            <h1 class="mb-4">Профиль</h1>
+            
+            <!-- Информация пользователя -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Информация пользователя</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="profile-icon rounded-circle mb-3" id="profileInitials" style="margin: 0 auto; width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; font-size: 48px; font-weight: 500;"></div>
+                        <h4 id="profileUsername">Загрузка...</h4>
                     </div>
+                    <p><strong>Email:</strong> <span id="profileEmail">Загрузка...</span></p>
+                    <p><strong>Дата регистрации:</strong> <span id="profileRegDate">10 апреля 2025 г.</span></p>
+                    <p><strong>Последний вход:</strong> <span id="profileLastLogin">10 мая 2025 г. в 00:45</span></p>
+                    <p><strong>Информация:</strong> <span id="profileBio">Загрузка...</span></p>
                 </div>
-                
-                <div class="profile-section fade-in delay-1">
-                    <h2 class="section-title">Личная информация</h2>
-                    <form id="profileInfoForm">
-                        <div class="form-group">
-                            <label for="displayName">Имя профиля</label>
-                            <input type="text" id="displayName" name="displayName" placeholder="Введите ваше имя">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Введите ваш email" disabled>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn">Сохранить изменения</button>
-                        </div>
-                    </form>
+                <div class="card-footer text-end">
+                    <button id="editProfileBtn" class="btn btn-primary" onclick="showEditProfileFormDirect()" tabindex="0" type="button" style="cursor: pointer !important;">Редактировать профиль</button>
                 </div>
-                
-                <div class="profile-section fade-in delay-2">
-                    <h2 class="section-title">Изменить пароль</h2>
-                    <form id="changePasswordForm">
-                        <div class="form-group">
-                            <label for="currentPassword">Текущий пароль</label>
-                            <input type="password" id="currentPassword" name="currentPassword" placeholder="Введите текущий пароль">
-                        </div>
-                        <div class="form-group">
-                            <label for="newPassword">Новый пароль</label>
-                            <input type="password" id="newPassword" name="newPassword" placeholder="Введите новый пароль">
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">Подтвердите новый пароль</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Подтвердите новый пароль">
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn">Обновить пароль</button>
-                        </div>
-                    </form>
+            </div>
+            
+            <!-- История заказов -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">История заказов</h5>
                 </div>
-                
-                <div class="profile-section fade-in delay-3">
-                    <h2 class="section-title">История заказов</h2>
+                <div class="card-body">
                     <div id="ordersContainer">
                         <!-- Заказы будут добавлены через JavaScript -->
                     </div>
                 </div>
+                <div class="card-footer text-end">
+                    <a href="Product Catalog.html" class="btn btn-outline-primary" tabindex="0" style="cursor: pointer !important; display: inline-block; text-decoration: none; pointer-events: auto !important;">В каталог</a>
+                </div>
+            </div>
+            
+            <!-- Форма редактирования профиля (изначально скрыта) -->
+            <div id="editProfileForm" style="display: none;">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Редактировать информацию</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="profileInfoForm">
+                            <div class="form-group mb-3">
+                                <label for="displayName">Имя пользователя</label>
+                                <input type="text" id="displayName" name="displayName" class="form-control" placeholder="Введите ваше имя">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Введите ваш email" disabled>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="bio">Информация о себе</label>
+                                <textarea id="bio" name="bio" class="form-control" rows="3" placeholder="Расскажите о себе"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <button id="cancelEditBtn" class="btn btn-outline-secondary" onclick="hideEditProfileFormDirect()" tabindex="0" type="button" style="cursor: pointer !important;">Отмена</button>
+                        <button id="saveProfileBtn" class="btn btn-primary" onclick="saveProfileChangesDirect()" tabindex="0" type="button" style="cursor: pointer !important;">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма изменения пароля -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Изменить пароль</h5>
+                </div>
+                <div class="card-body">
+                    <div id="changePasswordForm">
+                        <div class="form-group mb-3">
+                            <label for="currentPassword">Текущий пароль</label>
+                            <input type="password" id="currentPassword" name="currentPassword" class="form-control" placeholder="Введите текущий пароль">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="newPassword">Новый пароль</label>
+                            <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="Введите новый пароль">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="confirmPassword">Подтвердите новый пароль</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Подтвердите новый пароль">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end">
+                    <button id="changePasswordBtn" class="btn btn-primary" onclick="changePasswordDirect()" tabindex="0" type="button" style="cursor: pointer !important;">Обновить пароль</button>
+                </div>
             </div>
         </div>
     </main>
-
-    <!-- Футер -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="quick-links">
-                    <a href="/Landing Page.html">Главная</a>
-                    <span>•</span>
-                    <a href="/Product Catalog.html">Каталог</a>
-                    <span>•</span>
-                    <a href="/Product Detail.html">Подробности</a>
-                    <span>•</span>
-                    <a href="/About Product.html">О продукте</a>
-                </div>
-                <div class="copyright">
-                    2025 Spoframe
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- Уведомление -->
     <div class="notification" id="notification">
@@ -480,6 +829,111 @@
     </div>
 
     <script>
+        // Глобальные функции для кнопок, доступные напрямую из HTML
+        function showEditProfileFormDirect() {
+            console.log('Показываем форму редактирования профиля');
+            document.getElementById('editProfileForm').style.display = 'block';
+        }
+        
+        function hideEditProfileFormDirect() {
+            console.log('Скрываем форму редактирования профиля');
+            document.getElementById('editProfileForm').style.display = 'none';
+        }
+        
+        function saveProfileChangesDirect() {
+            console.log('Сохраняем изменения профиля');
+            const newName = document.getElementById('displayName').value.trim();
+            const newBio = document.getElementById('bio').value.trim();
+            
+            if (!newName) {
+                alert('Пожалуйста, введите имя пользователя');
+                return;
+            }
+            
+            // Получаем текущие данные пользователя
+            let currentUser = null;
+            try {
+                const userFromLocal = localStorage.getItem('currentUser');
+                if (userFromLocal) {
+                    currentUser = JSON.parse(userFromLocal);
+                } else {
+                    const userFromSession = sessionStorage.getItem('currentUser');
+                    if (userFromSession) {
+                        currentUser = JSON.parse(userFromSession);
+                    }
+                }
+            } catch (e) {
+                console.error('Ошибка при чтении данных пользователя:', e);
+                currentUser = {
+                    email: 'example@gmail.com',
+                    username: 'testuser',
+                    isAuthenticated: true,
+                    bio: 'Пользователь Spoframe'
+                };
+            }
+            
+            if (!currentUser) {
+                alert('Ошибка при обновлении профиля');
+                return;
+            }
+            
+            // Обновляем данные пользователя
+            currentUser.username = newName;
+            currentUser.bio = newBio;
+            
+            // Сохраняем обновленные данные
+            try {
+                if (localStorage.getItem('currentUser')) {
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+                if (sessionStorage.getItem('currentUser')) {
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+            } catch (error) {
+                console.error('Ошибка при сохранении данных:', error);
+            }
+            
+            // Обновление отображаемой информации
+            document.getElementById('profileUsername').textContent = newName;
+            document.getElementById('profileBio').textContent = newBio || 'Пользователь Spoframe';
+            
+            // Скрываем форму и показываем уведомление
+            hideEditProfileFormDirect();
+            alert('Профиль успешно обновлен');
+        }
+        
+        function changePasswordDirect() {
+            console.log('Изменение пароля');
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Проверка заполнения полей
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            // Проверка совпадения паролей
+            if (newPassword !== confirmPassword) {
+                alert('Новые пароли не совпадают');
+                return;
+            }
+            
+            // Проверка минимальной длины
+            if (newPassword.length < 8) {
+                alert('Пароль должен содержать минимум 8 символов');
+                return;
+            }
+            
+            // Очистка формы
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            alert('Пароль успешно изменен');
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Проверка авторизации
             if (!isLoggedIn()) {
@@ -493,33 +947,155 @@
             // Загрузка истории заказов
             loadOrderHistory();
             
-            // Обработчики форм
-            document.getElementById('profileInfoForm').addEventListener('submit', updateProfile);
-            document.getElementById('changePasswordForm').addEventListener('submit', changePassword);
+            // Инициализация выпадающего меню
+            initUserDropdown();
+            
+            // Добавление обработчиков событий для кнопок
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+            
+            // Добавление обработчиков событий для кнопок профиля
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', showEditProfileForm);
+            }
+            
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            if (cancelEditBtn) {
+                cancelEditBtn.addEventListener('click', hideEditProfileForm);
+            }
+            
+            const saveProfileBtn = document.getElementById('saveProfileBtn');
+            if (saveProfileBtn) {
+                saveProfileBtn.addEventListener('click', saveProfileChanges);
+            }
+            
+            const changePasswordBtn = document.getElementById('changePasswordBtn');
+            if (changePasswordBtn) {
+                changePasswordBtn.addEventListener('click', changePassword);
+            }
         });
+        
+        // Инициализация выпадающего меню пользователя
+        function initUserDropdown() {
+            const dropdownBtn = document.getElementById('userDropdownBtn');
+            const dropdownContent = document.getElementById('userDropdownContent');
+            
+            dropdownBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdownContent.classList.toggle('dropdown-show');
+            });
+            
+            // Закрыть выпадающее меню при клике вне его
+            window.addEventListener('click', function(e) {
+                if (!e.target.matches('#userDropdownBtn') && 
+                    !e.target.closest('#userDropdownBtn') && 
+                    !e.target.matches('#userDropdownContent')) {
+                    dropdownContent.classList.remove('dropdown-show');
+                }
+            });
+        }
         
         // Проверка авторизации пользователя
         function isLoggedIn() {
-            return localStorage.getItem('userToken') !== null;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
+            return currentUser && currentUser.isAuthenticated;
         }
         
         // Загрузка профиля пользователя
         function loadUserProfile() {
-            const userData = JSON.parse(localStorage.getItem('userData'));
-            
-            if (userData) {
-                // Заполнение данных профиля
-                document.getElementById('profileName').textContent = userData.name || 'Пользователь';
-                document.getElementById('profileEmail').textContent = userData.email || '';
-                document.getElementById('profileUsername').textContent = userData.name || 'Пользователь';
+            try {
+                // Безопасное получение данных из хранилища
+                let currentUser = null;
+                try {
+                    const userFromLocal = localStorage.getItem('currentUser');
+                    if (userFromLocal) {
+                        currentUser = JSON.parse(userFromLocal);
+                    } else {
+                        const userFromSession = sessionStorage.getItem('currentUser');
+                        if (userFromSession) {
+                            currentUser = JSON.parse(userFromSession);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Ошибка при чтении данных пользователя:', e);
+                    // Создание демо-данных для тестирования
+                    currentUser = {
+                        email: 'example@gmail.com',
+                        username: 'testuser',
+                        isAuthenticated: true,
+                        bio: 'Пользователь Spoframe'
+                    };
+                }
+                
+                if (!currentUser || !currentUser.isAuthenticated) {
+                    // Если данных нет или пользователь не авторизован, перенаправляем на страницу входа
+                    window.location.href = '/Landing Page.html';
+                    return;
+                }
+                
+                // Получаем имя пользователя или используем часть email
+                const email = currentUser.email || 'пользователь@spoframe.com';
+                const displayName = currentUser.username || email.split('@')[0];
+                const bio = currentUser.bio || 'Пользователь Spoframe';
+                
+                // Безопасное обновление элементов DOM
+                const updateElement = (id, property, value) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element[property] = value;
+                    }
+                };
+                
+                // Заполнение данных в шапке
+                updateElement('headerUserName', 'textContent', displayName);
+                updateElement('headerUserInitials', 'textContent', getInitials(displayName));
+                
+                // Заполнение данных в профиле
+                updateElement('profileUsername', 'textContent', displayName);
+                updateElement('profileEmail', 'textContent', email);
+                updateElement('profileBio', 'textContent', bio);
+                updateElement('profileInitials', 'textContent', getInitials(displayName));
                 
                 // Заполнение полей формы
-                document.getElementById('displayName').value = userData.name || '';
-                document.getElementById('email').value = userData.email || '';
+                updateElement('displayName', 'value', displayName);
+                updateElement('email', 'value', email);
+                updateElement('bio', 'value', bio || '');
                 
-                // Установка инициалов
-                const initials = getInitials(userData.name || 'Пользователь');
-                document.getElementById('profileInitials').textContent = initials;
+                // Устанавливаем даты регистрации и последнего входа
+                // Используем фиксированные даты для демонстрации
+                const regDate = '10 апреля 2025 г.';
+                const lastLoginFormatted = '10 мая 2025 г. в 00:45';
+                
+                // Сохраняем даты в профиле пользователя
+                currentUser.registrationDate = regDate;
+                currentUser.lastLoginFormatted = lastLoginFormatted;
+                
+                // Сохраняем даты в профиле пользователя
+                // Для демонстрации используем фиксированные значения
+                
+                // Сохраняем обновленные данные пользователя
+                try {
+                    if (localStorage.getItem('currentUser')) {
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    }
+                    if (sessionStorage.getItem('currentUser')) {
+                        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    }
+                } catch (error) {
+                    console.error('Ошибка при сохранении данных пользователя:', error);
+                }
+                
+                updateElement('profileRegDate', 'textContent', regDate);
+                updateElement('profileLastLogin', 'textContent', lastLoginFormatted);
+                
+                console.log('Профиль пользователя загружен успешно');
+            } catch (error) {
+                console.error('Ошибка при загрузке профиля:', error);
+                // Показываем сообщение об ошибке
+                showNotification('Ошибка при загрузке профиля. Пожалуйста, обновите страницу.', true);
             }
         }
         
@@ -528,34 +1104,121 @@
             return name.split(' ').map(n => n[0]).join('').toUpperCase();
         }
         
-        // Обновление профиля
-        function updateProfile(e) {
-            e.preventDefault();
-            
+        // Форматирование даты в формате "день месяц год"
+        function formatDate(dateInput) {
+            console.log('Форматирование даты, входные данные:', dateInput, typeof dateInput);
+            try {
+                // Проверка на null или undefined
+                if (!dateInput) {
+                    console.log('Дата не указана');
+                    return 'Не указана';
+                }
+                
+                // Преобразование строки в объект Date
+                let date;
+                if (typeof dateInput === 'string') {
+                    console.log('Преобразование строки в дату:', dateInput);
+                    date = new Date(dateInput);
+                } else {
+                    date = dateInput;
+                }
+                
+                console.log('Полученная дата:', date);
+                
+                // Проверка на корректность даты
+                if (isNaN(date.getTime())) {
+                    console.log('Некорректная дата');
+                    return 'Некорректная дата';
+                }
+                
+                const day = date.getDate();
+                const monthNames = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+                const month = monthNames[date.getMonth()];
+                const year = date.getFullYear();
+                const result = day + ' ' + month + ' ' + year;
+                console.log('Результат форматирования:', result);
+                return result;
+            } catch (error) {
+                console.error('Ошибка при форматировании даты:', error);
+                return 'Неизвестная дата';
+            }
+        }
+        
+        // Показать форму редактирования профиля
+        function showEditProfileForm() {
+            console.log('Попытка отобразить форму редактирования профиля');
+            const editForm = document.getElementById('editProfileForm');
+            if (editForm) {
+                editForm.style.display = 'block';
+                window.scrollTo({
+                    top: editForm.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            } else {
+                console.error('Форма редактирования профиля не найдена');
+            }
+        }
+        
+        // Скрыть форму редактирования профиля
+        function hideEditProfileForm() {
+            document.getElementById('editProfileForm').style.display = 'none';
+        }
+        
+        // Сохранение изменений профиля
+        function saveProfileChanges() {
             const newName = document.getElementById('displayName').value.trim();
+            const newBio = document.getElementById('bio').value.trim();
             
             if (!newName) {
-                showNotification('Пожалуйста, введите имя профиля', true);
+                showNotification('Пожалуйста, введите имя пользователя', true);
                 return;
             }
             
-            const userData = JSON.parse(localStorage.getItem('userData')) || {};
-            userData.name = newName;
+            // Получаем текущие данные пользователя
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
             
-            localStorage.setItem('userData', JSON.stringify(userData));
+            if (!currentUser) {
+                showNotification('Ошибка при обновлении профиля', true);
+                return;
+            }
+            
+            // Обновляем данные пользователя
+            currentUser.username = newName;
+            currentUser.bio = newBio;
+            
+            // Сохраняем обновленные данные
+            if (localStorage.getItem('currentUser')) {
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            if (sessionStorage.getItem('currentUser')) {
+                sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+            
+            // Обновляем также в списке пользователей
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(user => user.email === currentUser.email);
+            
+            if (userIndex !== -1) {
+                users[userIndex].username = newName;
+                users[userIndex].bio = newBio;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
             
             // Обновление отображаемой информации
-            document.getElementById('profileName').textContent = newName;
+            document.getElementById('headerUserName').textContent = newName;
+            document.getElementById('headerUserInitials').textContent = getInitials(newName);
             document.getElementById('profileUsername').textContent = newName;
+            document.getElementById('profileBio').textContent = newBio || 'Пользователь Spoframe';
             document.getElementById('profileInitials').textContent = getInitials(newName);
             
+            // Скрываем форму и показываем уведомление
+            hideEditProfileForm();
             showNotification('Профиль успешно обновлен');
         }
         
         // Изменение пароля
-        function changePassword(e) {
-            e.preventDefault();
-            
+        function changePassword() {
+            console.log('Попытка изменить пароль');
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
@@ -578,122 +1241,201 @@
                 return;
             }
             
-            // В реальном проекте здесь была бы отправка на сервер
-            // Для демонстрации просто показываем успешное уведомление
-            showNotification('Пароль успешно изменен');
-            
-            // Очистка формы
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
+            try {
+                // Получаем текущего пользователя
+                const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
+                
+                if (!currentUser) {
+                    showNotification('Ошибка при изменении пароля', true);
+                    return;
+                }
+                
+                // В реальном проекте здесь была бы проверка текущего пароля на сервере
+                // Для демонстрации считаем, что пароль изменен успешно
+                
+                // Обновляем также в списке пользователей
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userIndex = users.findIndex(user => user.email === currentUser.email);
+                
+                if (userIndex !== -1) {
+                    users[userIndex].password = newPassword;
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+                
+                // Показываем уведомление об успехе
+                showNotification('Пароль успешно изменен');
+                
+                // Очистка формы
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+            } catch (error) {
+                console.error('Ошибка при изменении пароля:', error);
+                showNotification('Произошла ошибка при изменении пароля', true);
+            }
         }
         
         // Загрузка истории заказов
         function loadOrderHistory() {
-            const ordersContainer = document.getElementById('ordersContainer');
+            console.log('Загрузка истории заказов');
             
-            // Демонстрационные данные заказов
-            const orders = [
-                {
-                    id: 'SP-1234',
-                    date: '15 марта 2025',
-                    products: 'Spoframe Classic (черный)',
-                    total: '3999 ₽',
-                    status: 'completed'
-                },
-                {
-                    id: 'SP-1235',
-                    date: '2 апреля 2025',
-                    products: 'Spoframe Pro (белый)',
-                    total: '5999 ₽',
-                    status: 'processing'
+            try {
+                const ordersContainer = document.getElementById('ordersContainer');
+                if (!ordersContainer) {
+                    console.error('Контейнер заказов не найден');
+                    return;
                 }
-            ];
-            
-            // Отображение заказов или сообщения об их отсутствии
-            if (orders.length > 0) {
-                const ordersList = document.createElement('ul');
-                ordersList.className = 'orders-list';
                 
-                orders.forEach(order => {
-                    const orderItem = document.createElement('li');
-                    orderItem.className = 'order-item';
-                    
-                    let statusText, statusClass;
-                    
-                    switch(order.status) {
-                        case 'completed':
-                            statusText = 'Выполнен';
-                            statusClass = 'status-completed';
-                            break;
-                        case 'processing':
-                            statusText = 'В обработке';
-                            statusClass = 'status-processing';
-                            break;
-                        case 'cancelled':
-                            statusText = 'Отменен';
-                            statusClass = 'status-cancelled';
-                            break;
-                        default:
-                            statusText = 'В обработке';
-                            statusClass = 'status-processing';
+                ordersContainer.innerHTML = ''; // Очищаем контейнер перед заполнением
+                
+                // Демонстрационные данные заказов
+                const orders = [
+                    {
+                        id: 'SP-1234',
+                        date: '15 марта 2025',
+                        products: 'Black Metal Frame',
+                        total: '3999 ₽',
+                        status: 'completed'
+                    },
+                    {
+                        id: 'SP-1235',
+                        date: '2 апреля 2025',
+                        products: 'Silver Frame',
+                        total: '5999 ₽',
+                        status: 'processing'
                     }
+                ];
+                
+                // Получаем текущего пользователя
+                const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(sessionStorage.getItem('currentUser'));
+                
+                // В реальном приложении здесь был бы запрос к API для получения заказов пользователя
+                // Для демонстрации используем фиксированные данные
+                
+                // Отображение заказов или сообщения об их отсутствии
+                if (orders && orders.length > 0) {
+                    const ordersList = document.createElement('ul');
+                    ordersList.className = 'orders-list';
                     
-                    orderItem.innerHTML = `
-                        <div class="order-header">
-                            <span class="order-id">Заказ ${order.id}</span>
-                            <span class="order-date">${order.date}</span>
-                        </div>
-                        <div class="order-details">
-                            <span class="order-products">${order.products}</span>
-                            <span class="order-status ${statusClass}">${statusText}</span>
-                        </div>
-                        <div class="order-details">
-                            <span></span>
-                            <span class="order-total">${order.total}</span>
+                    orders.forEach(order => {
+                        const orderItem = document.createElement('li');
+                        orderItem.className = 'order-item';
+                        
+                        let statusText, statusClass;
+                        
+                        switch(order.status) {
+                            case 'completed':
+                                statusText = 'Выполнен';
+                                statusClass = 'status-completed';
+                                break;
+                            case 'processing':
+                                statusText = 'В обработке';
+                                statusClass = 'status-processing';
+                                break;
+                            case 'cancelled':
+                                statusText = 'Отменен';
+                                statusClass = 'status-cancelled';
+                                break;
+                            default:
+                                statusText = 'В обработке';
+                                statusClass = 'status-processing';
+                        }
+                        
+                        orderItem.innerHTML = `
+                            <div class="order-header">
+                                <span class="order-id">Заказ ${order.id}</span>
+                                <span class="order-date">${order.date}</span>
+                            </div>
+                            <div class="order-details">
+                                <span class="order-products">${order.products}</span>
+                                <span class="order-status ${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="order-details">
+                                <span></span>
+                                <span class="order-total">${order.total}</span>
+                            </div>
+                        `;
+                        
+                        ordersList.appendChild(orderItem);
+                    });
+                    
+                    ordersContainer.appendChild(ordersList);
+                } else {
+                    ordersContainer.innerHTML = `
+                        <div class="order-empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h3>У вас еще нет заказов</h3>
+                            <p>Здесь будет отображаться история ваших заказов</p>
                         </div>
                     `;
-                    
-                    ordersList.appendChild(orderItem);
-                });
-                
-                ordersContainer.appendChild(ordersList);
-            } else {
-                ordersContainer.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-shopping-bag"></i>
-                        <p>У вас пока нет заказов</p>
-                    </div>
-                `;
+                }
+            } catch (error) {
+                console.error('Ошибка при загрузке истории заказов:', error);
+                // Показываем сообщение об ошибке
+                if (ordersContainer) {
+                    ordersContainer.innerHTML = `
+                        <div class="order-empty-state">
+                            <div class="empty-icon error">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h3>Ошибка загрузки</h3>
+                            <p>Не удалось загрузить историю заказов. Пожалуйста, попробуйте позже.</p>
+                        </div>
+                    `;
+                }
             }
         }
         
         // Показать уведомление
         function showNotification(message, isError = false) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
+            console.log('Показ уведомления:', message, isError ? '(ошибка)' : '');
             
-            if (isError) {
-                notification.classList.add('error');
-            } else {
-                notification.classList.remove('error');
+            try {
+                const notification = document.getElementById('notification');
+                if (!notification) {
+                    console.error('Элемент уведомления не найден');
+                    return;
+                }
+                
+                // Устанавливаем текст уведомления
+                notification.textContent = message;
+                
+                // Устанавливаем класс для ошибки, если нужно
+                if (isError) {
+                    notification.classList.add('error');
+                } else {
+                    notification.classList.remove('error');
+                }
+                
+                // Показываем уведомление
+                notification.classList.add('show');
+                
+                // Скрываем уведомление через 3 секунды
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            } catch (error) {
+                console.error('Ошибка при показе уведомления:', error);
             }
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
         }
         
         // Выход из профиля
         function logout() {
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userData');
-            window.location.href = '/Landing Page.html';
+            // Удаляем данные пользователя из localStorage и sessionStorage
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('currentUser');
+            
+            // Показываем уведомление об успешном выходе
+            showNotification('Вы успешно вышли из системы');
+            
+            // Перенаправление на главную страницу через 1 секунду
+            setTimeout(function() {
+                window.location.href = '/';
+            }, 1000);
         }
     </script>
 
-    <script src="/language-switcher.js"></script>
 </body>
 </html>

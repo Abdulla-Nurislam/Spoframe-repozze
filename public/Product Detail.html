@@ -286,28 +286,43 @@
         }
         
         /* Стили для футера */
+        footer {
+            width: 100%;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            padding: 20px 0 !important;
+            margin-top: 0 !important;
+            border-top: none !important;
+            box-sizing: border-box;
+        }
+        
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem;
+            padding: 1rem;
             background-color: #000000 !important;
             border-top: none !important;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .quick-links {
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .quick-links a {
-            color: #666;
+            color: #ffffff !important;
             text-decoration: none;
+            padding: 5px 10px;
         }
         
         .quick-links a:hover {
-            color: #333;
+            color: #7C3AED !important;
         }
         
         .language-selector {
@@ -321,8 +336,11 @@
         }
         
         .copyright {
-            color: #666;
+            color: #ffffff !important;
             font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+            padding: 10px 0;
         }
             /* Стили для мобильной версии аутентификации */
         @media (max-width: 768px) {
@@ -341,6 +359,83 @@
             .auth-modal__content {
                 width: 90%;
                 margin: 0 5%;
+                padding: 15px;
+            }
+            
+            .navbar {
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .nav-left {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .auth-buttons {
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .product-detail-container {
+                padding: 15px;
+            }
+            
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .product-image-section {
+                height: auto;
+            }
+            
+            .product-detail-image {
+                max-height: 300px;
+                object-fit: contain;
+            }
+            
+            .product-info-section {
+                padding: 15px;
+            }
+            
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .product-description {
+                font-size: 0.9rem;
+            }
+            
+            .product-price {
+                font-size: 1.2rem;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .product-actions .btn {
+                width: 100%;
+            }
+            
+            .faq-section {
+                padding: 20px 15px;
+            }
+            
+            .faq-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .faq-description {
+                font-size: 0.9rem;
             }
             
             .form-container {
@@ -350,11 +445,79 @@
             .auth-header h2 {
                 font-size: 1.3rem;
             }
+        }
+        
+        /* Стили для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 1.3rem;
+            }
             
+            .product-description {
+                font-size: 0.85rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .faq-item-header {
+                font-size: 0.9rem;
+                padding: 12px 10px;
+            }
+            
+            .faq-item-content {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
+            
+            .contact-section {
+                padding: 2rem 1rem;
+            }
+            
+            .form-group label {
+                font-size: 0.85rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .btn-submit {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .user-dropdown-btn {
+                padding: 6px 10px;
+            }
+            
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            
+            #headerUserName {
+                display: none;
+            }
+        
             .auth-header p {
                 font-size: 0.8rem;
             }
         }
+        
+
     </style>
     
     <!-- Новые скрипты аутентификации -->
@@ -366,8 +529,11 @@
     <nav class="navbar">
         <div class="nav-left">
             <a href="/">
-                <img src="/SF.png" alt="Spoframe" class="logo">
+                <img src="/SF.png" alt="Spoframe" class="logo" style="max-height: 40px;">
             </a>
+            
+
+
             <ul class="nav-links">
                 <li><a href="/Landing Page.html" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
                 <li><a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
@@ -470,25 +636,27 @@
     </section>
 
     <!-- Футер -->
-    <footer style="background-color: #000000 !important; padding: 20px 0 !important; margin-top: 0 !important; color: #ffffff !important; width: 100% !important; display: block !important; border-top: none !important;">
-        <div class="footer-content" style="background-color: #000000 !important;">
-            <div class="quick-links">
-                <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
-                <span>•</span>
-                <a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a>
-                <span>•</span>
-                <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
-            </div>
-        </div>
-        <div class="footer-center" style="background-color: #000000 !important;">
-            <div class="language-selector">
-                <select id="languageSelect" aria-label="Language Selection">
-                    <option value="ru">RU</option>
-                    <option value="en">EN</option>
-                </select>
-            </div>
-            <div class="copyright" data-lang-ru="2025 Spoframe" data-lang-en="2025 Spoframe">
-                2025 Spoframe
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="quick-links">
+                    <a href="/Product Catalog.html" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a>
+                    <span>•</span>
+                    <a href="/Product Detail.html" data-lang-ru="Подробности" data-lang-en="Details">Подробности</a>
+                    <span>•</span>
+                    <a href="/About Product.html" data-lang-ru="О продукте" data-lang-en="About Product">О продукте</a>
+                </div>
+                <div class="footer-center">
+                    <div class="language-selector">
+                        <select id="languageSelect" aria-label="Language Selection">
+                            <option value="ru">RU</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <div class="copyright" data-lang-ru="2025 Spoframe" data-lang-en="2025 Spoframe">
+                        2025 Spoframe
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -506,10 +674,12 @@
 
     <script src="/public/js/main.js"></script>
     <script src="/scroll-buttons.js"></script>
-    <script src="/language-switcher.js"></script>
+    <script src="/js/language-switcher.js" defer></script>
     <script src="/js/auth.js"></script>
     
     <script>
+
+        
         // Функция для показа уведомлений
         function showNotification(message, type) {
             // Создаем элемент уведомления, если его нет
@@ -710,7 +880,7 @@
     // Функция выхода из профиля удалена
     </script>
     
-    <script src="/language-switcher.js"></script>
+    <script src="/js/language-switcher.js" defer></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Обработка формы обратной связи
