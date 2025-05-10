@@ -171,6 +171,7 @@
         }
         
         /* Стили навигационной панели */
+        /* Стили навигационной панели */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -229,21 +230,111 @@
             align-items: center;
         }
         
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin-right: 15px;
+        }
+        
+        .nav-links a {
+            color: #CBD5E1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #7C3AED;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #7C3AED;
+            border-radius: 2px;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
         .auth-buttons {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .login-btn, .register-btn, .profile-btn, .logout-btn {
+        .register-btn {
             padding: 8px 16px;
             border-radius: 6px;
+            background-color: #7C3AED;
+            color: white;
+            text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 500;
         }
         
+        .login-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            background-color: transparent;
+            border: 1px solid #7C3AED;
+            color: #7C3AED;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .profile-btn, .logout-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .profile-btn {
+            background-color: #4F46E5;
+            color: white;
+        }
+        
+        .logout-btn {
+            background-color: transparent;
+            border: 1px solid #EF4444;
+            color: #EF4444;
+        }
+        
         .login-btn:hover, .register-btn:hover, .profile-btn:hover, .logout-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-btn:hover {
+            background-color: #6D28D9;
+        }
+        
+        .login-btn:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+        
+        .profile-btn:hover {
+            background-color: #4338CA;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(239, 68, 68, 0.1);
         }
         
         /* Стили для уведомлений */
@@ -273,14 +364,43 @@
         /* Кнопка-гамбургер для мобильного меню */
 
         
+        /* Дополнительные стили для кнопок авторизации */
+        .register-btn {
+            background-color: #7C3AED;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            border: 1px solid #7C3AED;
+            color: #7C3AED;
+            border-radius: 8px;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .register-btn:hover {
+            background-color: #6D28D9;
+        }
+
+        .login-btn:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+        
         /* Медиа-запросы для адаптивности */
         @media (max-width: 768px) {
-
-            
+            /* Стили для навигации */
             .navbar {
                 padding: 10px 15px;
                 flex-wrap: wrap;
                 justify-content: space-between;
+                position: relative; /* Отменяем sticky позиционирование */
+                top: auto;
             }
             
             .nav-left {
@@ -291,7 +411,28 @@
             }
             
             .nav-links {
-                margin: 1rem 0;
+                display: none; /* Скрываем навигационные ссылки на мобильных устройствах */
+                margin: 0;
+            }
+            
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 12px 5px;
+                font-size: 0.9rem;
+            }
+            
+            .nav-links a.active::after {
+                bottom: 0;
+                height: 3px;
+            }
+            
+            .nav-right {
+                width: 100%;
             }
             
             .auth-buttons {
@@ -302,6 +443,12 @@
                 gap: 10px;
             }
             
+            .register-btn, .login-btn, .profile-btn, .logout-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* Стили для контента */
             .hero-content {
                 padding: 40px 20px;
             }
@@ -329,7 +476,10 @@
             .cta-content {
                 padding: 40px 20px;
             }
-            
+        }
+        
+        /* Дополнительные стили для маленьких экранов */
+        @media (max-width: 480px) {
             .cta-title {
                 font-size: 1.8rem;
             }
@@ -405,7 +555,7 @@
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Основная навигация">
         <div class="nav-left">
             <a href="/">
                 <img src="/SF.png" alt="Spoframe" class="logo" style="max-height: 40px;">
